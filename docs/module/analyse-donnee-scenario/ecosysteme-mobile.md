@@ -191,19 +191,19 @@ L'essor de l'AR (Réalité Augmentée) et des objects connectés (IoT, montres, 
 - Sensibilité accrue aux **questions d'éthique et de sobriété numérique**.
 
 ## 🧩 1.1.9 Activités pédagogiques
-### 🧠 Exercice 1 : Analyse du marhcé mobile
+### 🧠 Exercice 1 - Analyse du marché mobile
 Recherchez la part de marché actuelle d'Android et d'iOS dans :
 - Le monde
 - L'Europe
 - La Suisse
 > ➡️ **Question :** Quelles implications cela a-t-il pour un développeur souhaitant publier une application dans ces régions ?
 
-### 📈 Exercice 2 : Ligne du temps technologique
+### 📈 Exercice 2 - Ligne du temps technologique
 En groupe, créez une **frise technologique** retraçant les grandes étapes du développement mobile entre 2000 et 2025.
 Incluez : les systèmes d'exploitation, les languages, et les frameworks majeurs.
 > ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applicaitons.
 
-### 🔁 Exercice 3 : Cycle de vie d'une application
+### 🔁 Exercice 3 - Cycle de vie d'une application
 Choisissez une application que vous utilisez souvent (ex: Instagram, Spotify, Duolingo, etc.)
 Reconstituez les **grandes étapes de son cycle de vie** :
 1. Idée / besoin initial

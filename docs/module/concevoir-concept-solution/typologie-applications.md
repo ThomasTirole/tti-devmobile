@@ -195,4 +195,82 @@ Contrairement aux applications hybrides, les solutions cross-plateformes moderne
 prévoir une illustration simple : schéma “un code → plusieurs plateformes (Android / iOS / Web)”
 :::
 
+## 🧮 2.1.6 Comparatif global
+Pour mieux visualiser les différences entre les quatre grandes approches de développement mobile, le tableau ci-dessous résume leurs principales caractéristiques :
 
+| Type d’application   | Langages principaux      | Performance   | Accès matériel             | Publication            | Maintenance         | Coût estimé | Cas d’usage idéal                                                        |
+| -------------------- |--------------------------| ------------- | -------------------------- | ---------------------- | ------------------- | ----------- | ------------------------------------------------------------------------ |
+| **Native**           | Kotlin / Swift           | 🔥 Excellente | ✅ Complet                  | App Store / Play Store | Difficile (2 codes) | 💰💰💰      | Applications exigeant performance et stabilité (banque, réseaux sociaux) |
+| **Web**              | HTML / CSS / JS          | ⚠️ Moyenne    | ❌ Limitée                  | Navigateur             | Très facile         | 💰          | Sites vitrines, services accessibles sans installation                   |
+| **Hybride**          | HTML / JS + Plugins | ⚙️ Bonne      | ⚠️ Partielle (via plugins) | Store                  | Moyenne             | 💰💰        | Apps métiers, outils éducatifs, prototypes                               |
+| **Cross-plateforme** | Dart / JS / C#           | 💪 Très bonne | ✅ Large                    | Store                  | Facile              | 💰💰        | Startups, projets multisystèmes performants                              |
+
+### 🔬 Analyse et interprétation
+Chaque approche répond à un **équilibre différent** entre **coût**, **performance** et **portée d'accès**.
+
+- **Native** ➡️ meilleure performance, mais développement plus long et coûteux.
+- **Web** ➡️ universalité, rapide, mais accès limité au matériel.
+- **Hybride** ➡️ compromis pratique pour des projets légers ou internes.
+- **Cross-plateforme** ➡️ solution moderne pour projets ambitieux à budget modéré.
+
+> 💬 Le choix de la technologie dépend toujours du **contexte** : besoins métier, public cible, délais et ressources disponibles.
+
+## 🤔 2.1.7 Comment choisir la bonne approche ?
+Le choix du type d'application dépend de plusieurs critères essentiels :
+1. **Public cible**
+   - Si les utilisateurs sont uniquement sur un système (ex. iOS en entreprise), une app native suffit
+   - Si le public est mixte, une solution cross-plateforme est souvent plus rentable
+2. **Objectifs du projet**
+   - Priorité à la **performance** &rarr; optez pour du natif
+   - Priorité à la **rapidité de déploiement** &rarr; Web ou Hybride
+   - Priorité à la compatibilité multi-OS &rarr; Cross-plateforme
+3. **Budget et délais**
+   - Les projets natifs coûtent plus cher (deux bases de code).
+   - Les frameworks cross-plateformes et hybrides mutualisent les coûts.
+4. **Compétences disponibles**
+   - Équipe issue du **web** &rarr; Hybride ou PWA
+   - Équipe issue du **développement logiciel** &rarr; Natif ou Cross-plateforme.
+5. **Maintenance à long terme**
+   - Une seule base de code = mise à jour plus rapides et moins de risques d'incohérences.
+
+::: details **💡 Exemple concret** : {open}
+Une **application de covoiturage locale** à budget limité pourrait être développée en **Flutter** : un seul code source, un rendu natif fluide et une maintenance simplifiée.
+:::
+
+## 🧩 2.1.8 Activités pédagogiques
+### 🧠 Exercice 1 - Identifier les types d'applications
+Choisissez trois applications connues (par exemple : **Duolingo**, **YouTube**, **Instagram**).
+> ➡️ Déterminez leur type : native, web, hybride ou cross-plateforme.
+> ➡️ Justifiez votre choix en observant leur comportement : installation, fluidité, accès hors-ligne, compatibilité multi-appareils, etc.
+
+### ⚖️ Exercice 2 - Comparatif de solutions
+Vous devrez créer une application pour un **festival de musique** : agenda, billetterie et carte interactive.
+> ➡️ Comparez les avantages et inconvénients d'une app **native**, **web**, et **cross-plateforme**.
+> ➡️ Recommandez la solution la plus pertinente selon les objectifs et le budget, en justifiant votre choix.
+
+### 💡 Exercice 3 - Étude de cas client
+Votre client est un **restaurant** qui souhaite permettre à ses clients de consulter le menu, réserver une table et recevoir des notifications.
+> ➡️ Quelle approche technique choisiriez-vous ?
+> ➡️ Quels compromis seriez-vous prêt à accepter entre performance, coûts et expérience utilisateur ?
+
+::: tip **💬 Info**
+Vous serez amenés à débattre en petits groupes, puis présenter votre justification à l'oral en fin d'exercice.
+:::
+
+## 🔗 2.1.9 Références et ressources
+
+- [Google Developers – Android Studio](https://developer.android.com/studio)
+
+- [Apple Developer – Xcode & Swift](https://developer.apple.com/xcode/)
+
+- [Ionic Framework (v8)](https://ionicframework.com/docs)
+
+- [Capacitor (v7)](https://capacitorjs.com/docs)
+
+- [Flutter (Google)](https://flutter.dev)
+
+- [React Native (Meta)](https://reactnative.dev)
+
+- [.NET MAUI (Microsoft)](https://learn.microsoft.com/en-us/dotnet/maui/)
+
+- [Mozilla MDN – Progressive Web Apps](https://developer.mozilla.org/docs/Web/Progressive_web_apps)
