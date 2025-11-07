@@ -1,0 +1,76 @@
+- text: 📱 Module 335
+  collapsed : true
+  items:
+    - text: Présentation du module
+      link: /module/presentation
+    - text: Objectifs du module
+      link: /module/objectifs
+    - text: Environnement de développement
+      link: /module/environnement
+- text: 1. Analyser les données et le scénario
+  collapsed: true
+  items:
+    - text: 🌳 Comprendre l'écosystème mobile
+      link: /module/analyse-donnee-scenario/ecosysteme-mobile
+    - text: 🎨 Standards ergonomique et UX
+      link: /module/analyse-donnee-scenario/ergonomie-et-ux
+    - text: 🧬 Caractéristiques des appareils mobiles
+      link: /module/analyse-donnee-scenario/caracteristiques-appareils-mobiles
+- text: 2. Concevoir le concept de solution
+  collapsed: true
+  items:
+    - text: 🪪 Typlogie des applications
+      link: /module/concevoir-concept-solution/typologie-applications
+- text: Apprendre le développement mobile
+  collapsed: true
+  items:
+    - text: Introduction au développement mobile
+      link: /dev-mobile/introduction
+    - text: Types d’applications
+      link: /dev-mobile/types
+    - text: UX/UI et ergonomie mobile
+      link: /dev-mobile/ux-ui
+    - text: Fonctionnalités spécifiques aux mobiles
+      link: /dev-mobile/fonctionnalites
+    - text: Publication et distribution
+      link: /dev-mobile/publication
+
+- text: TypeScript
+  collapsed: true
+  items:
+    - text: Pourquoi TypeScript ?
+      link: /ts/introduction
+    - text: Bases du langage
+      link: /ts/bases
+    - text: Classes et objets
+      link: /ts/classes
+    - text: Outils et configuration
+      link: /ts/outils
+
+- text: Ionic
+  collapsed: true
+  items:
+    - text: Introduction à Ionic
+      link: /ionic/introduction
+    - text: Démarrer un projet
+      link: /ionic/demarrer
+    - text: Composants de base
+      link: /ionic/composants
+    - text: Accéder aux fonctionnalités natives
+      link: /ionic/natif
+    - text: Persistance & API
+      link: /ionic/persistance-api
+    - text: Build et déploiement
+      link: /ionic/build-deploiement
+
+- text: Exercices & Projet fil rouge
+  collapsed: true
+  items:
+    - text: Introduction
+      link: /exercices/introduction
+    - text: Étape 1
+      link: /exercices/etape1
+    - text: Étape 2
+      link: /exercices/etape2
+    - text: Étape finale
+      link: /exercices/final
