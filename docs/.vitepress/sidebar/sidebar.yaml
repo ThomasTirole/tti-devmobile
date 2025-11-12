@@ -21,6 +21,8 @@
   items:
     - text: 🪪 Typlogie des applications
       link: /module/concevoir-concept-solution/typologie-applications
+    - text: 📡 Fonctions et capteurs
+      link: /module/concevoir-concept-solution/fonctions-capteurs
 - text: Apprendre le développement mobile
   collapsed: true
   items:
