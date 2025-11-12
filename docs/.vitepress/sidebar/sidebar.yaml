@@ -19,10 +19,12 @@
 - text: 2. Concevoir le concept de solution
   collapsed: true
   items:
-    - text: 🪪 Typlogie des applications
+    - text: 🪪 Typologie des applications
       link: /module/concevoir-concept-solution/typologie-applications
     - text: 📡 Fonctions et capteurs
       link: /module/concevoir-concept-solution/fonctions-capteurs
+    - text: 🗃️ Architecture et composants
+      link: /module/concevoir-concept-solution/architecture-composants
 - text: Apprendre le développement mobile
   collapsed: true
   items:
