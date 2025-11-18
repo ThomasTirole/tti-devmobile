@@ -25,6 +25,8 @@
       link: /module/concevoir-concept-solution/fonctions-capteurs
     - text: 🗃️ Architecture et composants
       link: /module/concevoir-concept-solution/architecture-composants
+    - text: 💾 Persistance et scénarios offline
+      link: /module/concevoir-concept-solution/persistance-scenarios-offline
 - text: Apprendre le développement mobile
   collapsed: true
   items:
