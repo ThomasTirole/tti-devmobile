@@ -101,7 +101,7 @@ Contrairement au stockage clé-valeur, elle permet d'effectuer :
 
 > 🎯 Une base locale permet un stockage organisé, performant et persistant, même lorsqu'on ferme l'application.
 
-## 2.4.4 📇 Stockage de fichiers
+## 📇 2.4.4 Stockage de fichiers
 Certaines applications doivent stocker des **fichiers** plutôt que des données structurées : photos, PDF, documents, images, scans, enregistrements audio...
 
 ### 📃 Types de fichiers concernés
