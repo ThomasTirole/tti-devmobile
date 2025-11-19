@@ -27,6 +27,8 @@
       link: /module/concevoir-concept-solution/architecture-composants
     - text: 💾 Persistance et scénarios offline
       link: /module/concevoir-concept-solution/persistance-scenarios-offline
+    - text: 🔐 Authentification
+      link: /module/concevoir-concept-solution/authentification-gestion-utilisateurs
 - text: Apprendre le développement mobile
   collapsed: true
   items:
