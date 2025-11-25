@@ -28,7 +28,7 @@ Cela implique généralement :
 - des **fonctions serveur**,
 - une **gestion des permissions**.
 
-Créer tout cela manuellement est long, coûteux, et n écessite de gérer un serveur, sa sécurité, sa scalabilité et sa maintenance.
+Créer tout cela manuellement est long, coûteux, et nécessite de gérer un serveur, sa sécurité, sa scalabilité et sa maintenance.
 
 C'est là que les **Backend-as-a-Service (BaaS)** deviennent extrêmement attractifs.
 
