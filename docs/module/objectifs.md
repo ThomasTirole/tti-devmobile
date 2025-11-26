@@ -19,7 +19,7 @@ Vous élaborerez des **concepts d'application mobile** cohérents et explorerez 
 
 📘 *Cette partie dévleoppe la compréhension des choix techniques et des modèles de conception.*
 
-## 💻 Objectif 3 : Programmer l'application à l'aide d'un environnement de développement usuel et en tenant compte des possiiblités et restrictions des appareisl mobiles
+## 💻 Objectif 3 : Programmer l'application à l'aide d'un environnement de développement usuel et en tenant compte des possibilités et restrictions des appareils mobiles
 Vous découvrirez les **outils et frameworks** pour développer une application mobile en tenant compte des contraintes spécifiques.
 Vous découvrirez les **outils et frameworks** pour développer une application mobile en tenant compte des contraintes spécifiques.
 
