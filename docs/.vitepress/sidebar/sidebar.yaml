@@ -29,6 +29,8 @@
       link: /module/concevoir-concept-solution/persistance-scenarios-offline
     - text: 🔐 Authentification
       link: /module/concevoir-concept-solution/authentification-gestion-utilisateurs
+    - text: ☁️ Persistance cloud et BaaS
+      link: /module/concevoir-concept-solution/persistance-cloud-baas
 - text: Apprendre le développement mobile
   collapsed: true
   items:
