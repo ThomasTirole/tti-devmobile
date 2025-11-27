@@ -50,7 +50,7 @@ Le marché mobile mondial est dominé par **deux systèmes d'exploitation** :
 - **iOS (Apple)** : environ 28% de part de marché.
 Les autres systèmes (HarmonyOS, KaiOS, etc.) ne représentent qu'une minorité.
 
-![statcounter-os-mobile.png](../../public/1.1/statcounter-os-mobile.png)
+![statcounter-os-mobile.png](/1.1/statcounter-os-mobile.png)
 
 ### 🤖 Android
 - Système **open source** (AOSP) développé par Google.
