@@ -31,6 +31,10 @@
       link: /module/concevoir-concept-solution/authentification-gestion-utilisateurs
     - text: ☁️ Persistance cloud et BaaS
       link: /module/concevoir-concept-solution/persistance-cloud-baas
+- text: 3. Programmer une application hybride
+  items:
+    - text: 🛠️ Mise en place de l’environnement
+      link: /module/programmer-application/setup-environnement
 - text: Apprendre le développement mobile
   collapsed: true
   items:
