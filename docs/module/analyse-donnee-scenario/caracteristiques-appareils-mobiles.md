@@ -1,5 +1,7 @@
 # 🧬 1.3 - Caractéristiques des appareils mobiles
 
+<iframe src="https://slides.com/tirtho/1-3-caracteristiques-des-appareils-mobiles/embed" width="576" height="420" title="🧬 1.3 - Caractéristiques des appareils mobiles" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capables de : 
 - Identifier les **caractéristiques physiques et logicielles** des principaux appareils mobiles.
@@ -69,12 +71,17 @@ Les appareils mobiles permettent généralement **deux orientations principales*
 - **Paysage** (horizontal) : vidéo, saisie de texte, tableaux de bord, jeux (majoritairement, bien qu'une tendance verticale existe aussi pour les smartphones).
 L'application doit être capable de **s'adapter automatiquement** à ces changements d'orientation.
 
-::: danger
-**AJOUTER PHOTOS ? EXEMPLES ? DANS DES APPLICATIONS ? ETC**
-:::
-::: danger
-***CHAPITRE SUR LES TYPES D'APPLICAITON ? PAR EXEMPLE LES JEUX, POURQUOI EN PAYSAGE, POURQUOI PORTRAIT, QUEL INTERET, ETC. ?***
-:::
+[//]: # (::: danger)
+
+[//]: # (**AJOUTER PHOTOS ? EXEMPLES ? DANS DES APPLICATIONS ? ETC**)
+
+[//]: # (:::)
+
+[//]: # (::: danger)
+
+[//]: # (***CHAPITRE SUR LES TYPES D'APPLICAITON ? PAR EXEMPLE LES JEUX, POURQUOI EN PAYSAGE, POURQUOI PORTRAIT, QUEL INTERET, ETC. ?***)
+
+[//]: # (:::)
 ### 🔄️ Rotation automatique
 Lorsque l'utilisateur fait pivoter l'appareil, le système d'exploitation réorganise automatiquement les éléments selon les **règles définies dans le design.**
 Les développeurs peuvent choisir de :
@@ -195,21 +202,26 @@ Les concepteurs doivent anticiper les **situations réelles** dans lesquelles le
 Comparez deux modèles de smartphone récents (ex. iPhone 17 vs Samsung Galaxy S25).
 > ➡️ Quelles différences techniques (écran, densité, capteurs) influencent le design d'une même application ?
 
-### 🎨 Exercice 2 - Orientation etm ise en page
+### 🎨 Exercice 2 - Orientation et mise en page
 Créer une maquette simple d'un écran d'application
 > ➡️ Comment les éléments se réorganisent-ils entre **portrait** et **paysage** ?
 
-### Exercice 3 - Interactions et capteurs
-Imaginez une application exploitant un capteur spécifique (GPS, micro, gyroscope)
-> ➡️ Décrivez comment ce capteur améliore l'expérience utilisateur.
-> 
-> ➡️ Quelles contraintes cela impose-t-il au design et à l'ergonomie ?
+[//]: # (### Exercice 3 - Interactions et capteurs)
 
-::: danger UTILE ?
+[//]: # (Imaginez une application exploitant un capteur spécifique &#40;GPS, micro, gyroscope&#41;)
+
+[//]: # (> ➡️ Décrivez comment ce capteur améliore l'expérience utilisateur.)
+
+[//]: # (> )
+
+[//]: # (> ➡️ Quelles contraintes cela impose-t-il au design et à l'ergonomie ?)
+
+## 🔗 1.3.8 Références et ressources
+::: tip **📗 Ressource complémentaire :**
 https://uxdesign.cc/three-simple-rules-of-good-touch-design-4590e0dd1979
 :::
 
-## 🔗 1.3.8 Références et ressources
+
 - [Google Developers - Responsive Layouts](https://developer.android.com/develop/ui/views/layout/responsive-adaptive-design-with-views?hl=fr)
 - [Apple Human Interface Guidelines - Device Adaptivity and Layout](https://developer.apple.com/design/human-interface-guidelines/layout)
 - [W3C - Device and Sensors APIs](https://www.w3.org/TR/generic-sensor/)
