@@ -9,7 +9,7 @@ export default defineConfig({
   lang: 'fr-FR',
   lastUpdated: true,
   ignoreDeadLinks: true, // ignore dead links to allow build to succeed
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/tti-devmobile/favicon.ico' }]],
   themeConfig: {
       // https://vitepress.dev/reference/default-theme-config
       logo: '/logo.png',
