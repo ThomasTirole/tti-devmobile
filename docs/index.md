@@ -9,40 +9,49 @@ hero:
   actions:
     - theme: brand
       text: Apprendre le développement mobile
-      link: /markdown-examples
+      link: /module/analyse-donnee-scenario/ecosysteme-mobile
     - theme: alt
-      text: Introduction à TypeScript
-      link: /ts
+      text: Présentation du module
+      link: /module/presentation
     - theme: alt
-      text: Introduction à Ionic
-      link: /api-examples
+      text: Padlet du cours
+      link: https://padlet.com/thomastirole/m335-r-aliser-une-application-mobile-vcct90204ol2qz29
 
 features:
   - title : Présentation du module
     details : Objectifs, compétences visées, organisation
     link : /module/presentation
     linkText : En savoir plus
-  - title: Introduction
-    details: Types d'apps, installer Ionic, prise en mian IDE/simulateur
-  - title: Bases Ionic + composants UI
-    details: Découvrir structure projet, composants de base, navigation simple
-  - title: TypeScript pour débutants
-    details: S'initier aux bases TS
-  - title: UX/UI mobile & guidelines
-    details: Standards ergonomiques, bonnes pratiques mobiles
-  - title: Gestion de données & persistance
-    details: Stockage local, scénraois offline/online
-  - title: Accès capteurs (géolocalisation)
-    details: Comprendre API Capacitor, permissions, GPS
-  - title: Autres capteurs & multimédia
-    details: Découvrir capteurs mouvement, caméra, micro
-  - title: Connexion API externe
-    details: Consommer une API REST
-  - title: Tests & qualité
-    details: Voir tests fonctionnels et non-fonctionnels (UX, portabilité), debug & simulateurs
-  - title: Publication & distribution
-    details: Comprendre stores (Android/iOS), PWA, étapes publication, contraintes légales
-  - title: Récap & présentation projets
-    details: Bilan module, retour sur compétences acquises
+  - title: 1. Analyser les données et le scénario
+    details: Écosystème mobile, standards UX/UI, caractéristiques des appareils
+    link : /module/analyse-donnee-scenario/ecosysteme-mobile
+    linkText : En savoir plus
+  - title: 2. Concevoir le concept de solution
+    details: Typologies, capteurs, architectures, persistances, authentification, cloud, synchro
+    link : /module/concevoir-concept-solution/typologie-applications
+    linkText : En savoir plus
+  - title: 3. Programmer une application mobile hybride
+    details: Setup, Ionic + Vue + Capacitor, TypeScript, rappel UI/UX, capteurs, API, tests
+    link : /module/programmer-application/setup-environnement
+    linkText : En savoir plus
+#    
+#  - title: TypeScript pour débutants
+#    details: S'initier aux bases TS
+#  - title: UX/UI mobile & guidelines
+#    details: Standards ergonomiques, bonnes pratiques mobiles
+#  - title: Gestion de données & persistance
+#    details: Stockage local, scénraois offline/online
+#  - title: Accès capteurs (géolocalisation)
+#    details: Comprendre API Capacitor, permissions, GPS
+#  - title: Autres capteurs & multimédia
+#    details: Découvrir capteurs mouvement, caméra, micro
+#  - title: Connexion API externe
+#    details: Consommer une API REST
+#  - title: Tests & qualité
+#    details: Voir tests fonctionnels et non-fonctionnels (UX, portabilité), debug & simulateurs
+#  - title: Publication & distribution
+#    details: Comprendre stores (Android/iOS), PWA, étapes publication, contraintes légales
+#  - title: Récap & présentation projets
+#    details: Bilan module, retour sur compétences acquises
 ---
 
