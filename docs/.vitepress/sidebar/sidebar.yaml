@@ -5,8 +5,6 @@
       link: /module/presentation
     - text: Objectifs du module
       link: /module/objectifs
-    - text: Environnement de développement
-      link: /module/environnement
 - text: 1. Analyser les données et le scénario
   collapsed: true
   items:
