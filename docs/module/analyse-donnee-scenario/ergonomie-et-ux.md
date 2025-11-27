@@ -1,5 +1,7 @@
 # 🎨 1.2 Les standards ergonomiques et l'expérience utilisateur
 
+<iframe src="https://slides.com/tirtho/1-2-les-standards-ergonomiques-et-l-experience-utilisateur/embed" width="576" height="420" title="🎨 1.2 Les standards ergonomiques et l'expérience utilisateur" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable :
 - Expliquer ce qu'est un **standard ergonomique** et pourquoi il est essentiel dans la conception mobile.
@@ -77,13 +79,13 @@ Chaque action de l'utilisateur doit déclencher une réaction visuelle, sonore o
 
 > 💬 Exemple : une icône qui se coche après l'ajout d'un favori indique que l'action a bien été enregistrée.
 
-### Prévisibilité et contrôle
+### 🔮 Prévisibilité et contrôle
 L'utilisateur doit toujours savoir **où il se trouve** et **ce qui va se passer**.
 Des transitions douces et des titres d'écran clairs renforcent le sentiment de maîtrise.
 
 > 💬 Exemple : une barre de navigation affichant l'onglet actif ("Accueil", "Profil", "paramètres").
 
-### Accessibilité
+### ️‍ 👁️‍ Accessibilité
 Une interface inclusive doit être utilisable par tous, y compris les personnes avec handicaps visuels, auditifs ou moteurs.
 Quelques bonnes pratiques :
 - Taille de texte ajustable
@@ -190,18 +192,23 @@ Les tests utilisateurs permettent d'identifier les **points de friction** et d'a
 Choisissez une application mobile que vous utilisez fréquemment (Instagram, CFF, etc.).
 Analyser la selon **trois principes** de la norme **EN ISO 9241-110**.
 > ➡️ Quelles forces et faiblesses remarquez-vous ?
+> 
 > ➡️ L'application respecte-t-elle la cohérence et la tolérance aux erreurs ?
 
 ### ⚖️ Exercice 2 - Comparaison iOS / Android
 Comparez la **même application** sur un téléphone Android et un iPhone.
 > ➡️ Quelles différences d'apparence, d'interaction ou de logique notez-vous ?
+> 
 > ➡️ Selon vous, laquelle est la plus ergonomique, et pourquoi ?
 
-### 🏋️ Exercice 3 - Améliorer une interface
-On vous montre la capture d'écran d'une application mal conçue : texte miniuscule, boutons trop proches, icônes incompréhensibles.
-> ➡️ Proposez au moins **trois améliorations ergonomiques** précises et justifiées selon les principes étudiés.
+[//]: # (### 🏋️ Exercice 3 - Améliorer une interface)
 
-💡 **Astuce :** appuyez-vous sur les 7 principes de la norme ISO pour argumenter vos choix.
+[//]: # (On vous montre la capture d'écran d'une application mal conçue : texte miniuscule, boutons trop proches, icônes incompréhensibles.)
+
+[//]: # (> ➡️ Proposez au moins **trois améliorations ergonomiques** précises et justifiées selon les principes étudiés.)
+
+[//]: # ()
+[//]: # (💡 **Astuce :** appuyez-vous sur les 7 principes de la norme ISO pour argumenter vos choix.)
 
 ## 🔗 1.2.7 - Référence et ressources
 - **EN ISO 9241-110:2020** - *Ergonomic principles for human-system interaction*

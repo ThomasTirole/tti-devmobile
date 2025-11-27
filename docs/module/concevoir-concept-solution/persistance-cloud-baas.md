@@ -447,7 +447,7 @@ Backendless se distingue par son interface utilisateur conviviale et ses options
 
 > Il est adapté aux développeurs cherchant une solution complète avec une interface graphique intuitive.
 
-### Back4app
+### ☁️ Back4app
 Back4app est une plateforme BaaS basée sur Parse Server, offrant des fonctionnalités telles que :
 - une base de données NoSQL,
 - une authentification,

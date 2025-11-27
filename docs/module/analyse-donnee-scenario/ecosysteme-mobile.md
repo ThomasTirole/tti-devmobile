@@ -194,7 +194,11 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 - Le monde
 - L'Europe
 - La Suisse
-> ➡️ **Question :** Quelles implications cela a-t-il pour un développeur souhaitant publier une application dans ces régions ? et pour le choix des technologies à utiliser ? et pour la stratégie de marketing ?
+> ➡️ **Question :** Quelles implications cela a-t-il pour un développeur souhaitant publier une application dans ces régions ? 
+> 
+> ➡️ et pour le choix des technologies à utiliser ?
+> 
+> ➡️ et pour la stratégie de marketing ?
 
 [//]: # ()
 [//]: # (### 📈 Exercice 2 - Ligne du temps technologique)
