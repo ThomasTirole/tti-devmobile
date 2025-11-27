@@ -15,7 +15,7 @@ Elle se distingue d'un **site web mobile**, qui s'exécute dans un navigateur, p
 - **Application web :** Twitter Web App, accessible via un navigateur.
 - **Application cross-platform :** Spotify, développée avec des outils multi-plateformes.
 :::
-##  1.1.2 🔍 Pourquoi développer pour mobile ?
+## 🔍 1.1.2 Pourquoi développer pour mobile ?
 Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter (2024), plus de **60% du trafic web mondial** provient d'appareils mobiles.
 Les utilisateur passent en moyenne **4 à 5 heures par jour** sur leur téléphone.
 
@@ -212,7 +212,7 @@ Reconstituez les **grandes étapes de son cycle de vie** :
 4. Évolutions depuis sa sortie
 > ➡️ **Objectif :** relier la théorie du développement mobile à un cas concret
 
-## 🔗 Sources et références
+## 🔗 1.1.10 Sources et références
 
 * **StatCounter (2024)** – [https://gs.statcounter.com/](https://gs.statcounter.com/)
 * **Google Developers** – [developer.android.com](https://developer.android.com)
