@@ -50,6 +50,8 @@ Le marché mobile mondial est dominé par **deux systèmes d'exploitation** :
 - **iOS (Apple)** : environ 28% de part de marché.
 Les autres systèmes (HarmonyOS, KaiOS, etc.) ne représentent qu'une minorité.
 
+![statcounter-os-mobile.png](../../public/1.1/statcounter-os-mobile.png)
+
 ### 🤖 Android
 - Système **open source** (AOSP) développé par Google.
 - **Utilisé** par de **nombreux fabricants** (Samsung, Xiaomi, etc.).
@@ -110,9 +112,6 @@ C'est un **processus complet**, du concept initial jusqu'à la maintenance aprè
 Le développement mobile est un **cycle itératif**, où chaque version améliore la précédente.
 :::
 
-::: danger 🚨 Attention :
-exercice ? MDM ? etc. ?
-:::
 ## 📦 1.1.6 Distribution et mise à jour
 Les applications peuvent être distributées de plusieurs manières :
 - **Via un store officiel** (Play Store, App Store)
@@ -148,11 +147,6 @@ Développer pour mobile implique de composer avec un ensemble de **contraintes t
 
 ::: info
 *🎯 L'objectif est d'offrir une expérience fluide et cohérente, malgré ces contraintes*.
-:::
-
-
-::: danger 🚨 Attention :
-ajouter exercices recherches des évolutions dans le devmobile?
 :::
 
 ## 🔝 1.1.8 Tendances et évolutions du mobile
@@ -191,26 +185,39 @@ L'essor de l'AR (Réalité Augmentée) et des objects connectés (IoT, montres, 
 - Sensibilité accrue aux **questions d'éthique et de sobriété numérique**.
 
 ## 🧩 1.1.9 Activités pédagogiques
+
 ### 🧠 Exercice 1 - Analyse du marché mobile
 Recherchez la part de marché actuelle d'Android et d'iOS dans :
 - Le monde
 - L'Europe
 - La Suisse
-> ➡️ **Question :** Quelles implications cela a-t-il pour un développeur souhaitant publier une application dans ces régions ?
+> ➡️ **Question :** Quelles implications cela a-t-il pour un développeur souhaitant publier une application dans ces régions ? et pour le choix des technologies à utiliser ? et pour la stratégie de marketing ?
 
-### 📈 Exercice 2 - Ligne du temps technologique
-En groupe, créez une **frise technologique** retraçant les grandes étapes du développement mobile entre 2000 et 2025.
-Incluez : les systèmes d'exploitation, les languages, et les frameworks majeurs.
-> ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applicaitons.
+[//]: # ()
+[//]: # (### 📈 Exercice 2 - Ligne du temps technologique)
 
-### 🔁 Exercice 3 - Cycle de vie d'une application
-Choisissez une application que vous utilisez souvent (ex: Instagram, Spotify, Duolingo, etc.)
-Reconstituez les **grandes étapes de son cycle de vie** :
-1. Idée / besoin initial
-2. Fonctionnalités principales
-3. Tests / publication
-4. Évolutions depuis sa sortie
-> ➡️ **Objectif :** relier la théorie du développement mobile à un cas concret
+[//]: # (En groupe, créez une **frise technologique** retraçant les grandes étapes du développement mobile entre 2000 et 2025.)
+
+[//]: # (Incluez : les systèmes d'exploitation, les languages, et les frameworks majeurs.)
+
+[//]: # (> ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applicaitons.)
+
+[//]: # ()
+[//]: # (### 🔁 Exercice 3 - Cycle de vie d'une application)
+
+[//]: # (Choisissez une application que vous utilisez souvent &#40;ex: Instagram, Spotify, Duolingo, etc.&#41;)
+
+[//]: # (Reconstituez les **grandes étapes de son cycle de vie** :)
+
+[//]: # (1. Idée / besoin initial)
+
+[//]: # (2. Fonctionnalités principales)
+
+[//]: # (3. Tests / publication)
+
+[//]: # (4. Évolutions depuis sa sortie)
+
+[//]: # (> ➡️ **Objectif :** relier la théorie du développement mobile à un cas concret)
 
 ## 🔗 1.1.10 Sources et références
 

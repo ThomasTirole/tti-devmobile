@@ -49,11 +49,6 @@ Voici les **7 commandements** de la norme, illustrés par des exemples mobiles :
 Ces principes ne sont pas des règles rigides : ils constituent des **repères universels** pour juger si une interface est intuitive, claire et rassurante.
 :::
 
----
-
-> Vous verrez dans le chapitre [1.5 - Vérifier et tester l'application](module/test/test.md) comment ces principes servent de base aux **tests utilisateurs et audits ergonomiques**.
-
-
 ## 🧭 1.2.3 Les grands principes UX/UI sur mobile
 L'**UX (User Experience)** et l'**UI (User Interface)** sont deux notions complémentaires :
 - L'**UX** s'intéresse **à l'expérience vécue par l'utilisatuer** (utilité, efficacité, émotions).
