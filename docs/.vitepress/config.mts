@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import sidebar from './sidebar/sidebar.generated.mjs'
 
 // https://vitepress.dev/reference/site-config
@@ -8,6 +9,16 @@ export default defineConfig({
   description: "Apprendre TypeScript et Ionic",
   lang: 'fr-FR',
   lastUpdated: true,
+  markdown: {
+      config(md) {
+          md.use(groupIconMdPlugin)
+      },
+  },
+  vite: {
+      plugins: [
+          groupIconVitePlugin()
+      ],
+  },
   ignoreDeadLinks: true, // ignore dead links to allow build to succeed
   head: [['link', { rel: 'icon', href: '/tti-devmobile/favicon.ico' }]],
   themeConfig: {
