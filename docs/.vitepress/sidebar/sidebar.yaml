@@ -35,6 +35,8 @@
       link: /module/programmer-application/setup-environnement
     - text: 🧑‍🏫 Rappel UX & intro Ionic
       link: /module/programmer-application/rappel-ux-intro-ionic
+    - text: 🖼️ Composants Ionic
+      link: /module/programmer-application/composants-ui-ionic
 - text: Apprendre le développement mobile
   collapsed: true
   items:
