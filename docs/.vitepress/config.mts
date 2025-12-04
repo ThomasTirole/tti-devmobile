@@ -26,7 +26,7 @@ export default defineConfig({
       logo: '/logo.png',
       nav: [
           {text: 'Accueil', link: '/'},
-          {text: 'Examples', link: '/markdown-examples'}
+          // {text: 'Examples', link: '/markdown-examples'}
       ],
 
       sidebar: {
@@ -44,7 +44,8 @@ export default defineConfig({
 
       socialLinks: [
           {icon: 'github', link: 'https://github.com/vuejs/vitepress'},
-          {icon: 'ionic', link: 'https://ionicframework.com/'}
+          {icon: 'ionic', link: 'https://ionicframework.com/'},
+          {icon: 'padlet', link: 'https://padlet.com/thomastirole/m335-r-aliser-une-application-mobile-vcct90204ol2qz29'}
       ],
       outline: {
           label: 'Sur cette page',
