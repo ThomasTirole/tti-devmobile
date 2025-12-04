@@ -9,6 +9,7 @@
     "gen:sidebar": "node docs/.vitepress/sidebar/generate-sidebar.mjs"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "vitepress-plugin-group-icons": "^1.6.5"
   }
 }

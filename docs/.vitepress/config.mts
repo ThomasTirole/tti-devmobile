@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import sidebar from './sidebar/sidebar.generated.mjs'
 
 // https://vitepress.dev/reference/site-config
@@ -8,6 +9,16 @@ export default defineConfig({
   description: "Apprendre TypeScript et Ionic",
   lang: 'fr-FR',
   lastUpdated: true,
+  markdown: {
+      config(md) {
+          md.use(groupIconMdPlugin)
+      },
+  },
+  vite: {
+      plugins: [
+          groupIconVitePlugin()
+      ],
+  },
   ignoreDeadLinks: true, // ignore dead links to allow build to succeed
   head: [['link', { rel: 'icon', href: '/tti-devmobile/favicon.ico' }]],
   themeConfig: {
@@ -15,7 +26,7 @@ export default defineConfig({
       logo: '/logo.png',
       nav: [
           {text: 'Accueil', link: '/'},
-          {text: 'Examples', link: '/markdown-examples'}
+          // {text: 'Examples', link: '/markdown-examples'}
       ],
 
       sidebar: {
@@ -33,7 +44,8 @@ export default defineConfig({
 
       socialLinks: [
           {icon: 'github', link: 'https://github.com/vuejs/vitepress'},
-          {icon: 'ionic', link: 'https://ionicframework.com/'}
+          {icon: 'ionic', link: 'https://ionicframework.com/'},
+          {icon: 'padlet', link: 'https://padlet.com/thomastirole/m335-r-aliser-une-application-mobile-vcct90204ol2qz29'}
       ],
       outline: {
           label: 'Sur cette page',
