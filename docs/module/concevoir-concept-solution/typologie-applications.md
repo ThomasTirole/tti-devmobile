@@ -38,11 +38,6 @@ C’est cette recherche d’équilibre entre **performance**, **coût** et **acc
 Il n’existe pas de “meilleure” approche universelle : le bon choix dépend toujours du **contexte du projet**, des **objectifs**, du **budget** et du **public cible**.
 :::
 
-::: danger
-exercice ou on doit analyser un marché etc par exemple je mets un pays avec un certain OS et je demande aux étudiants de choisir le type d'application le plus adapté et justifier avec leur analyse
-:::
-
-
 ## 📱 2.1.2 Les applications natives
 Les **applications natives** sont développées spécifiquement pour un **système d’exploitation donné**.  
 Elles utilisent les **langages officiels** et les **outils fournis par les créateurs de la plateforme** :
@@ -64,10 +59,6 @@ Cependant, cette qualité a un prix : développer une application native pour An
 Cela implique deux équipes de développement, des tests séparés et des coûts plus élevés.
 
 > 💬 En résumé, le développement natif reste le choix privilégié lorsque la **performance**, la **stabilité** et la **qualité d’intégration** priment sur le **budget** et le **temps de développement**.
-
-::: danger
-prévoir un petit schéma “architecture native” avec OS / API / App pour visualiser la différence
-:::
 
 ## 🌐 2.1.3 Les applications web mobiles
 Les **applications web mobiles** ne s’installent pas depuis un store : elles s’exécutent directement dans le **navigateur** (Chrome, Safari, Firefox, Edge, etc.).  
@@ -118,12 +109,8 @@ Cette version PWA pèse **99 % de moins** que l’application native, tout en of
 4. Lancez l’application depuis votre écran d’accueil : vous venez d’installer une PWA !  
 :::
 
-::: danger
-faire un GIF de démonstration
-:::
-
 ## 💻 2.1.4 Les applications hybrides
-Les **applications hybrides** ou **cross-plateformes** cherchent à combiner les avantages des applications web et des applications natives.  
+Les **applications hybrides** cherchent à combiner les avantages des applications web et des applications natives.  
 Elles reposent sur une **base de code web** (HTML, CSS, JavaScript) mais sont **encapsulées** dans un conteneur natif qui leur permet d’être installées depuis un store (Google Play ou App Store).
 
 Techniquement, une application hybride fonctionne comme une page web affichée à l’intérieur d’un “navigateur embarqué”, appelé **_WebView_**.  
@@ -154,9 +141,7 @@ Les premières versions d’**Instagram**, d’**Uber** et de **Twitter** étaie
 Aujourd’hui encore, de nombreuses **applications métiers** ou **outils internes/éducatifs** utilisent l’approche hybride pour rester **efficaces**, **modernes** et **économiques**.
 :::
 
-::: danger
-prévoir une illustration simple : schéma du fonctionnement hybride (WebView, pont natif, accès aux APIs)
-:::
+![hybrid-architecture.png](/2.1/hybrid-architecture.png)
 
 ## ⚛️ 2.1.5 Les applications cross-plateformes
 Les **applications cross-plateformes** (ou multiplateformes) représentes aujourd'hui une des approches les plus répandues du développement mobile.
@@ -191,9 +176,7 @@ Contrairement aux applications hybrides, les solutions cross-plateformes moderne
 > 💬 En résumé : les frameworks cross-plateformes modernes consistuent aujourd'hui **le meilleur compromis entre performance, rapidité et coût**. 
 > Ils permettent de créer des applications **multisystèmes performantes**, tout en réduisant la duplication du travail et les coûts de maintenance.
 
-::: danger
-prévoir une illustration simple : schéma “un code → plusieurs plateformes (Android / iOS / Web)”
-:::
+![hybrid-native.png](/2.1/hybrid-native.png)
 
 ## 🧮 2.1.6 Comparatif global
 Pour mieux visualiser les différences entre les quatre grandes approches de développement mobile, le tableau ci-dessous résume leurs principales caractéristiques :
@@ -236,6 +219,8 @@ Le choix du type d'application dépend de plusieurs critères essentiels :
 ::: details **💡 Exemple concret** : {open}
 Une **application de covoiturage locale** à budget limité pourrait être développée en **Flutter** : un seul code source, un rendu natif fluide et une maintenance simplifiée.
 :::
+
+![how-to-choose.png](/2.1/how-to-choose.png)
 
 ## 🧩 2.1.8 Activités pédagogiques
 ### 🧠 Exercice 1 - Identifier les types d'applications
