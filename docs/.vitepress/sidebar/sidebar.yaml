@@ -37,56 +37,56 @@
       link: /module/programmer-application/rappel-ux-intro-ionic
     - text: 🖼️ Composants Ionic
       link: /module/programmer-application/composants-ui-ionic
-- text: Apprendre le développement mobile
-  collapsed: true
-  items:
-    - text: Introduction au développement mobile
-      link: /dev-mobile/introduction
-    - text: Types d’applications
-      link: /dev-mobile/types
-    - text: UX/UI et ergonomie mobile
-      link: /dev-mobile/ux-ui
-    - text: Fonctionnalités spécifiques aux mobiles
-      link: /dev-mobile/fonctionnalites
-    - text: Publication et distribution
-      link: /dev-mobile/publication
-
-- text: TypeScript
-  collapsed: true
-  items:
-    - text: Pourquoi TypeScript ?
-      link: /ts/introduction
-    - text: Bases du langage
-      link: /ts/bases
-    - text: Classes et objets
-      link: /ts/classes
-    - text: Outils et configuration
-      link: /ts/outils
-
-- text: Ionic
-  collapsed: true
-  items:
-    - text: Introduction à Ionic
-      link: /ionic/introduction
-    - text: Démarrer un projet
-      link: /ionic/demarrer
-    - text: Composants de base
-      link: /ionic/composants
-    - text: Accéder aux fonctionnalités natives
-      link: /ionic/natif
-    - text: Persistance & API
-      link: /ionic/persistance-api
-    - text: Build et déploiement
-      link: /ionic/build-deploiement
-
-- text: Exercices & Projet fil rouge
-  collapsed: true
-  items:
-    - text: Introduction
-      link: /exercices/introduction
-    - text: Étape 1
-      link: /exercices/etape1
-    - text: Étape 2
-      link: /exercices/etape2
-    - text: Étape finale
-      link: /exercices/final
+#- text: Apprendre le développement mobile
+#  collapsed: true
+#  items:
+#    - text: Introduction au développement mobile
+#      link: /dev-mobile/introduction
+#    - text: Types d’applications
+#      link: /dev-mobile/types
+#    - text: UX/UI et ergonomie mobile
+#      link: /dev-mobile/ux-ui
+#    - text: Fonctionnalités spécifiques aux mobiles
+#      link: /dev-mobile/fonctionnalites
+#    - text: Publication et distribution
+#      link: /dev-mobile/publication
+#
+#- text: TypeScript
+#  collapsed: true
+#  items:
+#    - text: Pourquoi TypeScript ?
+#      link: /ts/introduction
+#    - text: Bases du langage
+#      link: /ts/bases
+#    - text: Classes et objets
+#      link: /ts/classes
+#    - text: Outils et configuration
+#      link: /ts/outils
+#
+#- text: Ionic
+#  collapsed: true
+#  items:
+#    - text: Introduction à Ionic
+#      link: /ionic/introduction
+#    - text: Démarrer un projet
+#      link: /ionic/demarrer
+#    - text: Composants de base
+#      link: /ionic/composants
+#    - text: Accéder aux fonctionnalités natives
+#      link: /ionic/natif
+#    - text: Persistance & API
+#      link: /ionic/persistance-api
+#    - text: Build et déploiement
+#      link: /ionic/build-deploiement
+#
+#- text: Exercices & Projet fil rouge
+#  collapsed: true
+#  items:
+#    - text: Introduction
+#      link: /exercices/introduction
+#    - text: Étape 1
+#      link: /exercices/etape1
+#    - text: Étape 2
+#      link: /exercices/etape2
+#    - text: Étape finale
+#      link: /exercices/final

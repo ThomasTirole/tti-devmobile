@@ -1,5 +1,7 @@
 # 🪪 2.1 Typologie des applications mobiles
 
+<iframe src="https://slides.com/tirtho/2-1-typologie-des-applications-mobiles/embed" width="576" height="420" title="🪪 2.1 Typologie des applications mobiles" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d’apprentissage
 À la fin de ce chapitre, vous serez capables de :
 - Comprendre pourquoi il existe plusieurs **types d’applications mobiles**.
