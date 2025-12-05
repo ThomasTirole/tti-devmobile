@@ -1,4 +1,4 @@
-# ☁️ Persistance cloud et Backend-as-a-Service (BaaS)
+# ☁️ 2.6 Persistance cloud et Backend-as-a-Service (BaaS)
 
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable de :
