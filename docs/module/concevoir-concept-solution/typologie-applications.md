@@ -228,16 +228,19 @@ Une **application de covoiturage locale** à budget limité pourrait être déve
 ### 🧠 Exercice 1 - Identifier les types d'applications
 Choisissez trois applications connues (par exemple : **Duolingo**, **YouTube**, **Instagram**).
 > ➡️ Déterminez leur type : native, web, hybride ou cross-plateforme.
+> 
 > ➡️ Justifiez votre choix en observant leur comportement : installation, fluidité, accès hors-ligne, compatibilité multi-appareils, etc.
 
 ### ⚖️ Exercice 2 - Comparatif de solutions
 Vous devrez créer une application pour un **festival de musique** : agenda, billetterie et carte interactive.
 > ➡️ Comparez les avantages et inconvénients d'une app **native**, **web**, et **cross-plateforme**.
+> 
 > ➡️ Recommandez la solution la plus pertinente selon les objectifs et le budget, en justifiant votre choix.
 
 ### 💡 Exercice 3 - Étude de cas client
 Votre client est un **restaurant** qui souhaite permettre à ses clients de consulter le menu, réserver une table et recevoir des notifications.
 > ➡️ Quelle approche technique choisiriez-vous ?
+> 
 > ➡️ Quels compromis seriez-vous prêt à accepter entre performance, coûts et expérience utilisateur ?
 
 ::: tip **💬 Info**
