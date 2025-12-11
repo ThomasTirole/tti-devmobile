@@ -1,4 +1,4 @@
-# ☁️ Persistance cloud et Backend-as-a-Service (BaaS)
+# ☁️ 2.6 Persistance cloud et Backend-as-a-Service (BaaS)
 
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable de :
@@ -385,7 +385,7 @@ Le NoSQL demande une structuration soigneuse pour éviter :
 
 > 💬 Firebase convient mieux aux données peu structurées ou très dynamiques.
 
-### ⚖️ 2.6.6 Supabase vs Firebase
+## ⚖️ 2.6.6 Supabase vs Firebase
 Supabase et Firebase proposent tous deux un backend complet et prêt à l'emploi, mais reposent sur des approches différentes.
 Le premier s'appuie sur le **SQL** et les standards ouverts, tandis que le second met en avant la **simplicité** et la **synchronisation en temps réel** via une base NoSQL.
 
@@ -775,7 +775,7 @@ La synchronisation est **automatique** et **silencieuse**.
 > 🎯 *Modèle très utilisé* : WhatsApp, Notion, Google Drive, Figma Offline, etc.
 :::
 
-# 🧩 2.6.9 Activités pédagogiques
+## 🧩 2.6.9 Activités pédagogiques
 
 ### 🧠 Exercice 1 — Comprendre un schéma BaaS
 
