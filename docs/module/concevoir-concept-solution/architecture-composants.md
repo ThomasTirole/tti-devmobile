@@ -1,9 +1,11 @@
 # 🗃️ 2.3 Architecture et composants d'une application mobile
 
+<iframe src="https://slides.com/tirtho/2-3-architecture-et-composants-d-une-application-mobile/embed" width="576" height="420" title="🗃️ 2.3 Architecture et composants d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable de :
 - Comprendre la **structure interne** d'une application mobile.
-- Identifier les *3modèles d'architectures** les plus utilisés (MVC, MVVM, Clean Architecture).
+- Identifier les **modèles d'architectures** les plus utilisés (MVC, MVVM, Clean Architecture).
 - Expliquer le rôle et la communication entre les **différentes couches** d'une application.
 - Appréhender les **principes de gestion d'état** et de modularité.
 
@@ -26,15 +28,88 @@ Une application météo comporte :
 
 > **🎯 But de ce chapitre :** comprendre comment ces couches s'articulent pour concevoir des applications structurées, performantes et faciles à faire évoluer.
 
-## 🗃️ 2.3.2 Les modèles d'architectures les plus utilisés
-Les architectures logicielles définissent **comment séparer les responsabilités** dans une application.
-Les plus courantes dans le développement mobile sont **MVC**, **MVVM** et **Clean Architecture**.
+## 🧱 2.3.1bis Les 3 couches universelles d’une application
 
-::: danger
-SCHEMA DE CHAQUE MODELE D'ARCHITECTURE
+Avant de parler de MVC ou MVVM, retenez qu’une application est presque toujours organisée autour de **3 grandes couches** :
+
+1. **Interface (UI)** : ce que l’utilisateur voit et manipule (écrans, boutons, formulaires).
+2. **Logique / État** : ce qui décide *quoi faire* quand l’utilisateur agit (règles métier, état de l’app).
+3. **Données** : où sont stockées les informations (API, base de données, localStorage, fichiers…).
+
+#### 🔍 Exemple concret : app Ionic-Vue “TaskIonic”
+
+Imaginons une petite app de **liste de tâches** en Ionic-Vue.
+
+On peut relier ses fichiers aux 3 couches :
+
+| Couche             | Rôle                                | Exemple dans TaskIonic          |
+| ------------------ | ----------------------------------- | ------------------------------- |
+| **Interface (UI)** | Afficher les infos, gérer les clics | `TasksPage.vue`, `TaskItem.vue` |
+| **Logique / État** | Gérer l’état et la logique métier   | `useTasksStore.ts` (Pinia)      |
+| **Données**        | Lire / écrire les données           | `tasksApi.ts`, `Task.ts`        |
+
+💡 **Réflexe à adopter :**
+
+Quand vous ne savez pas où mettre un morceau de code, posez-vous la question :
+
+- Est-ce que ça affiche quelque chose ou réagit à un clic ? 👉 **Interface (UI)**
+- Est-ce que ça décide *quoi faire* (validation, règles métier, calcul, choix) ? 👉 **Logique / État**
+- Est-ce que ça lit ou écrit des données “persistantes” (API, storage, BDD) ? 👉 **Données**
+
+Les modèles comme **MVC**, **MVVM** ou **Clean Architecture** sont différentes façons d’organiser ces 3 couches.
+
+## 🗃️ 2.3.2 Les modèles d’architectures les plus utilisés
+
+::: details 🧭 Ces architectures ne sont pas réservées à Android
+
+Les architectures comme **MVC**, **MVVM** ou **Clean Architecture** ne sont **pas propres à Android**.
+
+Ce sont des **modèles généraux** pour organiser le code d’une application :
+
+- au départ utilisées sur **desktop** et **web** ;
+- adaptées ensuite à **Android**, **iOS**, **Flutter**, **React Native**… ;
+- et tout à fait pertinentes pour des apps **hybrides** comme **Ionic + Vue + Capacitor**.
+
+Dans tous les cas, on retrouve les mêmes questions :
+
+- Où mettre la **logique métier** ?
+- Où gérer l’**état** de l’application ?
+- Où accéder aux **données** (API, storage, BDD) ?
+- Comment éviter le “gros fichier unique” ingérable ?
+
+Les patterns (MVC, MVVM, Clean…) sont simplement des **façons différentes de séparer** ces responsabilités.
+
 :::
 
+Les architectures logicielles (MVC, MVVM, Clean…) définissent **comment organiser les 3 couches** vues précédemment :
+
+- **Interface (UI)** ;
+- **Logique / État** ;
+- **Données**.
+
+Elles répondent toutes aux mêmes objectifs :
+
+- **séparer les responsabilités** (ce qui affiche, ce qui décide, ce qui stocke) ;
+- rendre le code **plus lisible**, **plus testable** et **plus maintenable** ;
+- permettre à plusieurs développeurs de travailler **en parallèle** sans se gêner.
+
+Dans ce cours, nous allons surtout nous référer à :
+
+- **MVC (Model – View – Controller)** ;
+- **MVVM (Model – View – ViewModel)** ;
+- **Clean Architecture** (version simplifiée).
+
+> 🧩 **Lien avec notre app Ionic-Vue “TaskIonic” :**
+>
+> - **Model / Données** : `Task.ts`, `tasksApi.ts`
+> - **View / UI** : `TasksPage.vue`, `TaskItem.vue`
+> - **Controller / ViewModel** : `useTasksStore.ts` (Pinia, logique + état)
+
+L’idée importante à retenir n’est pas le nom précis du pattern, mais le **principe** :
+> 👉 *ce qui affiche* ≠ *ce qui décide* ≠ *ce qui stocke*.
+
 ### 🔹 MVC (Model - View - Controller)
+
 Le modèle **MVC** est l'un des plus anciens et des plus répandus.
 Il repose sur une séparation en trois couches :
 
@@ -58,6 +133,8 @@ Il repose sur une séparation en trois couches :
 ::: tip  Architecture présente dans :
 Android (Activities + Layouts XML), iOS (ViewControllers), Ionic (composants + services).
 :::
+
+![mvc.png](/2.3/mvc.png)
 
 ### 🔸 MVVM (Model - View - ViewModel)
 Le modèle **MVVM** est une évolution du MVC, conçue pour mieux séparer la logique de présentation de la logique métier.
@@ -84,6 +161,8 @@ Dans ce modèle, la `ViewModel` "observe" le `Model` : dès qu'une donnée chang
 **Limites :**
 - Plus complexe à comprendre au départ
 - Requiert une bonne maîtrise des notions de **réactivité** et d'**observation**.
+
+![mvvm.png](/public/2.3/mvvm.png)
 
 ### ▫️ Clean Architecture
 La **Clean Architecture**, popularisé par Robert C. Martin ("Uncle Bob"), pousse la séparation encore plus loin pour les projets complexes.
@@ -112,6 +191,84 @@ Cette approche permet de **tester et modifier** une couche sans impacter les aut
 ::: tip Utilisée dans :
 grands projets Android / Flutter / React Native professionnels.
 :::
+
+![clean-architecture.png](/2.3/clean-architecture.png)
+
+## 📱 2.3.2bis Comment ces architectures se traduisent dans une app Ionic-Vue ?
+
+Avec **Ionic + Vue + Pinia**, nous allons utiliser une architecture qui ressemble à une combinaison de **MVVM** et de **Clean Architecture simplifiée**.
+
+#### 🧩 Rôle des dossiers dans un projet Ionic-Vue
+
+| Dossier / fichier         | Couche            | Rôle principal                                           |
+|---------------------------|-------------------|----------------------------------------------------------|
+| `views/` (`*.vue`)        | Interface (UI)    | Écrans, navigation, mise en forme                       |
+| `components/` (`*.vue`)   | Interface (UI)    | Petits blocs réutilisables (card, liste, bouton custom) |
+| `stores/` (Pinia)         | Logique / État    | État global, règles métier, actions                     |
+| `models/` (`*.ts`)        | Modèle / Domaine  | Types, interfaces, parfois petites fonctions métier     |
+| `services/` (`*Api.ts`)   | Données           | Accès aux API, localStorage, SQLite, etc.               |
+
+#### 🔁 Exemple concret : scénarios dans l’app TaskIonic
+
+1. L’utilisateur clique sur **“Ajouter”** dans `TasksPage.vue`.
+2. La vue appelle une **action** du store : `tasksStore.addTask(title)`.
+3. Le store met à jour l’**état** (liste des tâches) et appelle `tasksApi.saveTasks(...)`.
+4. La couche **données** (service) s’occupe de **persister** la liste (localStorage ou API).
+5. Vue se **met à jour automatiquement** grâce à la réactivité de Vue / Pinia.
+
+On peut visualiser ce flux :
+![architecture-ionic-task.svg](/2.3/architecture-ionic-task.svg)
+
+::: details 🔁 Lecture du diagramme : scénario “Ajouter une tâche”
+
+Ce diagramme montre ce qui se passe dans l’app quand l’utilisateur ajoute une tâche.
+
+- **UI (Vue / Ionic – `TasksPage.vue`)**  
+  L’utilisateur remplit le champ texte et clique sur **Ajouter**.  
+  👉 La vue déclenche un événement (`@submit` / `@click`) et appelle une action du store :  
+  `tasksStore.addTask(title)`.
+
+- **VM (Store Pinia – `useTasksStore`)**  
+  Le store reçoit la demande, crée une nouvelle tâche, met à jour la liste en mémoire  
+  et appelle un service de données pour la sauvegarder.  
+  👉 C’est ici que se trouve la **logique métier** et la **gestion de l’état**.
+
+- **DATA (Service – `tasksApi`)**  
+  Le service gère la **persistance** : enregistre les tâches dans le `localStorage`  
+  (ou plus tard, dans une API / base de données).  
+  👉 La Vue ne sait pas *où* ni *comment* les données sont stockées.
+
+Grâce à la **réactivité de Vue / Pinia**, dès que le store met à jour la liste `tasks`,  
+l’UI se met automatiquement à jour et la nouvelle tâche apparaît à l’écran.
+
+> 🎯 Idée clé :
+> - UI = affiche + récupère les clics
+> - Store = décide quoi faire + gère l’état
+> - Service = lit / écrit les données
+:::
+
+💬 **À retenir pour vos projets Ionic :**
+- Les **composants Vue/Ionic** ne devraient contenir que :
+  - de l’affichage ; 
+  - la gestion d’événements (clic, submit) ; 
+  - des appels à des **actions** (du store, des services…).
+
+- Les **stores Pinia** :
+  - gèrent l’**état** ; 
+  - contiennent la **logique métier** (règles, validations, calculs) ; 
+  - appellent les **services de données**.
+
+- Les **services** :
+  - encapsulent tout ce qui touche aux **APIs** et au **stockage** ; 
+  - rendent le reste du code indépendant de la technologie utilisée (API, localStorage, etc.).
+
+> 🎯 **Objectif pédagogique :**
+> Habituez-vous à vous demander, pour chaque morceau de code :
+>
+> * “Est-ce que ça touche à l’interface ?” → Vue / composants
+> * “Est-ce que ça touche à l’état ou à la logique métier ?” → store / composables
+> * “Est-ce que ça touche à une source de données ?” → service / API
+
 
 ## 🔄️ 2.3.3 Gestion de l'état
 Une application doit souvent gérer des données dynamiques : utilisateur connecté, panier, liste de favoris, onglet actif, etc.
@@ -156,7 +313,7 @@ Chaque couche à son rôle et ne doit pas "empiéter" sur les autres.
 
 > **💬 Exemple :**
 > 
-> Un clic sur "Actualiser la météo" &rarr;  ViewModel appelle un service API &rarr; réponse JSON rarr; mise à jour de l'interface.
+> Un clic sur "Actualiser la météo" &rarr;  ViewModel appelle un service API &rarr; réponse JSON &rarr; mise à jour de l'interface.
 
 ### ⚙️ Principes de modularité
 - **Responsabilité unique :** chaque module doit faire une seule chose (principe de _"Single Responsibility"_).
@@ -164,40 +321,9 @@ Chaque couche à son rôle et ne doit pas "empiéter" sur les autres.
 - **Évolutivité :** on peut remplacer une couche (ex. API) sans modifier toute l'application.
 > 💡 Une architecture modulaire permet à plusieurs développeurs de travailler ensemble sans conflit.
 
-::: danger
-faire un schéma qui montre un développeur qui travaille sur la couche UI, un autre sur la couche données, etc. et que du coup ça n'interfère pas. pourquoi pas animation ou gif.
-:::
-
 ### 📁 Schéma de communication recommandé
 
-```mermaid
-graph TD
-    A[Vue (UI)] -->|Interaction utilisateur| B[ViewModel / Controller]
-    B -->|Appel de services| C[Couche Données (API / BDD)]
-    C -->|Retour des données| B
-    B -->|Mise à jour de l'UI| A
-```
-
-```
-+-------------------+
-|     Interface     |
-|   (View / UI)     |
-+---------▲----------+
-          |
-          | (interaction utilisateur)
-          ▼
-+-------------------+
-| Logique (VM / Ctl)|
-|   ViewModel / Ctrl|
-+---------▲----------+
-          |
-          | (requêtes, données)
-          ▼
-+-------------------+
-|     Données       |
-| (API / BDD / Repo)|
-+-------------------+
-```
+![schema-communication.svg](/2.3/schema-communication.svg)
 
 > 💬 Ce modèle simple illustre la circulation de l'information dans une application bien structurée.
 
