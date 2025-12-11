@@ -4,13 +4,13 @@
 À la fin de ce chapitre, vous serez capable de :
 - Identifier les **principaux capteurs matériels** d'un appareil mobile.
 - Expliquer comment ces capteurs sont utilisés dans les applications mobiles.
-- Comprendre la **géolocalisation**, la **détection de mouvemment** et l'**accès audio/vidéo**.
+- Comprendre la **géolocalisation**, la **détection de mouvement** et l'**accès audio/vidéo**.
 - Connaître les bonnes pratiques pour gérer la **sécurité et la consommation d'énergie** liées aux capteurs.
 
 ## 🧭 2.2.1 Introduction : les sens du smarpthone
 Les smartphones modernes sont de véritables **concentrés de capteurs**.
 À l'image des sens humains, ils peuvent **voir**, **entendre**, **ressentir**, **se situer** et **interagir** avec leur environnement.
-Ces capteurs permettent à l'appareil de **percevoir le monde réell* et d'enrichir les fonctionnalités des applications : navigation, sport, santé, jeux, photographie, domotique, etc.
+Ces capteurs permettent à l'appareil de **percevoir le monde réel* et d'enrichir les fonctionnalités des applications : navigation, sport, santé, jeux, photographie, domotique, etc.
 
 ::: details **💡Exemple concret :** {open}
 Une application de course à pied combine plusieurs capteurs :
@@ -45,8 +45,11 @@ La combinaison de ces technologies permet d'obtenir une position précise tout e
 - **Sport** et **santé** : Strava, Nike Run Club.
 - **Réseaux sociaux** : géolocalisation des publications/stories.
 - **Météo** : affichage automatique des conditions locales.
-::: danger
-- AJOUTER UNE IMAGE POUR LA GEOLOCALISATION INSTAGRAM
+::: details **📍 Géolocalisation dans Instagram**
+![insta-geoloc.gif](/2.2/insta-geoloc.gif)
+
+#### Pastille de localisation en utilisant "Plans"
+![ios-pastille-loc.png](/2.2/ios-pastille-loc.png)
 :::
 
 ### 🧰 APIs et frameworks utilisés
@@ -136,13 +139,19 @@ Ces éléments permettent une interaction directe entr el'utilisateur et le mond
 > **💬 Exemples :** une application de dictée vocale qui convertie la parole en texte, ou une app de reconnaissance musicale comme Shazam.
 
 ### 👍 Bonnes pratiques et accessibilités
-- Toujours demander la *3permission explicite** avant d'activer la caméra ou le micro.
+- Toujours demander la **permission explicite** avant d'activer la caméra ou le micro.
 - Fournir un **signal visuel** (icône, vocant, vibration) indiquant que le capteure est en cours d'utilisation.
 - Prévoir des **alternatives accessibles** : sous-titres, commandes vocales, transcriptions automatiques.
 > 🎯 Une app respectueuse de la vie privée est une app à laquelle les utilisateurs font confiance !
 
-::: danger
-AJOUTER UNE IMGAE DE LA PASTILLE NE HAUT A GAUCHE SUR IPHONE QUAND LE MICRO OU LA CAMERA TOURNE
+::: details **🟢🟠Les "pastilles" de couleurs iPhone lorsqu'on utilise le micro ou la caméra**
+#### Caméra en utilisation
+![ios-camera.png](/2.2/ios-camera.png)
+#### Micro en utilisation
+![ios-micro.jpg](/2.2/ios-micro.jpg)
+#### Derniers capteurs utilisés
+![ios-capteurs-used.jpg](/2.2/ios-capteurs-used.jpg)
+![ios-capteurs-used-2.jpg](/2.2/ios-capteurs-used-2.jpg)
 :::
 
 ## 🌡️ 2.2.5 Autres capteurs et contexte d'usage
@@ -205,13 +214,25 @@ Une application de météo doit justifier son accès à la position GPS pour obt
 :::
 > 🥇 **Règle d'or** : toujours traiter la donnée comme si c'était la vôtre.
 
-::: danger 
-EST-CE QUE JE PEUX TROUVER UN GIF QUI ILLUSTRE COMMENT SUPPRIMER LES DATA D'UNE APP DANS LES PARAMETRES D'UN IPHONE ? OU EN PLUS AJOUTER AUSSI UN MESSAGE DE CONSENTEMENT ?
+::: details **❓ Permissions iOS**
+#### Demande de permissions
+![pokemongo-permission.png](/2.2/pokemongo-permission.png)
+
+#### Trouver les applications par services utilisés
+![ios-confidentiality.gif](/2.2/ios-confidentiality.gif)
 :::
 
 ## 🧩 2.2.7 Activités pédagogiques
 ### 🧠 Exercice 1 - Identifier les capteurs
 Utilisez les paramètres de votre smartphone ou une application comme _Sensor Box_ pour repérer les capteurs disponibles.
+
+Pour Android :
+- [Physics Toolbox Sensor Suite](https://play.google.com/store/apps/details?id=com.chrystianvieyra.physicstoolboxsuite)
+- [Sensor Box](https://play.google.com/store/apps/details?id=com.nirmallabs.sensorbox&hl=fr_CH)
+
+Pour iOS :
+- [Physics Toolbox Sensor Suite](https://apps.apple.com/us/app/physics-toolbox-sensor-suite/id1128914250)
+
 > ➡️ Quels types de données collectent-ils ?
 > 
 > ➡️ Quelles applications de votre téléphone les utilisent ?
