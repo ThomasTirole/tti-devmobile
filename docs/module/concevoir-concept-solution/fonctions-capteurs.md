@@ -1,5 +1,7 @@
 # 📡 2.2 Fonctions et capteurs
 
+<iframe src="https://slides.com/tirtho/2-2-fonctions-et-capteurs/embed" width="576" height="420" title="📡 2.2 Fonctions et capteurs" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable de :
 - Identifier les **principaux capteurs matériels** d'un appareil mobile.
