@@ -237,11 +237,105 @@ Vous devrez créer une application pour un **festival de musique** : agenda, bil
 > 
 > ➡️ Recommandez la solution la plus pertinente selon les objectifs et le budget, en justifiant votre choix.
 
-### 💡 Exercice 3 - Étude de cas client
-Votre client est un **restaurant** qui souhaite permettre à ses clients de consulter le menu, réserver une table et recevoir des notifications.
-> ➡️ Quelle approche technique choisiriez-vous ?
+### Exercice 3 - Études de cas clients
+Vous êtes en charge d'étudier l'un de ces trois cas clients. Pour chacun, déterminez la meilleure approche technique (native, web, hybride, cross-plateforme) en justifiant votre choix. Répondez aussi aux questions à la fin du cas.
+
+::: details **🧩 Étude de cas 1 – HelvBank Mobile**
+Une grande banque suisse veut moderniser son application mobile « HelvBank Mobile ».
+Les fonctionnalités prévues sont :
+
+* Consultation des comptes, virements, paiements de factures (QR-facture, eBill, etc.).
+* Connexion via **biométrie** (Face ID, Touch ID, reconnaissance d’empreinte Android).
+* Gestion des cartes (blocage/déblocage, modification des limites).
+* Notifications **push** en temps réel pour chaque transaction importante.
+* Intégration avec d’autres services de l’écosystème de l’OS :
+
+    * Raccourcis Siri / Google Assistant.
+    * Intégration avec le portefeuille natif (Apple Wallet / Google Wallet).
+* Exigences très strictes de **sécurité**, de **fiabilité** et de **performance**.
+
+Contexte et contraintes :
+
+* Les client·e·s ciblés sont répartis à parts égales entre **Android** et **iOS**.
+* L’application doit être disponible sur les **stores** et inspirer une **grande confiance**.
+* Le moindre bug d’affichage ou ralentissement risque d’être perçu comme un problème de sécurité.
+* Le budget est **confortable**, mais les équipes de développement doivent respecter des normes très strictes (audit de code, certification, etc.).
+
+> **🔎 Questions :**
+>
+> * Quel type d’application privilégieriez-vous (native, web/PWA, hybride, cross-plateforme) ?
+> * Quels sont les **arguments principaux** qui motivent ce choix ?
+> * Quels compromis acceptez-vous (coût, temps de développement, complexité) ?
+
+:::
+
+::: details **🧩 Étude de cas 2 – AgendaCulturel**
+Une association culturelle romande regroupe plusieurs théâtres, cinémas indépendants et salles de concert.
+Elle souhaite une solution numérique pour :
+
+* Afficher le **programme** des événements (par date, lieu, type de spectacle).
+* Permettre la **réservation** ou redirection vers les systèmes de billetterie existants.
+* Envoyer des **informations pratiques** (horaires, accès en transports publics, contacts).
+* Mettre en avant des **articles éditoriaux** (interviews, critiques, recommandations).
+
+Contexte et contraintes :
+
+* Le budget est **très limité** : l’association vit principalement de subventions et de bénévolat.
+* Le public est **large** et varié : jeunes, familles, personnes âgées, parfois peu à l’aise avec la technologie.
+* L’objectif principal est la **visibilité** : que les gens trouvent facilement l’information ou via une newsletter.
+* L’association ne dispose que d’une petite de personnes ayant fait du développement web (HTML/CSS/JS) et un peu de **compétences natives**.
+* L'application doit pouvoir être :
+
+    * Elle est facilement accessible sur smartphone.
+    * On peut l'_installer_ sur l’écran d’accueil.
+* L'application nécessite l'accès au capteur de géolocalisation pour montrer des événements proches de l'utilisateur.
+
+> 🔎 Questions pour les étudiant·e·s
+>
+> * Quelle approche technique vous semble la plus adaptée (native, web/PWA, hybride, cross-plateforme) ?
+> * Quels sont les **arguments principaux** qui motivent ce choix ?
+> * Quels compromis êtes-vous prêt·e à accepter ?
+
+:::
+
+::: details **🧩 Étude de cas 3 – TechServ Mobile**
+Une entreprise de maintenance industrielle emploie une soixantaine de techniciens qui interviennent sur des machines dans des usines partout en Suisse.
+
+Aujourd’hui, les techniciens utilisent :
+
+* Un **intranet web** sur ordinateur au bureau pour :
+
+    * Consulter la liste des interventions.
+    * Encoder leurs rapports (pannes, pièces changées, temps passé).
+* Des **feuilles papier** sur le terrain, qu’ils ressaisissent ensuite à leur retour.
+
+L’entreprise souhaite créer une application mobile « TechServ Mobile » pour les techniciens afin de :
+
+* Voir la **liste des interventions du jour** (issue du système existant).
+* Consulter les **détails d’une machine** (historique, documentation PDF).
+* Scanner un **QR code** ou un **code-barres** sur la machine pour l’identifier.
+* Ajouter des **photos** (pièce cassée, installation finale).
+* Encoder le **rapport d’intervention** directement sur place.
+* Synchroniser les données quand une connexion est disponible (certaines usines ont un réseau très mauvais, voire inexistant).
+
+Contexte et contraintes :
+
+* La majorité des techniciens sont équipés de **smartphones Android fournis par l’entreprise**, quelques cadres utilisent des iPhones.
+* L’application est **strictement interne** : pas de besoin d’être visible sur le store public.
+* L’entreprise dispose déjà d’une **équipe de développeurs** (magnifiquement formés par M. Tirole au module 293 et 294 et aux frameworks modernes) qui maintient l’intranet actuel.
+* La direction insiste pour :
+
+    * **Réutiliser au maximum** l’existant (API, logique métier, composants UI).
+    * Limiter les coûts de formation à de nouvelles techno.
+* Les besoins en performance sont importants pour certaines parties (scan de code, prise de photo), mais l’application n’a pas vocation à gérer des animations complexes ou des millions d’utilisateurs.
+
+> 🔎 Questions pour les étudiant·e·s
 > 
-> ➡️ Quels compromis seriez-vous prêt à accepter entre performance, coûts et expérience utilisateur ?
+> * Quelle approche technique vous semble la plus adaptée (native, web/PWA, hybride, cross-plateforme) ?
+> * Quels sont les **arguments principaux** qui motivent ce choix ?
+> * Quels compromis êtes-vous prêt·e à accepter ?
+> * Comment gérer le **mode hors-ligne** dans votre solution ?
+:::
 
 ::: tip **💬 Info**
 Vous serez amenés à débattre en petits groupes, puis présenter votre justification à l'oral en fin d'exercice.
