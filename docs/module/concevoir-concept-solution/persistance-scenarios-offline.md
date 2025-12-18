@@ -1,5 +1,7 @@
 # 💾 Persistance et scénarios offline
 
+<iframe src="https://slides.com/tirtho/2-4-persistance-et-scenarios-offline/embed" width="576" height="420" title="💾 2.4 Persistance et scénarios offline" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capables de :
 - Comprendre les différentes formes de **persistance locale** sur mobile
