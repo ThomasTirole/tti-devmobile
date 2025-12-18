@@ -24,7 +24,7 @@ La gestion du mode offline repose sur trois briques complémentaires :
 2. **la base de données locale** (SQLite, Realm, etc.),
 3. **la synchronisation** entre le local et le serveur, lorsque la connexion revient.
 
-::: details **💡 Exemple concret :**  {open}
+::: details **💡 Exemple concret :** {open}
 Une application de notes doit permettre d'ajouter, modifier ou supprimer des notes **même hors ligne**, puis synchroniser toutes les modifications avec le cloud dès que la connexion revient.
 :::
 
@@ -142,10 +142,6 @@ C'est un mécanisme clé pour offrir une expérience fluide et éviter les écra
 > 
 > Twitter, Instagram ou YouTube affichent le **dernier contenu chargé**, même hors ligne.
 
-::: danger
-TROUVER UN SCREEN DU CACHE YOUTUBE EN HORS-LIGNE ? OU INSTAGRAM PAR EXEMPLE SUR LE FEED
-:::
-
 ### 🧠 Types de cache
 - **Cache mémoire (RAM)**
   - Très rapide
@@ -165,9 +161,7 @@ TROUVER UN SCREEN DU CACHE YOUTUBE EN HORS-LIGNE ? OU INSTAGRAM PAR EXEMPLE SUR 
 Toujours enregistrer un **timestamp** pour savoir si les données du cache sont encore "fraîches". Comme en restauration : on labellise tous les aliments dans le frigo !
 :::
 
-::: danger
-ajouter une image de frigo de restauration
-:::
+![walkin-cooler.jpg](/2.4/walkin-cooler.jpg)
 
 ## 🔄️ 2.4.6 Synchronisation online/offline
 La synchronisation consiste à **maintenir la cohérence** entre les données locales et les données du serveur, même lorsque l'utilisateur travaille sans réseau.
@@ -220,26 +214,57 @@ Cela permet d'afficher des messages comme :
 > 💬 **Exemple :**
 > Une app de livraison peut empêcher l'envoi d'une commande hors ligne, mais continuer d'afficher les menus via le cache.
 
-## 🧩 2.4.8 Activité pratique - Mini schéma de stockage
+## 🧩 2.4.8 Activité pratique – Où stocker quoi ?
+*(clé–valeur / base de données / fichiers)*
+
 ### 🎓 Objectif
-Concevoir une architecture de stockage pour une **application de notes** fonctionnant en mode offline &rarr; online.
+Comprendre **où** et **comment** stocker chaque type de données dans une application mobile.
 
-### 📌 Consignes
-> ➜ Identifiez les données à stocker localement (titre, contenu, date, statut “à synchroniser”).
-> 
-> ➜ Décidez ce qui va dans :
->
-> * **SQLite** (notes + version + statut)
-> * **Clé-valeur** (préférences, thème, dernier utilisateur)
-    >   ➜ Décrivez le comportement offline :
-> **Ajouter une note hors ligne**
-> * **Modifier une note hors ligne**
-    >   ➜ Décrivez la synchronisation au retour du réseau.
+::: details **🌇 Application CityQuest**
+Vous travaillez sur **CityQuest**, une application de **chasse au trésor en ville**.
 
-### 🏆 Bonus
-Comment gérer un conflit si la note a été modifiée sur le téléphone et sur un autre appareil pendant que l'utilisateur était hors ligne ?
+#### 🪙 Fonctionnalités
+- L'app affiche des **quêtes géolocalisées** (énigmes, points d'intérêt, QR codes à scanner).
+- Chaque quête rapporte des **points** et peut être **validée** avec une photo.
+- L'utilisateur peut voir :
+    - ses quêtes en cours,
+    - ses quêtes terminées.
+- L'app doit fonctionner **raisonnablement** même avec un réseau faible (cache local).
 
-> 💬 Cet exercice prépare directement la transition vers le chapitre 2.5 (Authentification) et 2.6 (Backend as a Service : Supabase / Firebase).
+> ℹ️ Remarque  
+> On ne modélise ici **ni la base de données serveur**, ni tous les détails du profil utilisateur.  
+> On se concentre uniquement sur **les données stockées sur le téléphone**.
+
+#### 🗒️ Consignes
+Pour chaque donnée ci-dessous, indiquez **dans quel type de stockage** vous la placeriez :
+- **Clé-valeur**
+- **Base de données locale**
+- **Fichiers**
+- **Pas besoin de persistance** (si justifié)
+
+> ✍️ Justifiez chaque choix en 1 phrase.
+
+#### 🔍 Données à analyser
+1. Token d'authentification (JWT, OAuth)
+2. Paramètre du thème (sombre/clair)
+3. Choix de l'utilisateur pour télécharger les images uniquement en Wi-Fi / en Wi-Fi + 5G
+4. Dernière position GPS connue de l'utilisateur (afin de centrer la carte au prochain lancement)
+5. Liste des quêtes disponibles dans la ville (titre, description, coordonnées GPS, difficulté, nombre de points)
+6. État d'une quête pour l'utilisateur (`non commencée`, `en cours`, `terminée`)
+7. Historique des quêtes terminées (dizaines ou centaines d'entrées)
+8. Cache des quêtes à proximité récupérées depuis l'API (pour qu'elles s'affichent même si le réseau est lent)
+9. Photo de validation d'une quête prise par l'utilisateur
+10. Fichiers de **logs d'erreur** pour envoi ultérieur au support (stack traces, messages techniques)
+
+_**👉 Format de réponse suggéré**_
+
+| Donnée                               | Type de stockage choisi | Justification (1 phrase) |
+|--------------------------------------|-------------------------|--------------------------|
+| Token d'authentification             | …                       | …                        |
+| Paramètre du thème                   | …                       | …                        |
+| …                                    | …                       | …                        |
+:::
+
 
 ## 🔗 2.4.9 Références
 
