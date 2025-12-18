@@ -148,7 +148,7 @@ Voici les principaux :
 - Spécialisé "Identity & Access Management"
 - Très complet (SSO, OAuth2, permissions avancées)
 - Idéal pour les environnements professionnels complexes
-- Intégration plus lourde mais très robuste
+- Intégration plus lourde, mais très robuste
 > 📝 Choix privilégié dans les grandes entreprises.
 
 ### ⚖️ Comparatif synthétique
@@ -178,16 +178,18 @@ Une app de notes doit être totalement utilisable offline, **y compris pour cons
 :::
 
 ## 💪 2.5.6 Stratégies robustes pour l'auth mobile
-### 🟦 1. Vérification de session au démarrage
+Voici un exemple de stratégie d'authentification robuste pour une application mobile moderne :
+
+![strategie-auth-mobile.png](/2.5/strategie-auth-mobile.png)
+
+::: details 🟦 1. Vérification de session au démarrage
 Au lancement de l'app :
 - l'application vérifie si un **token valide** est déjà stocké,
 - si oui &rarr; l'utilisateur reste connecté,
 - sinon &rarr; redirection vers l'écran de connexion.
-::: danger
-SCHEMA avec accordion explication
 :::
 
-### 🟧 2. Rafraîchissement automatique du token
+::: details 🟧 2. Rafraîchissement automatique du token
 Les tokens JWT expirent (ex. après 1 heure).
 Un **refresh token** permet d'en redemander un nouveau sans re-saisir le mot de passe.
 
@@ -196,37 +198,33 @@ Suivi classique :
 2. L'app tente un refresh en arrière-plan.
 3. Si le refresh réussit &rarr; nouvelle session tansparente pour l'utilisateur.
 4. Si le refresh échoue &rarr; déconnexion.
-
-::: danger
-SCHEMA avec accordion explication
 :::
 
-### 🟩 3. Stockage sécurisé du token
+::: details 🟩 3. Stockage sécurisé du token
 Les tokens doivent être stockés via :
 - Capacitor `SecureStorage`
 - iOS `Keychain`,
 - Android `Keystore`,
 - Flutter `flutter_secure_storage`.
 > 🔐 **Ne jamais stocker un token dans localStorage** (dangereux, accessible via JS &rarr; XSS).
-::: danger
-SCHEMA avec accordion explication
+
 :::
 
-### 🟧 4. Continuité hors ligne
+::: details 🟧 4. Continuité hors ligne
 Si l'utilisateur est hors ligne :
 - l'app doit continuer à fonctionner sur les données locales (voir chapitre 2.4),
 - les actions sont **mises en file d'attente**,
 - la sync s'effectue lorsque le réseau revient.
 
-::: danger
-SCHEMA avec accordion explication
 :::
 
-### 🟥 5. Déconnexion "gracieuse"
+::: details 🟥 5. Déconnexion "gracieuse"
 Si un token expire _et_ que le refresh échoue (ex. mot de passe changé ailleurs) :
 - nettoyage complet de la session stockée,
 - redirection vers la page de connexion,
 - message clair : "Votre session a expiré, veuillez vous reconnecter."
+
+:::
 
 ::: tip **📝 En résumé**
 une application mobile doit maintenir une session utilisateur stable, sécurisée et résistante aux interruptions réseau. Les BaaS modernes (Supabase, Firebase), facilitent grandement cette logique.
@@ -262,7 +260,7 @@ Réalisez un schéma complet du flux d'authentification mobile :
 
 > _💬 Cet exercice prépare directement la section 2.6 (Supabase/Firebase)_
 
-## 🔗 2.5.7 Références et ressources
+## 🔗 2.5.8 Références et ressources
 
 - **[Supabase Auth](https://supabase.com/docs/guides/auth)**
 - **[Firebase Authentication](https://firebase.google.com/docs/auth)**
