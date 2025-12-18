@@ -1,10 +1,12 @@
 # 🔐 2.5 Authentification et gestion des utilisateurs
 
+<iframe src="https://slides.com/tirtho/2-5-authentification-et-gestion-des-utilisateurs/embed" width="576" height="420" title="🔐 2.5 Authentification et gestion des utilisateurs" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capables de :
 - Comprendre les principes de **base de l'authentification** (identité, session, tokens).
 - Identifier les différences entre **authentification**, **autorisation** et **gestion des utilisateurs**.
-- Expliquer le fonctionnement des **tokens JWT**, des *3sessions**, et du **stockage sécurisé**.
+- Expliquer le fonctionnement des **tokens JWT**, des **sessions**, et du **stockage sécurisé**.
 - Connaître les **solutions modernes** adaptées au mobile (Supabase Auth, Firebase Auth, Auth0, etc.).
 - Gérer la persistance de connexion dans un contexte **mobile offline-first**.
 
@@ -17,10 +19,10 @@ Sans authentification, toutes les fonctionnalités doivent être accessibles à 
 - Protéger l'accès à certaines fonctionnalités : commandes, paiement, configuration.
 - Synchroniser les données entre **plusieurs appareils** grâce au cloud.
 - Améliorer l'expérience utilisateur : retrouver son profil, son thème, ses préférences.
-> 👉 Dans le mobile, un fédi supplémentaire existe : l'utilisateur s'attend à **rester connecté**, même si l'app est fermée pendant plusieurs jours.
+> 👉 Dans le mobile, un défi supplémentaire existe : l'utilisateur s'attend à **rester connecté**, même si l'app est fermée pendant plusieurs jours.
 
 ### Authentification vs Autorisation 
-Ces deux notions sont souvents confondues :
+Ces deux notions sont souvent confondues :
 - **Authentification** = vérifier l'identité de l'utilisateur
   > "Êtes-vous bien Thomas ?"
 - **Autorisation** = vérifier si l'utilisateur a le droit d'accéder à une ressource
