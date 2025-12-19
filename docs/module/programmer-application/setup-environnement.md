@@ -4,7 +4,7 @@ Durant ce module, nous allons apprendre à développer une application mobile av
 L'objectif de cette section et que vous puissiez :
 - installer les outils nécessaire ;
 - créer un **premier projet Ionic-Vue** ;
-- comprendre la **structure des dossiers ;
+- comprendre la **structure des dossiers** ;
 - lancer l'application dans le **navigateur** puis, plus tard, sur un **émulateur ou un appareil réel**.
 
 ## 🧰 3.1.1 Outils nécessaires 
