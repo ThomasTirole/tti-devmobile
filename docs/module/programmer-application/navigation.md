@@ -15,23 +15,53 @@ Dans Ionic-Vue, la navigation s'appuie sur `Vue Router`, mais avec une couche su
 - contrôler les transitions et le comportement du bouton retour ;
 - éviter les erreurs classiques de navigation hybride.
 
+## 🌐 Web vs 📱 Mobile : pourquoi la navigation est différente
+
+Dans une application web classique, la navigation repose principalement sur :
+- des **URLs** ;
+- un historique **linéaire** ;
+- un bouton retour qui revient simplement à la page précédente.
+
+Sur mobile, cette approche n’est pas suffisante.
+
+Une application mobile repose sur une **logique d’écrans**, organisés dans des **piles de navigation**, avec :
+- des transitions animées ;
+- un bouton retour natif ;
+- un comportement cohérent avec iOS et Android.
+
+👉 Ionic adopte cette logique mobile-first, même s’il s’appuie sur Vue Router en interne.
+
+
 ## 🧠 3.5.1 Principe général de la navigation dans Ionic-Vue
-Ionic-Vue utilise `Vue Router` comme moteur de navigation, mais des une différence essentielle :
-> 👉 la navigation ne consiste pas seulement à changer d'URL,
-> 
-> 👉 mais à **empiler et désempiler des écrans** dans une pile de navigation (navigation stack).
 
-Ionic prend en charge :
-- les **animations de transition** entre écrans ;
-- le bouton **retour Android** ;
-- le **swipe back iOS** ;
-- la gestion de plusieurs piles de navigation simultanées (Tabs).
+Ionic-Vue s’appuie sur **Vue Router** pour définir la navigation, mais Ionic ajoute
+une couche spécifique afin d’adapter cette navigation aux contraintes du mobile.
 
-L'élément central de ce mécanisme est : 
-```html
-<ion-router-outlet />
-```
-Ce composant remplace le `<router-view />` classique et permet à Ionic de contrôler le cycle de vie des pages mobiles.
+Vue Router (`router-link`, `router.push`, etc.) est responsable de :
+- la **définition des routes** ;
+- la gestion des **URLs** ;
+- le passage de **paramètres** ;
+- la navigation programmée (`router.push`, `router.replace`, etc.).
+
+> Vue Router décide **où l’application doit naviguer**.
+
+Ionic (notamment via `IonRouterOutlet`) intervient pour :
+- gérer la **pile de navigation mobile** ;
+- appliquer les **transitions animées natives** ;
+- gérer le **bouton retour Android** ;
+- gérer le **swipe back iOS** ;
+- conserver l’**état des écrans**.
+
+> Le composant `IonRouterOutlet` remplace le `<router-view />` classique et permet à Ionic
+de contrôler le cycle de vie des pages mobiles.
+
+Ionic décide **comment la navigation est vécue par l’utilisateur**.
+
+::: tip 💭 À retenir
+Vue Router décide *où* aller.  
+Ionic décide *comment* on y va.
+:::
+
 
 ## 🗺️ 3.5.2 Navigation linéaire et non-linéaire (concept clé)
 
@@ -39,27 +69,57 @@ La documentation officielle Ionic distingue deux grands types de navigation mobi
 
 Comprendre cette distinction est **fondamental**.
 
-### ➡️ Navigation linéaire (Linear navigation)
+### ➡️ Navigation linéaire (Linear routing)
+
+Si vous avez développé une application web qui utilise le routage, vous avez probablement déjà utilisé le routage linéaire. Cela signifie que vous pouvez avancer ou reculer dans l'historique de l'application en affichant et en masquant des pages.
+
+<video controls width="50%">
+  <source src="/3.5/linear-routing-demo.mp4" type="video/mp4">
+</video>
+
+::: details **🎞️ Explication de la vidéo**
+L'historique de l'application dans cet exemple à ce chemin : `Accessibility` &rarr; `VoiceOver` &rarr; `Speech`
+
+Quand on presse sur le bouton retour, on suit le même chemin de routage en sens inverse. Le routage linéaire est pratique lorsqu'il s'agit de suivre des chemins de routage simples et prédictibles. Cela signifie aussi que l'on peut utiliser des APIs de `Vue Router` comme `router.go()`.
+:::
 
 La navigation linéaire correspond à un **parcours séquentiel**, écran après écran.
 
-Caractéristiques :
 - les écrans sont empilés dans une **stack** ;
 - l'utilisateur avance étape par étape ;
 - le bouton retour revient à l'écran précédent ;
 - le chemin est généralement unique ;
 
-::: details 💬 Exemples typiques {open}
+::: tip 💬 Exemples typiques 
 - onboarding (écran d'accueil, présentation, inscription) ;
 - formulaire multi-étapes (données personnelles, adresse, paiement) ;
 - Liste &rarr; Détail &rarr; Édition.
 :::
 
-Dans Ionic, cette navigation repose sur : `ioni-router-outler` pour gérer la pile d'écrans. `router.push()` pour avancer et le bouton retour natif pour revenir en arrière.
+Dans Ionic, cette navigation repose sur : `ion-router-outlet` pour gérer la pile d'écrans. `router.push()` pour avancer et le bouton retour natif pour revenir en arrière. C'est la forme de navigation la plus proche du **comportement natif mobile**.
 
-> 👉 C'est la forme de navigation la plus proche du **comportement natif mobile**.
+> 👉 L'inconvénient du routage linéaire est qu'il ne permet pas d'expérience utilisateur complexes comme les vues en onglets (_Tabs_). C'est là ou le routage non-linéaire entre en jeu.
+### 🔀 Navigation non-linéaire (Non-linear routing)
+Le routage non-linéaire est un concept qui peut être nouveau pour beaucoup de développeurs web qui veulent développer des apps mobiles avec Ionic.
 
-### 🔀 Navigation non-linéaire (Non-linear navigation)
+Le routage non-linéaire signifie que la vue à laquelle l'utilisateur devrait retourner n'est pas nécessairement la vue précédemment affichée à l'écran.
+
+<video controls width="50%">
+  <source src="/3.5/non-linear-routing-demo.mp4" type="video/mp4">
+</video>
+
+::: details **🎞️ Explication de la vidéo**
+Dans cet exemple, on débute sur l'onglet `Originals`. Appuyer sur une carte nous amène sur la vue `Ted Lasso` qui est dans l'onglet `Originals`.
+
+Depuis ici, on change d'onglet pour aller sur `Search`. Ensuite, on appuie à nouveau sur `Originals` et on est amené à nouveau sur la vue `Ted Lasso`. À partir de là, nous avons utilisé la navigation non-linéaire.
+
+**_Pourquoi est-ce du routage non-linéaire ?_** Quand on a appuyé de nouveau sur Originals pour nous retrouver sur la vue `Ted Lasso`, la dernière vue visitée était `Search`. Cependant, en pressant le bouton retour depuis `Ted Lasso`, on revient à `Originals` et non à `Search`. Cela arrive parce que chaque onglet (_tab_), dans une application mobile est considéré comme une pile de navigation séparée !
+
+Si appuyer sur le bouton avait fait appel à la fonction `router.go(-1)`, on serait revenu à `Search` au lieu de `Originals`, ce qui n'est pas correct dans le contexte du routage non-linéaire avec les onglets.
+
+> Le routage non linéaire permet des flux utilisateur sophistiqués que le routage linéaire ne peut pas gérer. Cependant, certaines API de routage linéaire telles que router.go() ne peuvent pas être utilisées dans cet environnement non linéaire. Cela signifie que router.go() ne doit pas être utilisé dans ce genre de cas.
+:::
+
 La navigation non-linéaire permet à l'utilisateur de **changer librement de section**, sans suivre un chemin unique.
 
 Caractéristiques :
@@ -91,7 +151,7 @@ La configuration du router se trouve dans :
 `src/router/index.ts`
 
 ::: details **💬 Exemple typique avec _Tabs_**
-```ts [script.ts]
+```ts [src/router/index.ts]
 import { createRouter, createWebHistory } from '@ionic/vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -181,6 +241,10 @@ Ionic permet d'utiliser `router-link` directement sur ses composants :
 👉 Limite : impossible d'exécuter du code **avant** la navigation
 
 ## 🧠 3.5.6 `useIonRouter` : navigation mobile avancée avec Ionic
+L'un des inconvénients de l'utilisation de `router-link` est que vous ne pouvez pas exécuter de code personnalisé avant la navigation. Vous pouvez utiliser directement Vue Router, mais vous perdez alors la possibilité de contrôler la transition entre les pages. C'est là que `useIonRouter` s'avère utile.
+
+`useIonRouter` est une fonction qui fournit des méthodes pour la navigation tout en permettant un contrôle total sur les transitions de page. Il est ainsi facile d'exécuter du code personnalisé avant la navigation.
+
 Lorsque vous devez :
 - valider un formulaire,
 - sauvegarder des données,
@@ -273,4 +337,8 @@ Objectif :
 
 ::: danger
 A VERIFIER ET TESTER
+:::
+
+::: danger
+ajouter des screen d'une app ionic avec ces types de navigation
 :::
