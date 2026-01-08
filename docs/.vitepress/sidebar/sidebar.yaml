@@ -31,8 +31,8 @@
       link: /module/concevoir-concept-solution/persistance-cloud-baas
 - text: 3. Programmer une application hybride
   items:
-    - - text: 🌀 TypeScript
-    - link: /module/programmer-application/typescript
+    - text: 🌀 TypeScript
+      link: /module/programmer-application/typescript
     - text: 🛠️ Mise en place de l’environnement
       link: /module/programmer-application/setup-environnement
     - text: 🧑‍🏫 Rappel UX & intro Ionic
