@@ -33,6 +33,8 @@
   items:
     - text: 🛠️ Mise en place de l’environnement
       link: /module/programmer-application/setup-environnement
+    - text: 🌀 TypeScript
+      link: /module/programmer-application/typescript
     - text: 🧑‍🏫 Rappel UX & intro Ionic
       link: /module/programmer-application/rappel-ux-intro-ionic
     - text: 🖼️ Composants Ionic

@@ -39,7 +39,7 @@ message = 42 // ❌ erreur détectée avant l’exécution
 :::
 > Le code JavaScript est valide, mais peut provoquer des erreurs inattendues. Alors que le code TypeScript, détecte le problème **avant même de lancer l'application**.
 
-## 3.2.2 ⁉️ Pourquoi Ionic utilise TypeScript ?
+## ⁉️ 3.2.2  Pourquoi Ionic utilise TypeScript ?
 Ionic et Capacitor sont des frameworks **riches et complexes**, qui possèdent **beaucoup d'options**, d'**APIs** et de **paramètres précis à respecter**.
 
 De ce fait, TypeScript permet donc :
