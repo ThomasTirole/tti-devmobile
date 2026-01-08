@@ -60,6 +60,8 @@
           link: /exercices/apprendre-supabase/interface-utilisateur
         - text: 6️⃣ Authentification
           link: /exercices/apprendre-supabase/authentification
+        - text: 7️⃣ Row Level Security
+          link: /exercices/apprendre-supabase/rls
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
