@@ -1,5 +1,7 @@
 # ☁️ 2.6 Persistance cloud et Backend-as-a-Service (BaaS)
 
+<iframe src="https://slides.com/tirtho/2-6-persistance-cloud-et-backend-as-a-service-baas/embed" width="576" height="420" title="☁️ 2.6 Persistance cloud et Backend-as-a-Service (BaaS)" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## 🎯 Objectif d'apprentissage
 À la fin de ce chapitre, vous serez capable de :
 - Expliquer ce qu'est un **Backend-as-a-Service (BaaS)** et pourquoi il facilite le développement mobile.

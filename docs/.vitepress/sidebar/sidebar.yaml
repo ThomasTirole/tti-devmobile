@@ -58,6 +58,8 @@
           link: /exercices/apprendre-supabase/modele-api
         - text: 5️⃣ Interface utilisateur
           link: /exercices/apprendre-supabase/interface-utilisateur
+        - text: 6️⃣ Authentification
+          link: /exercices/apprendre-supabase/authentification
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
