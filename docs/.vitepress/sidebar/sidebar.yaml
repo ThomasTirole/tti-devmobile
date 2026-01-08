@@ -39,6 +39,8 @@
       link: /module/programmer-application/composants-ui-ionic
     - text: ⚡ APIs Capacitor
       link: /module/programmer-application/api-capacitor
+    - text: 🧭 Navigation
+      link: /module/programmer-application/navigation
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
