@@ -1,5 +1,5 @@
 # 🌀 Interlude - Intro à TypeScript
-Dans les chapitres précédents, vous avez pu apercevoir du code Ionic-Vue contenant du **TypeScript**(`.ts`, `lang="ts"`).
+Dans les chapitres qui vont suivre, vous pourrez apercevoir du code Ionic-Vue contenant du **TypeScript**(`.ts`, `lang="ts"`).
 Avant d'aller plus loin, il est essentiel de comprendre **ce qu'est TypeScript**, **ce qu'il apporte** et **comment l'utiliser sans complexité inutile**.
 
 L'objectif de ce chapitre n'est pas de faire de vous des experts TypeScript, mais de vous donner **les bases nécessaires pour comprendre du code propre et fiable** dans un projet Ionic.
@@ -43,7 +43,7 @@ message = 42 // ❌ erreur détectée avant l’exécution
 Ionic et Capacitor sont des frameworks **riches et complexes**, qui possèdent **beaucoup d'options**, d'**APIs** et de **paramètres précis à respecter**.
 
 De ce fait, TypeScript permet donc :
-- une **auto-complétion intelligente dans l'IDE ;
+- une **auto-complétion intelligente** dans l'IDE ;
 - une **documentation intégrée** dans le code ;
 - la détection d'erreurs courantes (mauvais type, propriété inexistante).
 
