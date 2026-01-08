@@ -34,6 +34,10 @@ features:
     details: Setup, Ionic + Vue + Capacitor, TypeScript, rappel UI/UX, capteurs, API, tests
     link : /module/programmer-application/setup-environnement
     linkText : En savoir plus
+  - title: Exercices pratiques
+    details: Atelier de mise en pratique des concepts vus en cours
+    link : /exercices/apprendre-supabase/setup-supabase
+    linkText : Essayez maintenant !
 #    
 #  - title: TypeScript pour débutants
 #    details: S'initier aux bases TS

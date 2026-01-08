@@ -138,6 +138,8 @@ my-first-app/
 
 > ✅ Si vous arrivez à modifier le texte et voir le résultat dans le navigateur, votre environnement est prêt pour la suite du module.
 
-::: danger 
-ajouter petite étape pour tester la version android et ios ? y a une ligne de commande à retrouver
+::: tip **💡 Astuce**
+Pour voir le rendu iOS/Android dans le navigateur, vous pouvez utiliser les outils de développement (DevTools) de votre navigateur (F12) et activer le mode "Appareil mobile" (icône de smartphone/tablette).
+Choisissez ensuite un modèle d'appareil (iPhone, Samsung) et rafraîchissez pour simuler l'OS.
 :::
+

@@ -1,5 +1,5 @@
 - text: 📱 Module 335
-  collapsed : true
+  collapsed: true
   items:
     - text: Présentation du module
       link: /module/presentation
@@ -43,6 +43,21 @@
       link: /module/programmer-application/api-capacitor
     - text: 🧭 Navigation
       link: /module/programmer-application/navigation
+- text: 🛠️ Exercices
+  items:
+    - text: ⚡ Apprendre Supabase
+      collapsed: true
+      items:
+        - text: 1️⃣ Setup Supabase
+          link: /exercices/apprendre-supabase/setup-supabase
+        - text: 2️⃣ Setup projet Ionic
+          link: /exercices/apprendre-supabase/setup-projet-ionic
+        - text: 3️⃣ Connecter à Supabase
+          link: /exercices/apprendre-supabase/connect-to-supabase
+        - text: 4️⃣ Modèle, services et store
+          link: /exercices/apprendre-supabase/modele-api
+        - text: 5️⃣ Interface utilisateur
+          link: /exercices/apprendre-supabase/interface-utilisateur
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
