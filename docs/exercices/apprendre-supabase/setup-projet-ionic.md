@@ -1,6 +1,6 @@
-# 1️⃣ Création du projet Ionic-Vue
+# 2️⃣ Création du projet Ionic-Vue
 
-## 1️⃣.1️⃣ Créer le projet
+## 2️⃣.1️⃣ Créer le projet
 ```bash
 ionic start clash-cards tabs --type=vue --capacitor
 ❔ Create free Ionic account (y/N)? ➡️ N
@@ -10,7 +10,7 @@ ionic serve
 ```
 > ✅ Vérifiez que l'app s'ouvre dans le navigateur avec les 3 onglets en bas.
 
-## 1️⃣.2️⃣ Installer les dépendances Supabase
+## 2️⃣.2️⃣ Installer les dépendances Supabase
 
 ### Installer Pinia et Supabase
 ```bash

@@ -18,9 +18,9 @@ Tout ceci va ressembler à ce que vous avez fait en Vue.JS en 2e année. Puisque
   - [Introduction à TypeScript](../module/programmer-application/typescript.md)
   - [Mise en place de l'environnement de développement](../module/programmer-application/setup-environnement.md)
 
-## 0️⃣ Mise en place de Supabase
+## 1️⃣ Mise en place de Supabase
 
-## 0️⃣.1️⃣ Créer un compte Supabase
+## 1️⃣.1️⃣ Créer un compte Supabase
 1. Rendez-vous sur [supabase.com](https://supabase.com/) et connectez-vous avec votre compte GitHub.
 2. Créer une nouvelle `Organization`
    - Définissez un `Name`
@@ -28,7 +28,7 @@ Tout ceci va ressembler à ce que vous avez fait en Vue.JS en 2e année. Puisque
    - Sélectionnez `Free` comme plan
    - Cliquez sur `Create Organization`
 
-## 0️⃣.2️⃣ Créer un nouveau projet
+## 1️⃣.2️⃣ Créer un nouveau projet
 3. Créer un nouveau `Project`
     - Sélectionnez votre organisation.
     - Définissez un `Project name` (ex: `m335-mobile-app`)
@@ -36,7 +36,7 @@ Tout ceci va ressembler à ce que vous avez fait en Vue.JS en 2e année. Puisque
     - Choisissez la région `Europe`
     - Cliquez sur `Create new project`
 
-## 0️⃣.3️⃣ Créer la table `cards`
+## 1️⃣.3️⃣ Créer la table `cards`
 1. Dans le menu de gauche, cliquez sur `SQL Editor`.
 2. Cliquez sur `New query` et copiez-collez le code SQL suivant pour créer la table `cards` :
 
@@ -62,7 +62,7 @@ create index cards_arena_idx on public.cards (arena);
 
 > ✅ La table `cards` est maintenant créée dans votre base de données Supabase.
 
-## 0️⃣.4️⃣ Insérer des données initiales
+## 1️⃣.4️⃣ Insérer des données initiales
 1. Toujours dans le `SQL Editor`, créez une nouvelle requête et copiez-collez le code SQL suivant pour insérer des données initiales dans la table `cards` :
 
 ```sql
@@ -82,14 +82,14 @@ insert into public.cards (name, rarity, elixir_cost, role, hitpoints, damage, ar
 
 > ✅ La table `cards` est maintenant peuplée avec des données initiales.
 
-## 0️⃣.5️⃣ Vérifier les données
+## 1️⃣.5️⃣ Vérifier les données
 1. Allez dans le menu de gauche et cliquez sur `Table Editor`.
 2. Sélectionnez la table `cards` pour voir les données que vous venez d'insérer.
 3. Vous devriez voir une liste de cartes avec leurs propriétés.
 
 > ✅ Si vous voyez les cartes &rarr; le backend est prêt.
 
-## 0️⃣.6️⃣ Récupérer les clés Supabase
+## 1️⃣.6️⃣ Récupérer les clés Supabase
 Ceci vous servira pour connecter votre application Ionic à Supabase.
 1. En haut de la page, cliquez sur le badge `Connect`.
 2. Sélectionnez `App Frameworks` &rarr; `Vue.JS`.

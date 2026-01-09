@@ -1,7 +1,7 @@
-# 3️⃣ Modèle - Services API - Store
+# 4️⃣ Modèle - Services API - Store
 Nous allons créer le modèle de données, les services pour interagir avec l'API Supabase et le store Pinia pour gérer l'état des cartes dans l'application.
 
-## 3️⃣.1️⃣ Créer le modèle TypeScript
+## 4️⃣.1️⃣ Créer le modèle TypeScript
 Dans le dossier `src/types`, créez un fichier `Card.ts` pour définir le modèle de données d'une carte :
 
 ```ts [src/types/Card.ts]
@@ -34,7 +34,7 @@ export type CardInsert = Omit<Card, 'id' | 'created_at'>
 export type CardUpdate = Partial<CardInsert>
 ```
 
-## 3️⃣.2️⃣ Créer les services API
+## 4️⃣.2️⃣ Créer les services API
 Dans le dossier `src/services`, créez un fichier `cardService.ts` pour gérer les interactions avec l'API Supabase :
 
 ```ts [src/services/cardService.ts]
@@ -107,7 +107,7 @@ export async function deleteCard(id: string): Promise<void> {
 }
 ```
 
-## 3️⃣.3️⃣ Créer le store Pinia
+## 4️⃣.3️⃣ Créer le store Pinia
 Dans le dossier `src/stores`, créez un fichier `cardStore.ts` pour gérer l'état des cartes dans l'application
 ```ts [src/stores/cardStore.ts]
 import { defineStore } from 'pinia'

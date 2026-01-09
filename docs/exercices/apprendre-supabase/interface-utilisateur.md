@@ -1,4 +1,4 @@
-# 4️⃣ Création de l'UI avec Ionic-Vue
+# 5️⃣ Création de l'UI avec Ionic-Vue
 Ionic fournit une bibliothèque de composants UI prêts à l'emploi, optimisés pour les applications mobiles. Nous allons utiliser Ionic-Vue pour construire l'interface utilisateur de notre application Clash Cards.
 
 ```html [src/views/Tab1Page.vue]

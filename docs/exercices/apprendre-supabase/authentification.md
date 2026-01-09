@@ -358,3 +358,6 @@ Puis dans le header, ajoutez le code suivant pour afficher l'email de l'utilisat
   <ion-button @click="openCreate()">+ Add</ion-button>
 </ion-buttons>
 ```
+
+## 6️⃣.7️⃣
+![6-7](https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyaWR1Y211anN1eGJsaHU2dWZ5Nmo0OWMzaTZyeWZiZzc2N3VhMHZ4biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/XMMUWcz4XtDTNgZj22/200w.gif)
