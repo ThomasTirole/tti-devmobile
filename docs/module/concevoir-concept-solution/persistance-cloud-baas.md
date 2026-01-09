@@ -15,10 +15,6 @@
   - des **notifications push**,
   - une **authentification utilisateur**.
 
-::: danger
-chapitre authentification utilisateur supabase auth rappel etc.
-:::
-
 ## 🤔 2.6.1 Introduction : pourquoi un backend cloud ?
 Les applications mobiles modernes ne se contentent plus de fonctionner localement : elles doivent **synchroniser les données**, **gérer des profils utilisateurs**, et permettre un usage fluide **sur plusieurs appareils**.
 
