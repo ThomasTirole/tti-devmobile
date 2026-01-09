@@ -27,13 +27,13 @@ Il est **compilé en JavaScript**, qui est le seul langage compris par le naviga
 ::: code-group
 ```js [JavaScript.js]
 let message = "Bonjour"
-message = 42
+message = 67
 ```
 
 ```ts [TypeScript.ts]
 let message = "Bonjour" // [!code --]
 let message: string = "Bonjour" // [!code ++]
-message = 42 // ❌ erreur détectée avant l’exécution
+message = 67 // ❌ erreur détectée avant l’exécution
 
 ```
 :::
@@ -114,6 +114,7 @@ let title = "Note"
 let count = 3
 let done = false
 let tags = ["cours", "mobile"]
+let type:(string | number)[] = [ 'hello', 'world', 20, 40, 'goodbye' ]; // tableau mixte
 ```
 
 ```ts [TypeScript.ts]
@@ -245,7 +246,7 @@ const count = ref(0)
 ```
 
 ```ts [script.ts]
-import { ref from 'vue'
+import { ref } from 'vue'
 
 const count = ref<number>(0)
 ```
@@ -272,7 +273,7 @@ const user = reactive<User>({
     id: 1,
     name: "Thomas",
     aura: 1000000,
-    beersDrank: 42
+    beersDrank: 670
 })
 
 // Dans Vue, puisque reactive est normalement utilisé pour des objets, on définit une interface pour structurer l'objet.
