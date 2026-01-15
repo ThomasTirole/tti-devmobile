@@ -84,6 +84,61 @@ Avant d'utiliser SQLite, il faut :
 
 Nous allons créer un **service dédié**, afin de centraliser cette logique. Ceci permettra de ne pas polluer les stores, réutiliser le code facilement et séparer la logique métier de la persistance des données.
 
+## 9️⃣.1️⃣.4️⃣ Préparer Supabase pour la synchronisation
+Avant d’implémenter la synchronisation offline &harr; online, il est indispensable que la base de données **cloud** soit prête à gérer des conflits et des comparaisons de versions.
+
+> 👉 Pour cela, chaque carte doit disposer d’un champ `updated_at` fiable côté Supabase.
+
+Ce champ nous permettra :
+- de comparer une version **locale** et une version **cloud** ;
+- de décider laquelle est la plus récente ;
+- d’appliquer notre règle métier (dans notre cas : **local prioritaire**).
+
+::: details 1. Ajouter le champ `updated_at` dans Supabase
+Dans le **SQL Editor** de Supabase, exécutez la requête suivante pour ajouter le champ `updated_at` dans la table `cards` :
+```sql
+ALTER TABLE public.cards
+ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT now();
+```
+> - `TIMESTAMPTZ` est le type de données pour une date/heure avec fuseau horaire.
+> - `DEFAULT now()` garantit que toute nouvelle carte aura toujours un `updated_at`, même si le front ne l’envoie pas.
+:::
+
+::: details 2. Initialiser `updated_at` pour les cartes existantes
+Si des cartes existent déjà, leur champ `updated_at` est actuellement `NULL`.
+On va donc les initialiser avec la date de création `created_at` :
+```sql
+UPDATE public.cards
+SET updated_at = created_at
+WHERE updated_at IS NULL;
+```
+:::
+
+::: details 3. Mettre à jour automatiquement `updated_at` lors des modifications
+Lorsqu'une carte est modifiée (`UPDATE`), on veut que `updated_at` reflète automatiquement la date de la dernière modification.
+
+Pour cela, on crée une fonction SQL et un trigger associé :
+```sql
+-- Fonction pour mettre à jour updated_at
+CREATE OR REPLACE FUNCTION public.set_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+   
+-- Trigger pour appeler la fonction avant chaque UPDATE
+DROP TRIGGER IF EXISTS set_cards_updated_at ON public.cards;
+
+CREATE TRIGGER set_cards_updated_at
+    BEFORE UPDATE ON public.cards
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.set_updated_at();
+```
+
+> À chaque `UPDATE` sur la table `cards`, le trigger mettra automatiquement à jour le champ `updated_at` avec la date/heure actuelle.
+
 ## 🔜 La suite...
 Dans la section suivante, nous allons :
 - créer un service `sqliteService.ts`,

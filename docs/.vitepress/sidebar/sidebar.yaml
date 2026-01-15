@@ -72,6 +72,8 @@
               link: /exercices/apprendre-supabase/synchronisation/setup-sqlite
             - text: 9️⃣.2️⃣ Création de la base SQLite
               link: /exercices/apprendre-supabase/synchronisation/create-database
+            - text: 9️⃣.3️⃣ CRUD local
+              link: /exercices/apprendre-supabase/synchronisation/crud-local
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
