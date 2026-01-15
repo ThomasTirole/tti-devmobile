@@ -32,7 +32,6 @@ Pour éviter de disperser le code SQLite dans les stores ou les composants, nous
 
 ## 9️⃣.2️⃣.3️⃣ Initialisation de la base SQLite
 ```ts [src/services/sqliteService.ts]
-import { Capacitor } from '@capacitor/core'
 import {
   CapacitorSQLite,
   SQLiteConnection,
@@ -47,60 +46,41 @@ const sqlite = new SQLiteConnection(CapacitorSQLite)
 let db: SQLiteDBConnection | null = null
 
 /**
- * Petit helper : attendre que <jeep-sqlite> soit prêt sur le Web
- */
-async function waitForJeepSqlite() {
-    if (Capacitor.getPlatform() !== 'web') return
-
-    // On attend que le custom element soit défini
-    await customElements.whenDefined('jeep-sqlite')
-
-    // Et on attend qu’il soit présent dans le DOM
-    const el = document.querySelector('jeep-sqlite') as any
-    if (!el) {
-        throw new Error('Missing <jeep-sqlite> element in DOM (needed for web)')
-    }
-
-    // Selon versions, le composant expose `componentOnReady()`
-    if (typeof el.componentOnReady === 'function') {
-        await el.componentOnReady()
-    }
-}
-
-
-/**
  * Initialise la base SQLite locale
  * - ouvre la base
  * - crée la table cards si nécessaire
  */
 export async function initDB() {
-
-    // Sur le Web, attendre que <jeep-sqlite> soit prêt
-    await waitForJeepSqlite()
     
   // Ouverture (ou création) de la base locale
   db = await sqlite.createConnection(
     'cards-db', // nom de la base
     false,
     'no-encryption',
-    1
+    1,
+    false
   )
 
-  await db.open()
-
-  // Création de la table cards
-  const createTableSQL = `
-    CREATE TABLE IF NOT EXISTS cards (
-      id TEXT PRIMARY KEY NOT NULL,
-      title TEXT NOT NULL,
-      description TEXT,
-      rarity TEXT,
-      updated_at TEXT NOT NULL,
-      synced INTEGER NOT NULL
-    );
-  `
-
-  await db.execute(createTableSQL)
+    await db.open()
+  
+    // Création de la table cards
+    const createTableSQL = `
+        CREATE TABLE IF NOT EXISTS cards (
+                                             id TEXT PRIMARY KEY NOT NULL,
+                                             name TEXT NOT NULL,
+                                             rarity TEXT NOT NULL,
+                                             elixir_cost INTEGER NOT NULL,
+                                             role TEXT NOT NULL,
+                                             hitpoints INTEGER NOT NULL,
+                                             damage INTEGER NOT NULL,
+                                             arena INTEGER NOT NULL,
+                                             is_favorite INTEGER NOT NULL,
+                                             created_at TEXT NOT NULL,
+                                             updated_at TEXT NOT NULL,
+                                             synced INTEGER NOT NULL
+        );
+    `
+    await db.execute(createTableSQL)
 }
 
 /**
@@ -123,6 +103,8 @@ SQLite doit être prêt **avant toute lecture ou écriture**.
 
 👉 Comme pour l'auth et le réseau, on initialise une seule fois dans `src/main.ts`.
 
+De plus, nous allons encapsuler l'initialisation avec un `bootstrap` asynchrone. Sans ça, on a uen erreur au build car `await` n'est pas autorisé au top-level.
+
 ```ts [src/main.ts]
 import {createApp} from 'vue'
 import App from './App.vue'
@@ -137,35 +119,37 @@ import { initDB } from '@/services/sqliteService' // [!code ++]
 
 // ...
 
+async function bootstrap() {
 // 🔹 Création de l’app
-const app = createApp(App)
-    .use(IonicVue)
+    const app = createApp(App)
+        .use(IonicVue)
 
 // 🔹 IMPORTANT : on garde une référence à Pinia
-const pinia = createPinia()
-app.use(pinia)
+    const pinia = createPinia()
+    app.use(pinia)
 
 // 🔹 Initialisation réseau (1 seule fois)
-const networkStore = useNetworkStore(pinia)
-networkStore.init()
+    const networkStore = useNetworkStore(pinia)
+    networkStore.init()
 
 // 🔹 Router inchangé
-app.use(router)
+    app.use(router)
 
 // 🔹 INITIALISATION AUTH (1 seule fois)
-const authStore = useAuthStore(pinia)
-authStore.init()
+    const authStore = useAuthStore(pinia)
+    authStore.init()
 
-// 🔹 SQLite Web (IndexedDB)
-jeepSqlite(window)
-
-// Initialisation SQLite [!code ++]
-await initDB() [!code ++]
+// Initialisation SQLite // [!code ++]
+    await initDB() // [!code ++]
 
 // 🔹 Mount final inchangé
-router.isReady().then(() => {
-    app.mount('#app')
-})
+    router.isReady().then(() => {
+        app.mount('#app')
+    })
+}
+
+bootstrap()
+
 ```
 ::: warning **⚠️ Attention !**
 L'initialisation de SQLite doit être fait **avant** toute synchronisation ou lecture locale.

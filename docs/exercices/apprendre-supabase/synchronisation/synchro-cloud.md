@@ -22,23 +22,21 @@ Ce service va :
 
 ::: details Création du service de synchronisation
 ```ts [src/services/syncService.ts]
-// src/services/syncService.ts
-
 import { getQueue, removeFromQueue } from '@/services/offlineQueueService'
 import { useAuthStore } from '@/stores/authStore'
 import { useNetworkStore } from '@/stores/networkStore'
 
 import {
-    createCardCloud,
-    updateCardCloud,
-    deleteCardCloud,
-    getAllCardsCloud
+    createCard,
+    updateCard,
+    deleteCard,
+    fetchCards
 } from '@/services/cardsService'
 
 import { upsertManyLocalCards } from '@/services/cardsLocalService'
 
 import type { OfflineAction } from '@/types/OfflineAction'
-import type { CardInsert, CardUpdate, CardLocal, CardCloud } from '@/types/Card'
+import type { CardInsert, CardUpdate, CardLocal } from '@/types/Card'
 
 /**
  * Empêche plusieurs synchronisations en parallèle
@@ -82,7 +80,7 @@ export async function syncOfflineQueue(): Promise<void> {
 
         // 2️⃣ Rafraîchir SQLite depuis Supabase
         // (on s’assure que le local reflète le cloud)
-        const cloudCards = await getAllCardsCloud()
+        const cloudCards = await fetchCards()
         await upsertManyLocalCards(cloudCards)
     } finally {
         isSyncing = false
@@ -96,20 +94,31 @@ export async function syncOfflineQueue(): Promise<void> {
 async function syncOneAction(action: OfflineAction): Promise<void> {
     switch (action.type) {
         case 'CREATE':
-            await createCardCloud(toCloudInsert(action.payload))
+            await createCard(toCloudInsert(action.payload))
             return
 
         case 'UPDATE':
-            await updateCardCloud(
+            await updateCard(
                 action.payload.id,
                 toCloudUpdate(action.payload)
             )
             return
 
         case 'DELETE':
-            await deleteCardCloud(action.payload.id)
+            await deleteCard(action.payload.id)
             return
     }
+}
+
+/**
+ * Omet des clés d’un objet (utilitaire)
+ * → utile pour transformer CardLocal → CardInsert / CardUpdate
+ * On évite les erreurs ESLint pour des attributs non utilisés. (Merci ChatGPT)
+ */
+function omit<T extends object, K extends keyof T>(obj: T, keys: readonly K[]) {
+    const copy = { ...obj }
+    for (const k of keys) delete copy[k]
+    return copy as Omit<T, K>
 }
 
 /**
@@ -120,8 +129,8 @@ async function syncOneAction(action: OfflineAction): Promise<void> {
  * - Supabase gère created_at / updated_at
  */
 function toCloudInsert(local: CardLocal): CardInsert {
-    const { synced, created_at, updated_at, ...rest } = local
-    return rest
+    // On enlève synced, created_at, updated_at avec la fonction omit (adieu ESLint)
+    return omit(local, ['synced', 'created_at', 'updated_at'] as const) as CardInsert
 }
 
 /**
@@ -132,9 +141,10 @@ function toCloudInsert(local: CardLocal): CardInsert {
  * - updated_at géré par trigger Supabase
  */
 function toCloudUpdate(local: CardLocal): CardUpdate {
-    const { id, synced, created_at, updated_at, ...rest } = local
-    return rest
+    // On enlève synced, created_at, updated_at avec la fonction omit (adieu ESLint)
+    return omit(local, ['id', 'synced', 'created_at', 'updated_at'] as const) as CardUpdate
 }
+
 ```
 :::
 
@@ -226,7 +236,6 @@ Le store **ne gère pas directement la queue offline**.
 Les appels à `enqueue()` sont faits **dans `cardsLocalService`** (chapitre 9.4), afin de centraliser la logique offline-first et éviter les duplications.
 
 ```ts [src/stores/cardStore.ts]
-// src/stores/cardStore.ts
 import { defineStore } from 'pinia'
 import type { CardInsert, CardLocal, CardUpdate } from '@/types/Card'
 
@@ -322,7 +331,45 @@ export const useCardsStore = defineStore('cards', {
         }
     }
 })
-
 ```
 :::
+
+## 9️⃣.5️⃣.5️⃣ C'est l'heure  de tester
+Chers élèves, il est passé minuit, ça fait + de 6h que je rédige et fait cet exercice, je ne vous cache pas qu'il n'est pas parfait et que certains bugs sont encore présents. Cependant, la synchronisation fonctionne malgré les quelques manipulations scabreuses à réaliser.
+![gif](https://media.tenor.com/X8sdwnDDxhQAAAAj/skyrim-skeleton.gif)
+Je ferai en sorte de  corriger cet exercice ultérieurement pour que vous ayez quelque chose de fonctionnel et propre à la longue.
+
+Pour l'instant, je vous invite donc à 
+1. Installer Android Studio (même si vous n'allez pas coder en natif, c'est nécessaire pour l'émulateur Android)
+2. Effectuer les commandes suivantes :
+```bash
+npm install
+npx ionic build
+npx cap add android
+```
+> Ceci installe la plateforme et dépendances pour Android.
+
+3. Synchroniser
+```bash
+npx cap sync
+```
+> Ceci copie le build web dans le projet Android.
+
+4. Ouvrir Android Studio
+```bash
+npx cap open android
+```
+> Ceci ouvre le projet Android dans Android Studio. C'est possible que ça ne fonctionne pas car il faut avoir une variable d'environnement définie. Dans ce cas, ouvrez Android Studio et ouvrez le dossier `android` manuellement.
+> Patientez le temps que Gradle télécharge les dépendances.
+
+5. Lancer un émulateur Android (ou connecter un appareil réel en USB avec le mode développeur activé).
+6. Lancer l'application depuis Android Studio (Run 'app').
+
+::: danger Problèmes connus :
+- Rien ne s'affiche, c'est normal il faut se logger
+- Ensuite, quitter l'application, puis relancez-là. Le onMounted() va faire son travail (j'ai pas eu le temps de gérer ce cas, désolé. Je voulais au moins que ça fonctionne)
+- Il faut encore que j'adapte les comportements de l'application pour qu'il récupère sur le backend quand on est online au démarrage de façon propre (on le fait de manière un peu sale avec le App.vue arrangé).
+:::
+
+
 

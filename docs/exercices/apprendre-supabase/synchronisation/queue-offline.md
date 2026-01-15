@@ -209,7 +209,7 @@ Ici, on relie ce qu'on a fait au chapitre 9.3 :
 - quand on crée/modifie/supprime en local
 - on ajoute aussi l'action dans la queue.
 
-*** warning **⚠️ Important**
+::: warning **⚠️ Important**
 On le fait seulement si l'action n'est pas déjà "cloud". (les actions "cloud &rarr; local" via `upsertManyLocalCards() ne doivent pas créer de queue)
 :::
 

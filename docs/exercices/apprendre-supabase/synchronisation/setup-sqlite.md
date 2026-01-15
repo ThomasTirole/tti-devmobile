@@ -13,7 +13,7 @@ Dans le terminal :
 npm install @capacitor-community/sqlite
 ```
 
-## 9️⃣.1️⃣.2️⃣ Configuration spécifique pour le navigateur (Web)
+::: details **NE PAS FAIRE** 9️⃣.1️⃣.2️⃣ Configuration spécifique pour le navigateur (Web)
 Sur **Android** et **iOS**, SQLite est fourni nativement par le système.
 
 Sur le **navigateur**, en revanche, SQLite n’existe pas directement.
@@ -75,6 +75,7 @@ Dans le fichier `index.html`, ajoutez la ligne suivante **juste avant** la balis
 ```
 
 > 👉 Sans cette étape, SQLite ne fonctionnera pas dans le navigateur.
+:::
 
 ## 9️⃣.1️⃣.3️⃣ Principe d'initialisation de SQLite
 Avant d'utiliser SQLite, il faut :
@@ -138,7 +139,8 @@ CREATE TRIGGER set_cards_updated_at
 ```
 
 > À chaque `UPDATE` sur la table `cards`, le trigger mettra automatiquement à jour le champ `updated_at` avec la date/heure actuelle.
-
+:::
+> 
 ## 🔜 La suite...
 Dans la section suivante, nous allons :
 - créer un service `sqliteService.ts`,

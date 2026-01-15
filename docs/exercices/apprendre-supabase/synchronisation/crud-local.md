@@ -58,7 +58,7 @@ export interface CardLocal extends CardCloud {
 Enfin, ajustons les types `CardInsert` et `CardUpdate` pour qu'ils correspondent à la nouvelle interface `CardCloud`. De plus, nous supprimons `id` de `CardInsert` car il sera généré côté application pour l'offline-first.
 ```ts [src/types/Card.ts]
 export type CardInsert = Omit<Card, 'id' | 'created_at'> // [!code --]
-export type CardInsert = Omit<CardCloud, 'created_at' | 'updated_at'> // [!code ++]
+export type CardInsert = Omit<CardCloud, id | 'created_at' | 'updated_at'> // [!code ++]
 
 export type CardUpdate = Partial<CardInsert> // [!code --]
 // ✅ UPDATE cloud : champs optionnels, mais jamais l’id // [!code ++]
@@ -149,9 +149,8 @@ export interface CardLocal extends CardCloud {
  * - Supabase gère `created_at` et `updated_at` via defaults / triggers.
  */
 
-// ✅ INSERT cloud : on envoie id + champs métier
-// ❌ On n’envoie pas created_at / updated_at (gérés côté Supabase)
-export type CardInsert = Omit<CardCloud, 'created_at' | 'updated_at'>
+// ❌ On n’envoie pas created_at / updated_at (gérés côté Supabase) et l'id est sera randomisé plus tard dans l'app.
+export type CardInsert = Omit<CardCloud, 'id' | 'created_at' | 'updated_at'>
 
 // ✅ UPDATE cloud : champs optionnels, mais jamais l’id
 export type CardUpdate = Partial<Omit<CardInsert, 'id'>>
@@ -525,6 +524,231 @@ export async function upsertManyLocalCards(cards: CardCloud[]): Promise<void> {
     )
   }
 }
+```
+:::
+
+## 9️⃣.3️⃣.🔟 VOTRE ATTENTION S'IL VOUS PLAÎT !
+Comme vous l'avez remarqué, nous avons changé la dénomination de l'interface principale de `Card` à `CardCloud` pour mieux refléter son rôle dans notre architecture offline-first. Assurez-vous de mettre à jour toutes les références à cette interface dans votre code pour éviter toute confusion ou erreur de typage.
+Je pense vous que voyez où je veux en venir, n'est-ce pas... ?  Et oui.. nous allons devoir adapter le code à différents endroits de l'application pour utiliser `CardCloud` et `CardLocal` de manière appropriée.
+
+C'est pas l'idéal je le conçois, mais c'est le but recherché avec cet exercice, j'aimerais que vous voyez l'évolution de l'application et ce que ça engendre.
+
+Mais comme je ne suis pas sadique, je vous ai préparé la liste des endroits à modifier :
+
+::: details `cardService.ts`
+```ts [src/services/cardService.ts]
+import { supabase } from '@/lib/supabase'
+// import type { Card, CardInsert, CardUpdate } from '@/types/Card' // [!code --]
+import type { CardCloud, CardInsert, CardUpdate } from '@/types/Card' // [!code ++]
+
+/**
+ * Récupère toutes les cartes depuis Supabase.
+ * - select('*') : récupère toutes les colonnes
+ * - order('created_at') : tri pour afficher les plus récentes en premier
+ */
+// export async function fetchCards(): Promise<Card[]> { // [!code --]
+export async function fetchCards(): Promise<CardCloud[]> { // [!code ++]
+    const { data, error } = await supabase
+        .from('cards') // table
+        .select('*')
+        .order('created_at', { ascending: false })
+
+    // Toujours gérer l’erreur : sinon on “échoue silencieusement”
+    if (error) throw error
+
+    // data peut être null, donc on retourne [] par défaut
+    // return (data ?? []) as Card[] // [!code --]
+    return (data ?? []) as CardCloud[] // [!code ++]
+}
+
+/**
+ * Crée une carte.
+ * - insert(payload) : ajoute une ligne
+ * - select('*').single() : on veut récupérer la ligne créée directement
+ */
+// export async function createCard(payload: CardInsert): Promise<Card> { // [!code --]
+export async function createCard(payload: CardInsert): Promise<CardCloud> { // [!code ++]
+    const { data, error } = await supabase
+        .from('cards')
+        .insert(payload)
+        .select('*')   // demande à Supabase de renvoyer la ligne créée
+        .single()      // on veut un objet (pas un tableau)
+
+    if (error) throw error
+    // return data as Card // [!code --]
+    return data as CardCloud // [!code ++]
+}
+
+/**
+ * Met à jour une carte (PATCH).
+ * - update(patch) : met à jour les champs fournis
+ * - eq('id', id) : cible la bonne carte
+ * - select('*').single() : renvoie la carte mise à jour
+ */
+// export async function updateCard(id: string, patch: CardUpdate): Promise<Card> { // [!code --]
+export async function updateCard(id: string, patch: CardUpdate): Promise<CardCloud> { // [!code ++]
+    const { data, error } = await supabase
+        .from('cards')
+        .update(patch)
+        .eq('id', id)
+        .select('*')
+        .single()
+
+    if (error) throw error
+    // return data as Card // [!code --]
+    return data as CardCloud // [!code ++]
+}
+
+/**
+ * Supprime une carte par id.
+ * Ici on ne renvoie rien : void.
+ */
+export async function deleteCard(id: string): Promise<void> { 
+    const { error } = await supabase
+        .from('cards')
+        .delete()
+        .eq('id', id)
+
+    if (error) throw error
+}
+
+```
+:::
+
+::: details `Tab1Page.vue`
+```ts [src/views/Tab1Page.vue]
+/**
+ * Composition API
+ * - ref : pour des valeurs primitives (modalOpen, editing)
+ * - reactive : pour l’objet form (plus pratique qu’un ref d’objet ici)
+ */
+import { reactive, ref, onMounted } from 'vue'
+import { useCardsStore } from '@/stores/cardsStore'
+// import type { Card, CardInsert, Rarity, Role } from '@/types/Card' // [!code --]
+import type { CardLocal, CardInsert, Rarity, Role } from '@/types/Card' // [!code ++]
+import { useAuthStore } from '@/stores/authStore'
+
+const auth = useAuthStore()
+
+/**
+ * Imports Ionic : uniquement ce qu’on utilise
+ * (évite de tout importer “au hasard”)
+ */
+import {
+  IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+  IonList, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
+  IonBadge, IonButton, IonButtons, IonText, IonSpinner,
+  IonModal, IonItem, IonInput, IonSelect, IonSelectOption, IonToggle,
+  IonGrid, IonRow, IonCol,
+  IonRefresher, IonRefresherContent
+} from '@ionic/vue'
+
+/**
+ * Store Pinia :
+ * - store.cards = données
+ * - store.loadFromLocal() = charge depuis SQLite
+ */
+const store = useCardsStore()
+
+/** Ouverture/fermeture du modal */
+const modalOpen = ref(false)
+
+/**
+ * editing = null => mode “create”
+ * editing = Card => mode “edit”
+ */
+// const editing = ref<null | Card>(null) // [!code --]
+const editing = ref<null | CardLocal>(null) // [!code ++]
+
+/**
+ * Formulaire (valeurs par défaut).
+ * Type CardInsert = tous les champs nécessaires à l’insertion.
+ */
+const form = reactive<CardInsert>({
+  name: '',
+  rarity: 'common' as Rarity,
+  elixir_cost: 3,
+  role: 'troop' as Role,
+  hitpoints: 500,
+  damage: 100,
+  arena: 1,
+  is_favorite: false
+})
+
+/** Au chargement de la page, on récupère les cartes */
+onMounted(() => {
+  store.loadFromLocal()
+})
+
+/** Remet le form dans son état “neuf” */
+function resetForm() {
+  form.name = ''
+  form.rarity = 'common'
+  form.elixir_cost = 3
+  form.role = 'troop'
+  form.hitpoints = 500
+  form.damage = 100
+  form.arena = 1
+  form.is_favorite = false
+}
+
+/** Ouvre le modal en mode création */
+function openCreate() {
+  editing.value = null
+  resetForm()
+  modalOpen.value = true
+}
+
+/** Ouvre le modal en mode édition et copie la carte dans le form */
+// function openEdit(card: Card) { // [!code --]
+function openEdit(card: CardLocal) { // [!code ++]
+  editing.value = card
+
+  // On copie les champs dans le formulaire
+  form.name = card.name
+  form.rarity = card.rarity
+  form.elixir_cost = card.elixir_cost
+  form.role = card.role
+  form.hitpoints = card.hitpoints
+  form.damage = card.damage
+  form.arena = card.arena
+  form.is_favorite = card.is_favorite
+
+  modalOpen.value = true
+}
+
+/** Ferme le modal */
+function closeModal() {
+  modalOpen.value = false
+}
+
+/**
+ * submit :
+ * - si editing != null => update
+ * - sinon => insert
+ */
+async function submit() {
+  // Validation minimale : name obligatoire
+  if (!form.name.trim()) return
+
+  if (editing.value) {
+    await store.edit(editing.value.id, { ...form })
+  } else {
+    await store.add({ ...form })
+  }
+
+  closeModal()
+}
+
+
+async function onRefresh(ev: CustomEvent) {
+  // await store.load() // [!code --]
+  // Cette méthode sera modifiée pour charger depuis SQLite dans le chapitre 9.5, mais je prévois déjà ici... // [!code ++]
+  await store.loadFromLocal() // [!code ++]
+  const refresher = ev.target as HTMLIonRefresherElement
+  refresher.complete()
+}
+
 ```
 :::
 
