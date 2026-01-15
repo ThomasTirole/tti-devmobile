@@ -1,0 +1,328 @@
+# 9️⃣.5️⃣ Synchronisation automatique avec Supabase
+
+Maintenant que :
+- ✅ les cartes sont stockées en local (SQLite),
+- ✅ chaque action utilisateur est enregistrée dans une queue (Preferences),
+- ✅ on sait détecter le réseau (chapitre 8),
+
+... on peut implémenter la **synchronisation automatique**.
+
+> 👉 Dans notre règle métier, on part sur une approche **local prioritaire** :
+> la version locale (celle modifiée par l’utilisateur) est considérée comme la plus récente.
+
+## 9️⃣.5️⃣.1️⃣ Créer un service de synchronisation : `syncService.ts`
+
+Créez le fichier `src/services/syncService.ts`.
+
+Ce service va :
+- lire la queue (Preferences),
+- exécuter chaque action sur Supabase,
+- mettre à jour SQLite,
+- retirer l'action de la queue si elle a réussie.
+
+::: details Création du service de synchronisation
+```ts [src/services/syncService.ts]
+// src/services/syncService.ts
+
+import { getQueue, removeFromQueue } from '@/services/offlineQueueService'
+import { useAuthStore } from '@/stores/authStore'
+import { useNetworkStore } from '@/stores/networkStore'
+
+import {
+    createCardCloud,
+    updateCardCloud,
+    deleteCardCloud,
+    getAllCardsCloud
+} from '@/services/cardsService'
+
+import { upsertManyLocalCards } from '@/services/cardsLocalService'
+
+import type { OfflineAction } from '@/types/OfflineAction'
+import type { CardInsert, CardUpdate, CardLocal, CardCloud } from '@/types/Card'
+
+/**
+ * Empêche plusieurs synchronisations en parallèle
+ * (ex: réseau qui clignote online/offline)
+ */
+let isSyncing = false
+
+/**
+ * 🔄 Synchronise la queue offline vers Supabase
+ *
+ * Règles :
+ * - ne fait rien si offline
+ * - ne fait rien si pas connecté
+ * - rejoue les actions dans l’ordre
+ * - nettoie la queue si succès
+ * - remet SQLite à jour depuis le cloud
+ */
+export async function syncOfflineQueue(): Promise<void> {
+    if (isSyncing) return
+
+    const network = useNetworkStore()
+    const auth = useAuthStore()
+
+    // ❌ Pas de réseau → pas de sync
+    if (!network.connected) return
+
+    // ❌ Pas d’utilisateur → pas de sync (RLS)
+    if (!auth.user) return
+
+    isSyncing = true
+
+    try {
+        const queue = await getQueue()
+        if (queue.length === 0) return
+
+        // 1️⃣ Rejouer chaque action offline
+        for (const action of queue) {
+            await syncOneAction(action)
+            await removeFromQueue(action.id)
+        }
+
+        // 2️⃣ Rafraîchir SQLite depuis Supabase
+        // (on s’assure que le local reflète le cloud)
+        const cloudCards = await getAllCardsCloud()
+        await upsertManyLocalCards(cloudCards)
+    } finally {
+        isSyncing = false
+    }
+}
+
+/**
+ * 🔁 Synchronise UNE action vers Supabase
+ * Approche : LOCAL PRIORITAIRE
+ */
+async function syncOneAction(action: OfflineAction): Promise<void> {
+    switch (action.type) {
+        case 'CREATE':
+            await createCardCloud(toCloudInsert(action.payload))
+            return
+
+        case 'UPDATE':
+            await updateCardCloud(
+                action.payload.id,
+                toCloudUpdate(action.payload)
+            )
+            return
+
+        case 'DELETE':
+            await deleteCardCloud(action.payload.id)
+            return
+    }
+}
+
+/**
+ * 🔄 CardLocal → CardInsert (CREATE cloud)
+ *
+ * - on garde l’id (offline-first)
+ * - on enlève les champs locaux
+ * - Supabase gère created_at / updated_at
+ */
+function toCloudInsert(local: CardLocal): CardInsert {
+    const { synced, created_at, updated_at, ...rest } = local
+    return rest
+}
+
+/**
+ * 🔄 CardLocal → CardUpdate (UPDATE cloud)
+ *
+ * - id passé séparément
+ * - pas de synced
+ * - updated_at géré par trigger Supabase
+ */
+function toCloudUpdate(local: CardLocal): CardUpdate {
+    const { id, synced, created_at, updated_at, ...rest } = local
+    return rest
+}
+```
+:::
+
+## 9️⃣.5️⃣.2️⃣ Déclencher la synchronisation au retour réseau
+Si l'utilisateur est **offline** &rarr; il continue à travailler (SQLite + queue). Dès que le réseau revient (`connected = true`), on lance `syncOfflineQueue()`.
+> On ne met pas cette logique  dans le store réseau. Le store garde l'état, l'UI (et la synchronisation) réagit dans `App.vue`.
+
+::: details 1. Importer le service sync dans `App.vue`
+```ts [src/App.vue]
+import { syncOfflineQueue } from '@/services/syncService'
+```
+:::
+
+::: details 2. Adapter le watcher sur `network.connected` d'affichage du toast.
+```ts [src/App.vue]
+watch(
+    () => network.connected,
+    async (connected) => {
+        // Au premier run, on ne veut pas spammer un toast
+        if (!hasInitialized) {
+            hasInitialized = true
+            return
+        }
+
+        if (!connected) {
+            // 🔴 Offline
+            await showToast('🔴 Réseau déconnecté (mode hors-ligne)')
+            return
+        }
+
+        // 🟢 Online
+        await showToast('🟢 Connecté au réseau')
+
+        // ✅ Réseau revenu : on lance la synchronisation
+        await syncOfflineQueue()
+    }
+)
+```
+:::
+
+## 9️⃣.5️⃣.3️⃣ Synchroniser au démarrage si on est online
+Pourquoi ?
+Même sans changement de réseau, il peut exister une queue offline (actions faites hier / fermeture de l'app / crash). Donc si l'app démarre en ligne, on lance une synchronisation **une seule fois**.
+
+::: details Ajouter un appel après l'initialisation
+Dans `src/App.vue`, dans le `<script setup>`, ajoutez :
+```ts [src/App.vue]
+import { onMounted } from 'vue'
+import { syncOfflineQueue } from '@/services/syncService'
+import { useNetworkStore } from '@/stores/networkStore'
+import { useAuthStore } from '@/stores/authStore'
+```
+Puis :
+```ts [src/App.vue]
+const network = useNetworkStore()
+const auth = useAuthStore()
+
+/**
+* Au démarrage :
+* - si on est online
+* - et si un utilisateur est connecté
+* => on tente une synchronisation (si queue vide, ça ne fait rien)
+  */
+
+onMounted(async () => {
+    // Si l’app démarre avec du réseau,
+    // on tente une synchronisation immédiate.
+    // (si pas d’utilisateur ou queue vide → le service ne fait rien)
+    if (network.connected) {
+        await syncOfflineQueue()
+    }
+})
+```
+:::
+
+## 9️⃣.5️⃣.4️⃣ Mettre à jour l'UI après synchronisation
+Après une synchronisation, on souhaite que l'UI reflète l'état actuel des données (SQLite). Pour cela, on peut déclencher le rechargement des cartes locales.
+
+1. `syncOfflineQueue()` synchronise la queue vers Supabase
+2. Puis elle "rafraîchit" SQLite depuis le cloud.
+3. Ensuite, on demande au store **de relire SQLite** &rarr; l'UI se met à jour.
+
+::: details 1. Ajoutez une méthode "reload local" dans le store des cartes
+Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()`. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
+Comme ça fait un peu beaucoup jusqu'à maintenant, je vous remets le code complet du store avec les modifications, parce qu'on est tous un peu des flemmards au fond. 😉
+
+::: warning **⚠️ Important**
+Le store **ne gère pas directement la queue offline**.
+Les appels à `enqueue()` sont faits **dans `cardsLocalService`** (chapitre 9.4), afin de centraliser la logique offline-first et éviter les duplications.
+
+```ts [src/stores/cardStore.ts]
+// src/stores/cardStore.ts
+import { defineStore } from 'pinia'
+import type { CardInsert, CardLocal, CardUpdate } from '@/types/Card'
+
+import {
+    getAllLocalCards,
+    createLocalCard,
+    updateLocalCard,
+    deleteLocalCard
+} from '@/services/cardsLocalService'
+
+import { syncOfflineQueue } from '@/services/syncService'
+
+export const useCardsStore = defineStore('cards', {
+    state: () => ({
+        cards: [] as CardLocal[],
+        loading: false,
+        error: null as string | null
+    }),
+
+    actions: {
+        /**
+         * Source de vérité : SQLite
+         */
+        async loadFromLocal() {
+            this.loading = true
+            this.error = null
+
+            try {
+                this.cards = await getAllLocalCards()
+            } catch (e: any) {
+                this.error = e?.message ?? 'Erreur de chargement local'
+            } finally {
+                this.loading = false
+            }
+        },
+
+        /**
+         * Ajout offline-first
+         * -> SQLite + queue (géré dans le service)
+         */
+        async add(payload: CardInsert) {
+            const now = new Date().toISOString()
+
+            const localCard: CardLocal = {
+                id: crypto.randomUUID(),
+                ...payload,
+                created_at: now,
+                updated_at: now,
+                synced: 0
+            }
+
+            await createLocalCard(localCard)
+            await this.loadFromLocal()
+        },
+
+        /**
+         * Update offline-first
+         */
+        async edit(id: string, patch: CardUpdate) {
+            const current = this.cards.find(c => c.id === id)
+            if (!current) return
+
+            const updated: CardLocal = {
+                ...current,
+                ...patch,
+                synced: 0
+            }
+
+            await updateLocalCard(updated)
+            await this.loadFromLocal()
+        },
+
+        /**
+         * Delete offline-first
+         */
+        async remove(id: string) {
+            await deleteLocalCard(id)
+            await this.loadFromLocal()
+        },
+
+        async toggleFavorite(id: string) {
+            const card = this.cards.find(c => c.id === id)
+            if (!card) return
+            await this.edit(id, { is_favorite: !card.is_favorite })
+        },
+
+        /**
+         * Sync manuel (debug / bouton)
+         */
+        async syncNow() {
+            await syncOfflineQueue()
+            await this.loadFromLocal()
+        }
+    }
+})
+
+```
+:::
+

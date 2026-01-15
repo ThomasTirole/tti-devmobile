@@ -74,6 +74,10 @@
               link: /exercices/apprendre-supabase/synchronisation/create-database
             - text: 9️⃣.3️⃣ CRUD local
               link: /exercices/apprendre-supabase/synchronisation/crud-local
+            - text: 9️⃣.4️⃣ Queue offline
+              link: /exercices/apprendre-supabase/synchronisation/queue-offline
+            - text: 9️⃣.5️⃣ Synchronisation cloud
+              link: /exercices/apprendre-supabase/synchronisation/synchro-cloud
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:

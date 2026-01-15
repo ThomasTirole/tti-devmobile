@@ -55,12 +55,14 @@ export interface CardLocal extends CardCloud {
 
 :::
 ::: details 3. Mettre à jour les types d'insertion et de mise à jour pour le Cloud
-Enfin, ajustons les types `CardInsert` et `CardUpdate` pour qu'ils correspondent à la nouvelle interface `CardCloud`.
+Enfin, ajustons les types `CardInsert` et `CardUpdate` pour qu'ils correspondent à la nouvelle interface `CardCloud`. De plus, nous supprimons `id` de `CardInsert` car il sera généré côté application pour l'offline-first.
 ```ts [src/types/Card.ts]
 export type CardInsert = Omit<Card, 'id' | 'created_at'> // [!code --]
-export type CardInsert = Omit<CardCloud, 'id' | 'created_at' | 'updated_at'> // [!code ++]
+export type CardInsert = Omit<CardCloud, 'created_at' | 'updated_at'> // [!code ++]
 
-export type CardUpdate = Partial<CardInsert> // inchangé
+export type CardUpdate = Partial<CardInsert> // [!code --]
+// ✅ UPDATE cloud : champs optionnels, mais jamais l’id // [!code ++]
+export type CardUpdate = Partial<Omit<CardInsert, 'id'>> // [!code ++]
 ```
 > Ces types restent utilisés pour :
 > - créer / modifier une carte via Supabase,
@@ -139,20 +141,33 @@ export interface CardLocal extends CardCloud {
  * ✅ CHANGEMENT 2 : CardInsert et CardUpdate se basent sur CardCloud
  *
  * Pourquoi ?
- * Ce sont des types utilisés côté "cloud" (Supabase).
- * On ne met pas synced ici car synced est un champ local SQLite,
- * pas un champ cloud (à ce stade).
+ * - Ces types servent pour les appels Supabase (cloud).
+ * - On ne met pas `synced` ici car c’est un champ local SQLite.
+ *
+ * Point clé offline-first :
+ * - L’app génère l’UUID `id` (stable partout : SQLite + queue + Supabase).
+ * - Supabase gère `created_at` et `updated_at` via defaults / triggers.
  */
 
-// Quand on crée une carte, c’est nous qui générons l’id (UUID) côté app (offline-first),
-// mais Supabase gère les timestamps automatiquement selon ton setup.
-// -> On ne fournit donc pas created_at / updated_at depuis le formulaire.
-export type CardInsert = Omit<CardCloud, 'id' | 'created_at' | 'updated_at'>
+// ✅ INSERT cloud : on envoie id + champs métier
+// ❌ On n’envoie pas created_at / updated_at (gérés côté Supabase)
+export type CardInsert = Omit<CardCloud, 'created_at' | 'updated_at'>
 
-// Quand on modifie une carte, on ne modifie pas forcément tout.
-// Partial = tous les champs deviennent optionnels.
-export type CardUpdate = Partial<CardInsert>
+// ✅ UPDATE cloud : champs optionnels, mais jamais l’id
+export type CardUpdate = Partial<Omit<CardInsert, 'id'>>
+
 ```
+::: warning ⚠️ Offline-first et génération des identifiants
+Dans une application **online-only**, on laisse souvent la base de données générer les identifiants (`id`).
+En **offline-first**, ce n’est plus possible : l’application doit créer des données **sans réseau**.
+
+👉 L’UUID est donc **généré côté application** pour rester **stable** entre :
+
+* SQLite (local),
+* la queue offline,
+* Supabase (cloud).
+
+Supabase conserve néanmoins `default gen_random_uuid()` comme **fallback**, au cas où aucun `id` n’est fourni.
 :::
 
 ## 9️⃣.3️⃣.2️⃣ Créer le service SQLite `cardsLocalService.ts`
@@ -208,7 +223,7 @@ Selon les règles : on écrit localement d'abord, avec `synced = 0` (car pas enc
  * - synced = 0 car pas encore synchronisée
  * - created_at / updated_at = now (pour le local)
  */
-export async function createLocalCard(card: CardCloud): Promise<void> {
+export async function createLocalCard(card: CardLocal): Promise<void> {
   const db = getDB()
 
   await db.run(
@@ -384,7 +399,7 @@ export async function getAllLocalCards(): Promise<CardLocal[]> {
  * - synced = 0 car pas encore synchronisée
  * - created_at / updated_at = now (pour le local)
  */
-export async function createLocalCard(card: CardCloud): Promise<void> {
+export async function createLocalCard(card: CardLocal): Promise<void> {
   const db = getDB()
 
   await db.run(
@@ -510,8 +525,8 @@ export async function upsertManyLocalCards(cards: CardCloud[]): Promise<void> {
     )
   }
 }
-:::
 ```
+:::
 
 
 ## 🔜 La suite...

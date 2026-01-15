@@ -273,6 +273,7 @@ export async function deleteLocalCard(id: string): Promise<void> {
   await enqueue(makeDeleteAction(id))
 }
 ```
+:::
 
 ## 9️⃣.4️⃣.8️⃣ Teste la queue rapidement
 1. Lancez l'app
@@ -283,6 +284,7 @@ import { getQueue } from '@/services/offlineQueueService'
 getQueue().then(console.log)
 ```
 Vous devez voir un tableau avec des actions `CREATE`/`UPDATE`/`DELETE` correspondant à vos actions.
+
 
 ## 🔜 La suite...
 Synchronisation automatique :
