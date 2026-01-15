@@ -1,4 +1,7 @@
 # 🧑‍🏫 3.2 Rappel UX mobile & introduction aux composants Ionic
+
+<iframe src="https://slides.com/tirtho/3-2-rappel-ux-mobile-composants-ionic/embed" width="576" height="420" title="🧑‍🏫 3.2 Rappel UX mobile & composants Ionic" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Dans cette section, nous allons rappeler brièvement les bases de l'ergonomie mobile pour comprendre **pourquoi** les composants Ionic sont conçus de cette manière.
 Nous entrerons ensuite directement dans le concret avec les **composants de base** d'Ionic-Vue, ceux que vous utiliserez dans la majorité de vos applications.
 

@@ -1,4 +1,7 @@
 # 🖼️ 3.3 Les composants UI d'Ionic
+
+<iframe src="https://slides.com/tirtho/3-3-les-composants-ui-d-ionic/embed" width="576" height="420" title="🖼️ 3.3 Les composants UI d'Ionic" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Ionic fournit une bibliothèque complète de composants conçus pour créer des interfaces mobiles modernes, cohérentes et adaptatives. Tous les composants `ion-*` respectent automatiquement les conventions visuelles d'iOS et d'Android, vous évitant de réécrire vos propres styles.
 
 Dans ce chapitre, vous découvrirez les composants les plus importants d'Ionic, que vous utiliserez pour structurer vos pages, afficher du contenu, créer des formulaires et fournir du feedback utilisateur.
