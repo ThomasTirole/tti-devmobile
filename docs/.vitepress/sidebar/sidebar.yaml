@@ -62,6 +62,16 @@
           link: /exercices/apprendre-supabase/authentification
         - text: 7️⃣ Row Level Security
           link: /exercices/apprendre-supabase/rls
+        - text: 8️⃣ Détection réseau
+          link: /exercices/apprendre-supabase/detection-reseau
+        - text: 9️⃣ Synchronisation
+          collapsed: false
+          link: /exercices/apprendre-supabase/synchronisation/sync
+          items:
+            - text: 9️⃣.1️⃣ Installation et configuration de SQLite
+              link: /exercices/apprendre-supabase/synchronisation/setup-sqlite
+            - text: 9️⃣.2️⃣ Création de la base SQLite
+              link: /exercices/apprendre-supabase/synchronisation/create-database
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
