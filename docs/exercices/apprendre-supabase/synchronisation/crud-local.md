@@ -511,4 +511,9 @@ export async function upsertManyLocalCards(cards: CardCloud[]): Promise<void> {
   }
 }
 :::
+```
+
+
+## 🔜 La suite...
+Nous avons maintenant un service SQLite complet pour gérer le CRUD local des cartes en mode offline-first. Nous procéderons ensuite à la création d'une queue offline pour stocker les actions effectuées hors-ligne et les synchroniser avec Supabase lorsque le réseau est disponible (chapitre 9.5).
 
