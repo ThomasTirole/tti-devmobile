@@ -32,19 +32,11 @@ Exemples :
 - `ion-tab-bar` : placé en bas sur iOS, parfois en haut sur Android
 - `ion-toolbar` : ombres et hauteurs différentes selon la plateforme.
 
-::: danger
-ajouter les images comparatives
-:::
-
 Grâce à cette approche :
 - vous écrivez **un seul code**,
 - Ionic se charge d'appliquer les **bonnes conventions natives**.
 
 👉 Il n'est pas nécessaire de refaire tout le design : Ionic s'en occupe.
-
-::: danger
-ajouter le bout de code pour montrer la différence avec un gif par exemple entre Android et iOS ou prendre celle de la doc officielle
-:::
 
 ## 🧱 3.2.3 Les composants UI fondamentaux d'Ionic
 Ionic propose une large palette de composants prêts à l'emploi.

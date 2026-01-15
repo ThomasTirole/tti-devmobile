@@ -340,6 +340,94 @@ Chers élèves, il est passé minuit, ça fait + de 6h que je rédige et fait ce
 Je ferai en sorte de  corriger cet exercice ultérieurement pour que vous ayez quelque chose de fonctionnel et propre à la longue.
 
 Pour l'instant, je vous invite donc à 
+
+::: details Copier-coller ce code dans `App.vue`, c'est une solution de secours car j'ai pas eu le temps de gérer tous les cas :
+
+```ts [src/App.vue]
+<template>
+    <ion-app>
+<ion-router-outlet />
+</ion-app>
+</template>
+
+<script setup lang="ts">
+import { IonApp, IonRouterOutlet } from '@ionic/vue';
+
+import { watch, onMounted } from 'vue'
+import { toastController } from '@ionic/vue'
+import { useNetworkStore } from '@/stores/networkStore'
+import { syncOfflineQueue } from '@/services/syncService'
+import {upsertManyLocalCards} from "@/services/cardsLocalService";
+import {fetchCards} from "@/services/cardsService";
+import {useCardsStore} from "@/stores/cardsStore";
+
+
+/**
+ * Store réseau global
+ */
+const network = useNetworkStore()
+
+const cardsStore = useCardsStore()
+
+/**
+ * Fonction utilitaire : affiche un toast simple
+ */
+async function showToast(message: string, duration = 5000) {
+    const toast = await toastController.create({
+        message,
+        duration,
+        position: 'top'
+    })
+    await toast.present()
+    return toast
+}
+
+onMounted(async () => {
+    // Toast temporaire : vérification réseau en cours
+    const checkingToast = await showToast('⏳ Vérification du réseau…', 0)
+
+    // Petite pause pour s'assurer que le store est prêt
+    await new Promise(r => setTimeout(r, 50))
+
+    // Fermeture du toast de vérification
+    await checkingToast.dismiss()
+
+    // Toast résultat
+    if (network.connected) {
+        await showToast('🟢 Connecté au réseau')
+        const cloudCards = await fetchCards()
+        await upsertManyLocalCards(cloudCards)
+        await cardsStore.loadFromLocal()
+        // await syncOfflineQueue()
+    } else {
+        await showToast('🔴 Réseau déconnecté (mode hors-ligne)')
+    }
+})
+
+watch(
+    () => network.connected,
+    async (connected, oldConnected) => {
+        /**
+         * oldConnected est undefined uniquement
+         * lors du premier appel du watcher.
+         * On l’ignore pour éviter un toast inutile au démarrage.
+         */
+        if (oldConnected === undefined) return
+
+        if (!connected) {
+            await showToast('🔴 Réseau déconnecté (mode hors-ligne)')
+        } else {
+            await showToast('🟢 Connecté au réseau')
+            // ✅ Réseau revenu : on lance la synchronisation
+            await syncOfflineQueue()
+        }
+    },
+    { immediate: true }
+)
+</script>
+```
+:::
+
 1. Installer Android Studio (même si vous n'allez pas coder en natif, c'est nécessaire pour l'émulateur Android)
 2. Effectuer les commandes suivantes :
 ```bash
