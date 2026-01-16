@@ -149,7 +149,7 @@ import router from './router';
 
 import {IonicVue} from '@ionic/vue';
 import {createPinia} from 'pinia';
-import { useAuthStore } from '@/stores/authStore // [!code ++]'
+import { useAuthStore } from '@/stores/authStore' // [!code ++]
 
 // ...
 
