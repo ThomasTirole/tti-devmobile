@@ -13,13 +13,18 @@ La table locale `cards` doit contenir :
 - les métadonnées nécessaires à la synchronisation.
 
 ### Colonnes retenues
-
 | Colonne       | Type    | Rôle                                      |
 |---------------|---------|-------------------------------------------|
 | `id`          | TEXT    | Identifiant unique (UUID généré côté app) |
-| `title`       | TEXT    | Titre de la carte                         |
-| `description` | TEXT    | Description                               |
+| `name`        | TEXT    | Nom de la carte                           |
 | `rarity`      | TEXT    | Rareté (ex: common, rare, epic…)          |
+| `elixir_cost` | INTEGER | Coût en élixir                            |
+| `role`        | TEXT    | Rôle / catégorie                          |
+| `hitpoints`   | INTEGER | Points de vie                             |
+| `damage`      | INTEGER | Dégâts                                    |
+| `arena`       | INTEGER | Arène                                     |
+| `is_favorite` | INTEGER | 1 = favorite, 0 = non                     |
+| `created_at`  | TEXT    | Création (ISO string)                     |
 | `updated_at`  | TEXT    | Dernière modification (ISO string)        |
 | `synced`      | INTEGER | 1 = synchronisé, 0 = modification locale  |
 

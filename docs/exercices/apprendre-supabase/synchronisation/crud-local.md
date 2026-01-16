@@ -58,7 +58,7 @@ export interface CardLocal extends CardCloud {
 Enfin, ajustons les types `CardInsert` et `CardUpdate` pour qu'ils correspondent à la nouvelle interface `CardCloud`. De plus, nous supprimons `id` de `CardInsert` car il sera généré côté application pour l'offline-first.
 ```ts [src/types/Card.ts]
 export type CardInsert = Omit<Card, 'id' | 'created_at'> // [!code --]
-export type CardInsert = Omit<CardCloud, id | 'created_at' | 'updated_at'> // [!code ++]
+export type CardInsert = Omit<CardCloud, 'id' | 'created_at' | 'updated_at'> // [!code ++]
 
 export type CardUpdate = Partial<CardInsert> // [!code --]
 // ✅ UPDATE cloud : champs optionnels, mais jamais l’id // [!code ++]
