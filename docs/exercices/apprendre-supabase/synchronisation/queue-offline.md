@@ -275,7 +275,7 @@ export async function deleteLocalCard(id: string): Promise<void> {
 ```
 :::
 
-## 9️⃣.4️⃣.8️⃣ Teste la queue rapidement
+::: details NE PAS FAIRE - pas à jour 9️⃣.4️⃣.8️⃣ Tester la queue rapidement
 1. Lancez l'app
 2. Faites une action locale (create/update/delete)
 3. Dans le navigateur, ouvrez la console et testez :
@@ -284,7 +284,7 @@ import { getQueue } from '@/services/offlineQueueService'
 getQueue().then(console.log)
 ```
 Vous devez voir un tableau avec des actions `CREATE`/`UPDATE`/`DELETE` correspondant à vos actions.
-
+:::
 
 ## 🔜 La suite...
 Synchronisation automatique :
