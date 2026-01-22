@@ -340,282 +340,513 @@ Adaptez alors les 4 actions comme suit :
 > - en mode **Web** (`ionic serve`),
 > - et en mode **natif** (Android / iOS), en utilisant `Capacitor.isNativePlatform()` et/ou `Capacitor.isPluginAvailable()` pour gérer les cas où un plugin n’est pas disponible.
 
-::: details **✅ Exemple de solution complète**
-```html [src/views/NativeKitPage.vue]
-<template>
-    <ion-page>
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Mini Kit Natif</ion-title>
-            </ion-toolbar>
-        </ion-header>
+[//]: # (::: details **✅ Exemple de solution complète**)
 
-        <ion-content class="ion-padding">
-            <!-- Caméra / Import d'image -->
-            <ion-list>
-                <ion-item>
-                    <ion-label>Caméra / Import d'image</ion-label>
-                </ion-item>
-            </ion-list>
+[//]: # (```html [src/views/NativeKitPage.vue])
 
-            <ion-button expand="block" @click="takePhoto">
-                Caméra / Import d'image
-            </ion-button>
+[//]: # (<template>)
 
-            <!-- Input fichier pour le fallback Web -->
-            <input
-                    ref="fileInput"
-                    type="file"
-                    accept="image/*"
-                    class="hidden-input"
-                    @change="onFileChange"
-            />
+[//]: # (    <ion-page>)
 
-            <img v-if="photo" :src="photo" class="preview" />
+[//]: # (        <ion-header>)
 
-            <!-- Haptique -->
-            <ion-list>
-                <ion-item>
-                    <ion-label>Haptique (vibration)</ion-label>
-                </ion-item>
-            </ion-list>
+[//]: # (            <ion-toolbar>)
 
-            <ion-button expand="block" @click="vibrate">
-                Vibrer (ou feedback visuel en Web)
-            </ion-button>
+[//]: # (                <ion-title>Mini Kit Natif</ion-title>)
 
-            <!-- Réseau -->
-            <ion-list>
-                <ion-item>
-                    <ion-label>Statut réseau</ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-label>
-                        <p>En ligne : {{ isOnlineText }}</p>
-                        <p>Dernier statut : {{ networkStatus }}</p>
-                    </ion-label>
-                </ion-item>
-            </ion-list>
+[//]: # (            </ion-toolbar>)
 
-            <ion-button expand="block" @click="checkNetwork">
-                Tester la connexion
-            </ion-button>
+[//]: # (        </ion-header>)
 
-            <!-- Préférences -->
-            <ion-list>
-                <ion-item>
-                    <ion-label>Préférences</ion-label>
-                </ion-item>
-                <ion-item>
-                    <ion-label>
-                        <p>Valeur stockée : {{ prefValue ?? 'Aucune valeur' }}</p>
-                    </ion-label>
-                </ion-item>
-            </ion-list>
+[//]: # ()
+[//]: # (        <ion-content class="ion-padding">)
 
-            <ion-button expand="block" @click="savePref">
-                Sauvegarder et relire une préférence
-            </ion-button>
+[//]: # (            <!-- Caméra / Import d'image -->)
 
-            <!-- Dernière action -->
-            <ion-list>
-                <ion-item>
-                    <ion-label>
-                        <p>Dernière action : {{ lastAction }}</p>
-                    </ion-label>
-                </ion-item>
-            </ion-list>
+[//]: # (            <ion-list>)
 
-            <!-- Toast pour le statut réseau -->
-            <ion-toast
-                    :is-open="showToast"
-                    :message="toastMessage"
-                    :duration="1500"
-                    position="bottom"
-                    @didDismiss="showToast = false"
-            />
-        </ion-content>
-    </ion-page>
-</template>
+[//]: # (                <ion-item>)
 
-<script setup lang="ts">
-    import { ref, onMounted, onUnmounted, computed } from 'vue'
-    import {
-        IonPage,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        IonButton,
-        IonItem,
-        IonLabel,
-        IonList,
-        IonToast
-    } from '@ionic/vue'
+[//]: # (                    <ion-label>Caméra / Import d'image</ion-label>)
 
-    import { Capacitor } from '@capacitor/core'
-    import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'
-    import { Haptics, ImpactStyle } from '@capacitor/haptics'
-    import { Network } from '@capacitor/network'
-    import { Preferences } from '@capacitor/preferences'
+[//]: # (                </ion-item>)
 
-    const photo = ref<string | null>(null)
-    const fileInput = ref<HTMLInputElement | null>(null)
+[//]: # (            </ion-list>)
 
-    const networkStatus = ref<string>('Inconnu')
-    const isOnline = ref<boolean | null>(null)
+[//]: # ()
+[//]: # (            <ion-button expand="block" @click="takePhoto">)
 
-    const prefValue = ref<string | null>(null)
-    const lastAction = ref<string>('Aucune action pour le moment')
+[//]: # (                Caméra / Import d'image)
 
-    // Toast
-    const showToast = ref(false)
-    const toastMessage = ref('')
+[//]: # (            </ion-button>)
 
-    // Texte lisible pour l'état en ligne / hors ligne
-    const isOnlineText = computed(() => {
-        if (isOnline.value === null) return 'Inconnu'
-        return isOnline.value ? 'Oui' : 'Non'
-    })
+[//]: # ()
+[//]: # (            <!-- Input fichier pour le fallback Web -->)
 
-    // 📷 Caméra : natif ➜ Camera, Web ➜ input file
-    async function takePhoto() {
-        const isNative = Capacitor.isNativePlatform()
-        const hasCamera = Capacitor.isPluginAvailable('Camera')
+[//]: # (            <input)
 
-        // 🌐 Fallback Web : input type="file"
-        if (!isNative || !hasCamera) {
-            fileInput.value?.click()
-            return
-        }
+[//]: # (                    ref="fileInput")
 
-        try {
-            const img = await Camera.getPhoto({
-                quality: 70,
-                resultType: CameraResultType.Uri,
-                source: CameraSource.Camera
-            })
+[//]: # (                    type="file")
 
-            photo.value = img.webPath ?? null
-            lastAction.value = 'Photo capturée depuis la caméra.'
-        } catch (error) {
-            console.error(error)
-            lastAction.value = 'Erreur lors de la prise de photo.'
-        }
-    }
+[//]: # (                    accept="image/*")
 
-    // 🌐 Récupération du fichier choisi en Web
-    function onFileChange(event: Event) {
-        const target = event.target as HTMLInputElement
-        const file = target.files?.[0]
-        if (!file) return
+[//]: # (                    class="hidden-input")
 
-        photo.value = URL.createObjectURL(file)
-        lastAction.value = 'Photo chargée depuis un fichier (fallback Web).'
-    }
+[//]: # (                    @change="onFileChange")
 
-    // 📳 Haptique : natif ➜ vibration, Web ➜ message
-    async function vibrate() {
-        const hasHaptics = Capacitor.isPluginAvailable('Haptics')
+[//]: # (            />)
 
-        if (!hasHaptics) {
-            // Fallback simple pour le Web
-            alert('Vibration simulée (Haptics non disponible sur cette plateforme).')
-            lastAction.value = 'Vibration simulée (Web).'
-            return
-        }
+[//]: # ()
+[//]: # (            <img v-if="photo" :src="photo" class="preview" />)
 
-        try {
-            await Haptics.impact({ style: ImpactStyle.Medium })
-            lastAction.value = 'Vibration effectuée.'
-        } catch (error) {
-            console.error(error)
-            lastAction.value = 'Erreur lors de l’utilisation du Haptics.'
-        }
-    }
+[//]: # ()
+[//]: # (            <!-- Haptique -->)
 
-    // 🌐🔌 Network : fonctionne Web + natif
-    async function checkNetwork() {
-        try {
-            const status = await Network.getStatus()
-            isOnline.value = status.connected
-            networkStatus.value = status.connected
-                    ? 'En ligne (vérification manuelle)'
-                    : 'Hors ligne (vérification manuelle)'
+[//]: # (            <ion-list>)
 
-            toastMessage.value = status.connected
-                    ? '✅ Vous êtes en ligne'
-                    : '⚠️ Vous êtes hors ligne'
-            showToast.value = true
+[//]: # (                <ion-item>)
 
-            lastAction.value = 'Statut réseau mis à jour.'
-        } catch (error) {
-            console.error(error)
-            lastAction.value = 'Erreur lors de la récupération du statut réseau.'
-        }
-    }
+[//]: # (                    <ion-label>Haptique &#40;vibration&#41;</ion-label>)
 
-    // Écouter les changements réseau (toast automatique)
-    let networkListener: { remove: () => Promise<void> } | null = null
+[//]: # (                </ion-item>)
 
-    onMounted(async () => {
-        try {
-            networkListener = await Network.addListener('networkStatusChange', status => {
-                isOnline.value = status.connected
-                networkStatus.value = status.connected
-                        ? 'En ligne (événement réseau)'
-                        : 'Hors ligne (événement réseau)'
+[//]: # (            </ion-list>)
 
-                toastMessage.value = status.connected
-                        ? '✅ Connexion restaurée'
-                        : '⚠️ Connexion perdue'
-                showToast.value = true
-            })
-        } catch (error) {
-            console.error('Erreur lors de l’enregistrement du listener réseau', error)
-        }
-    })
+[//]: # ()
+[//]: # (            <ion-button expand="block" @click="vibrate">)
 
-    onUnmounted(async () => {
-        if (networkListener) {
-            await networkListener.remove()
-            networkListener = null
-        }
-    })
+[//]: # (                Vibrer &#40;ou feedback visuel en Web&#41;)
 
-    // 🔑 Preferences : fonctionne Web + natif
-    async function savePref() {
-        try {
-            await Preferences.set({
-                key: 'demo-pref',
-                value: 'hello-from-capacitor'
-            })
+[//]: # (            </ion-button>)
 
-            const res = await Preferences.get({ key: 'demo-pref' })
-            prefValue.value = res.value ?? null
-            lastAction.value = 'Préférence sauvegardée et relue.'
-        } catch (error) {
-            console.error(error)
-            lastAction.value = 'Erreur lors de la sauvegarde/lecture des préférences.'
-        }
-    }
-</script>
+[//]: # ()
+[//]: # (            <!-- Réseau -->)
 
-<style scoped>
-    .preview {
-        width: 100%;
-        margin-top: 16px;
-        border-radius: 12px;
-        object-fit: cover;
-    }
+[//]: # (            <ion-list>)
 
-    .hidden-input {
-        display: none;
-    }
-</style>
-```
-:::
+[//]: # (                <ion-item>)
 
-::: danger
-ACHTUNG, A TESTER !!!
-:::
+[//]: # (                    <ion-label>Statut réseau</ion-label>)
+
+[//]: # (                </ion-item>)
+
+[//]: # (                <ion-item>)
+
+[//]: # (                    <ion-label>)
+
+[//]: # (                        <p>En ligne : {{ isOnlineText }}</p>)
+
+[//]: # (                        <p>Dernier statut : {{ networkStatus }}</p>)
+
+[//]: # (                    </ion-label>)
+
+[//]: # (                </ion-item>)
+
+[//]: # (            </ion-list>)
+
+[//]: # ()
+[//]: # (            <ion-button expand="block" @click="checkNetwork">)
+
+[//]: # (                Tester la connexion)
+
+[//]: # (            </ion-button>)
+
+[//]: # ()
+[//]: # (            <!-- Préférences -->)
+
+[//]: # (            <ion-list>)
+
+[//]: # (                <ion-item>)
+
+[//]: # (                    <ion-label>Préférences</ion-label>)
+
+[//]: # (                </ion-item>)
+
+[//]: # (                <ion-item>)
+
+[//]: # (                    <ion-label>)
+
+[//]: # (                        <p>Valeur stockée : {{ prefValue ?? 'Aucune valeur' }}</p>)
+
+[//]: # (                    </ion-label>)
+
+[//]: # (                </ion-item>)
+
+[//]: # (            </ion-list>)
+
+[//]: # ()
+[//]: # (            <ion-button expand="block" @click="savePref">)
+
+[//]: # (                Sauvegarder et relire une préférence)
+
+[//]: # (            </ion-button>)
+
+[//]: # ()
+[//]: # (            <!-- Dernière action -->)
+
+[//]: # (            <ion-list>)
+
+[//]: # (                <ion-item>)
+
+[//]: # (                    <ion-label>)
+
+[//]: # (                        <p>Dernière action : {{ lastAction }}</p>)
+
+[//]: # (                    </ion-label>)
+
+[//]: # (                </ion-item>)
+
+[//]: # (            </ion-list>)
+
+[//]: # ()
+[//]: # (            <!-- Toast pour le statut réseau -->)
+
+[//]: # (            <ion-toast)
+
+[//]: # (                    :is-open="showToast")
+
+[//]: # (                    :message="toastMessage")
+
+[//]: # (                    :duration="1500")
+
+[//]: # (                    position="bottom")
+
+[//]: # (                    @didDismiss="showToast = false")
+
+[//]: # (            />)
+
+[//]: # (        </ion-content>)
+
+[//]: # (    </ion-page>)
+
+[//]: # (</template>)
+
+[//]: # ()
+[//]: # (<script setup lang="ts">)
+
+[//]: # (    import { ref, onMounted, onUnmounted, computed } from 'vue')
+
+[//]: # (    import {)
+
+[//]: # (        IonPage,)
+
+[//]: # (        IonHeader,)
+
+[//]: # (        IonToolbar,)
+
+[//]: # (        IonTitle,)
+
+[//]: # (        IonContent,)
+
+[//]: # (        IonButton,)
+
+[//]: # (        IonItem,)
+
+[//]: # (        IonLabel,)
+
+[//]: # (        IonList,)
+
+[//]: # (        IonToast)
+
+[//]: # (    } from '@ionic/vue')
+
+[//]: # ()
+[//]: # (    import { Capacitor } from '@capacitor/core')
+
+[//]: # (    import { Camera, CameraResultType, CameraSource } from '@capacitor/camera')
+
+[//]: # (    import { Haptics, ImpactStyle } from '@capacitor/haptics')
+
+[//]: # (    import { Network } from '@capacitor/network')
+
+[//]: # (    import { Preferences } from '@capacitor/preferences')
+
+[//]: # ()
+[//]: # (    const photo = ref<string | null>&#40;null&#41;)
+
+[//]: # (    const fileInput = ref<HTMLInputElement | null>&#40;null&#41;)
+
+[//]: # ()
+[//]: # (    const networkStatus = ref<string>&#40;'Inconnu'&#41;)
+
+[//]: # (    const isOnline = ref<boolean | null>&#40;null&#41;)
+
+[//]: # ()
+[//]: # (    const prefValue = ref<string | null>&#40;null&#41;)
+
+[//]: # (    const lastAction = ref<string>&#40;'Aucune action pour le moment'&#41;)
+
+[//]: # ()
+[//]: # (    // Toast)
+
+[//]: # (    const showToast = ref&#40;false&#41;)
+
+[//]: # (    const toastMessage = ref&#40;''&#41;)
+
+[//]: # ()
+[//]: # (    // Texte lisible pour l'état en ligne / hors ligne)
+
+[//]: # (    const isOnlineText = computed&#40;&#40;&#41; => {)
+
+[//]: # (        if &#40;isOnline.value === null&#41; return 'Inconnu')
+
+[//]: # (        return isOnline.value ? 'Oui' : 'Non')
+
+[//]: # (    }&#41;)
+
+[//]: # ()
+[//]: # (    // 📷 Caméra : natif ➜ Camera, Web ➜ input file)
+
+[//]: # (    async function takePhoto&#40;&#41; {)
+
+[//]: # (        const isNative = Capacitor.isNativePlatform&#40;&#41;)
+
+[//]: # (        const hasCamera = Capacitor.isPluginAvailable&#40;'Camera'&#41;)
+
+[//]: # ()
+[//]: # (        // 🌐 Fallback Web : input type="file")
+
+[//]: # (        if &#40;!isNative || !hasCamera&#41; {)
+
+[//]: # (            fileInput.value?.click&#40;&#41;)
+
+[//]: # (            return)
+
+[//]: # (        })
+
+[//]: # ()
+[//]: # (        try {)
+
+[//]: # (            const img = await Camera.getPhoto&#40;{)
+
+[//]: # (                quality: 70,)
+
+[//]: # (                resultType: CameraResultType.Uri,)
+
+[//]: # (                source: CameraSource.Camera)
+
+[//]: # (            }&#41;)
+
+[//]: # ()
+[//]: # (            photo.value = img.webPath ?? null)
+
+[//]: # (            lastAction.value = 'Photo capturée depuis la caméra.')
+
+[//]: # (        } catch &#40;error&#41; {)
+
+[//]: # (            console.error&#40;error&#41;)
+
+[//]: # (            lastAction.value = 'Erreur lors de la prise de photo.')
+
+[//]: # (        })
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    // 🌐 Récupération du fichier choisi en Web)
+
+[//]: # (    function onFileChange&#40;event: Event&#41; {)
+
+[//]: # (        const target = event.target as HTMLInputElement)
+
+[//]: # (        const file = target.files?.[0])
+
+[//]: # (        if &#40;!file&#41; return)
+
+[//]: # ()
+[//]: # (        photo.value = URL.createObjectURL&#40;file&#41;)
+
+[//]: # (        lastAction.value = 'Photo chargée depuis un fichier &#40;fallback Web&#41;.')
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    // 📳 Haptique : natif ➜ vibration, Web ➜ message)
+
+[//]: # (    async function vibrate&#40;&#41; {)
+
+[//]: # (        const hasHaptics = Capacitor.isPluginAvailable&#40;'Haptics'&#41;)
+
+[//]: # ()
+[//]: # (        if &#40;!hasHaptics&#41; {)
+
+[//]: # (            // Fallback simple pour le Web)
+
+[//]: # (            alert&#40;'Vibration simulée &#40;Haptics non disponible sur cette plateforme&#41;.'&#41;)
+
+[//]: # (            lastAction.value = 'Vibration simulée &#40;Web&#41;.')
+
+[//]: # (            return)
+
+[//]: # (        })
+
+[//]: # ()
+[//]: # (        try {)
+
+[//]: # (            await Haptics.impact&#40;{ style: ImpactStyle.Medium }&#41;)
+
+[//]: # (            lastAction.value = 'Vibration effectuée.')
+
+[//]: # (        } catch &#40;error&#41; {)
+
+[//]: # (            console.error&#40;error&#41;)
+
+[//]: # (            lastAction.value = 'Erreur lors de l’utilisation du Haptics.')
+
+[//]: # (        })
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    // 🌐🔌 Network : fonctionne Web + natif)
+
+[//]: # (    async function checkNetwork&#40;&#41; {)
+
+[//]: # (        try {)
+
+[//]: # (            const status = await Network.getStatus&#40;&#41;)
+
+[//]: # (            isOnline.value = status.connected)
+
+[//]: # (            networkStatus.value = status.connected)
+
+[//]: # (                    ? 'En ligne &#40;vérification manuelle&#41;')
+
+[//]: # (                    : 'Hors ligne &#40;vérification manuelle&#41;')
+
+[//]: # ()
+[//]: # (            toastMessage.value = status.connected)
+
+[//]: # (                    ? '✅ Vous êtes en ligne')
+
+[//]: # (                    : '⚠️ Vous êtes hors ligne')
+
+[//]: # (            showToast.value = true)
+
+[//]: # ()
+[//]: # (            lastAction.value = 'Statut réseau mis à jour.')
+
+[//]: # (        } catch &#40;error&#41; {)
+
+[//]: # (            console.error&#40;error&#41;)
+
+[//]: # (            lastAction.value = 'Erreur lors de la récupération du statut réseau.')
+
+[//]: # (        })
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    // Écouter les changements réseau &#40;toast automatique&#41;)
+
+[//]: # (    let networkListener: { remove: &#40;&#41; => Promise<void> } | null = null)
+
+[//]: # ()
+[//]: # (    onMounted&#40;async &#40;&#41; => {)
+
+[//]: # (        try {)
+
+[//]: # (            networkListener = await Network.addListener&#40;'networkStatusChange', status => {)
+
+[//]: # (                isOnline.value = status.connected)
+
+[//]: # (                networkStatus.value = status.connected)
+
+[//]: # (                        ? 'En ligne &#40;événement réseau&#41;')
+
+[//]: # (                        : 'Hors ligne &#40;événement réseau&#41;')
+
+[//]: # ()
+[//]: # (                toastMessage.value = status.connected)
+
+[//]: # (                        ? '✅ Connexion restaurée')
+
+[//]: # (                        : '⚠️ Connexion perdue')
+
+[//]: # (                showToast.value = true)
+
+[//]: # (            }&#41;)
+
+[//]: # (        } catch &#40;error&#41; {)
+
+[//]: # (            console.error&#40;'Erreur lors de l’enregistrement du listener réseau', error&#41;)
+
+[//]: # (        })
+
+[//]: # (    }&#41;)
+
+[//]: # ()
+[//]: # (    onUnmounted&#40;async &#40;&#41; => {)
+
+[//]: # (        if &#40;networkListener&#41; {)
+
+[//]: # (            await networkListener.remove&#40;&#41;)
+
+[//]: # (            networkListener = null)
+
+[//]: # (        })
+
+[//]: # (    }&#41;)
+
+[//]: # ()
+[//]: # (    // 🔑 Preferences : fonctionne Web + natif)
+
+[//]: # (    async function savePref&#40;&#41; {)
+
+[//]: # (        try {)
+
+[//]: # (            await Preferences.set&#40;{)
+
+[//]: # (                key: 'demo-pref',)
+
+[//]: # (                value: 'hello-from-capacitor')
+
+[//]: # (            }&#41;)
+
+[//]: # ()
+[//]: # (            const res = await Preferences.get&#40;{ key: 'demo-pref' }&#41;)
+
+[//]: # (            prefValue.value = res.value ?? null)
+
+[//]: # (            lastAction.value = 'Préférence sauvegardée et relue.')
+
+[//]: # (        } catch &#40;error&#41; {)
+
+[//]: # (            console.error&#40;error&#41;)
+
+[//]: # (            lastAction.value = 'Erreur lors de la sauvegarde/lecture des préférences.')
+
+[//]: # (        })
+
+[//]: # (    })
+
+[//]: # (</script>)
+
+[//]: # ()
+[//]: # (<style scoped>)
+
+[//]: # (    .preview {)
+
+[//]: # (        width: 100%;)
+
+[//]: # (        margin-top: 16px;)
+
+[//]: # (        border-radius: 12px;)
+
+[//]: # (        object-fit: cover;)
+
+[//]: # (    })
+
+[//]: # ()
+[//]: # (    .hidden-input {)
+
+[//]: # (        display: none;)
+
+[//]: # (    })
+
+[//]: # (</style>)
+
+[//]: # (```)
+
+[//]: # (:::)
