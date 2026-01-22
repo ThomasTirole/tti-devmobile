@@ -164,6 +164,8 @@ Testez les opérations suivantes avec différents utilisateurs :
 ## 7️⃣.7️⃣ Conclusion
 Le Row-Level-Security (RLS) est une fonctionnalité puissante de Supabase/PostgreSQL qui permet de sécuriser les données au niveau des lignes, en fonction de l’utilisateur connecté. En combinant RLS avec des triggers SQL, on peut automatiser la gestion des permissions sans complexifier le code côté client.
 
-::: tip 🔚 Fin du module "Apprendre Supabase"
-Félicitations ! Vous avez terminé le module "Apprendre Supabase". Vous avez acquis des compétences essentielles pour intégrer Supabase dans vos applications mobiles Ionic-Vue, en assurant la sécurité et la gestion des données utilisateur.
+::: tip 🔚 Fin de la première partie du module "Apprendre Supabase"
+Félicitations ! Vous avez terminé la première partie du module "Apprendre Supabase". Vous avez acquis des compétences essentielles pour intégrer Supabase dans vos applications mobiles Ionic-Vue, en assurant la sécurité et la gestion des données utilisateur.
+
+Dans les chapitres suivants, nous implémenterons la détection du réseau pour intégrer une synchronisation hors ligne efficace.
 :::
