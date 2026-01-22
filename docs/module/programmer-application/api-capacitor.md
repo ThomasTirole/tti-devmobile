@@ -1,4 +1,7 @@
 # ⚡ 3.4 Utiliser les API natives avec Capacitor
+
+<iframe src="https://slides.com/tirtho/3-4-utiliser-les-api-natives-avec-capacitor/embed" width="576" height="420" title="⚡ 3.4 Utiliser les API natives avec Capacitor" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Ionic est un framework web. Mais grâce à **Capacitor**, vous pouvez accéder à des fonctionnalités **100% natives** : appareil photo, stockage, fichiers, réseau, partage, vibrations, etc.
 
 Capacitor agit comme un **pont** entre votre code Javascript/Vue et les API d'Android / iOS.
@@ -36,9 +39,11 @@ Capacitor est le successeur moderne de Cordova :
 
 > **👉 Capacitor est l'outil recommandé aujourd'hui pour toutes les apps Ionic.**
 
-::: danger 
-AJOUTER INSTALLER CAPACITOR à UN PROJET EXISTANT OU CREER UN NOUVEAU PROJET CAPACITOR
-:::
+Pour ajouter Capacitor à l'initialisation d'un projet Ionic :
+```bash
+ionic start my-app blank --type=vue --capacitor
+```
+> le --capacitor flag ajoute Capacitor dès le départ.
 
 ## 🗃️ 3.4.2 Structure d'un projet avec Capacitor
 Une fois votre projet créé, vous retrouverez :
@@ -58,6 +63,12 @@ ionic cap open android
 ionic cap open ios
 ionic cap run android --livereload
 ```
+
+Pour ajouter une API native, il faut souvent installer un plugin :
+```bash
+npm install @capacitor/nom-du-plugin
+```
+> Par exemple `npm install @capacitor/camera` pour la caméra. &rarr; vérifiez toujours la doc officielle.
 
 ### Cycle typique de développement mobile
 1. Vous modifiez votre code Ionic-Vue
@@ -319,6 +330,9 @@ Vous devez :
 - intégrer chaque API,
 - afficher les résultats dans l'UI,
 - tester dans un émulateur ou sur un appareil physique.
+::: tip 😉
+**Si vous voulez tester d'autres APIs natives ou en rajouter, n'hésitez pas, on est là pour tester.**
+:::
 
 ::: details **Votre téléphone ne vous permet pas de faire l'exercice ?**
 ### 💻 Variante Web (si vous ne pouvez pas déployer sur téléphone)
