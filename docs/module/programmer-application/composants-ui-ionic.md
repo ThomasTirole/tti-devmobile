@@ -332,12 +332,445 @@ Menu latéral coulissant. Idéal pour les applications avec beaucoup de sections
 Dans `Tab2Page.vue`, vous devez :
 1. Ajouter un header avec un titre et un bouton d'action
 2. Afficher une liste dynamique avec `v-for`.
-3. Ajouter un bouton pour ouvrir une modal.
+3. Ajouter un bouton pour ouvrir une modale.
 4. Afficher un toast lorsqu'une action de votre choix est effectuée.
+5. (Optionnel) Ajouter une searchbar pour filtrer la liste.
+6. (Optionnel) Ajouter un refresher pour **simuler** un refresh.
 
+[//]: # (::: details ✅ Solution possible)
 
+[//]: # (```html [Tab2Page.vue])
 
+[//]: # (<template>)
 
+[//]: # (  <ion-page>)
 
+[//]: # (    <!-- ✅ HEADER : titre + bouton d'action -->)
 
+[//]: # (    <ion-header>)
 
+[//]: # (      <ion-toolbar>)
+
+[//]: # (        <ion-title>Mes tâches</ion-title>)
+
+[//]: # ()
+[//]: # (        <ion-buttons slot="end">)
+
+[//]: # (          <!-- Ajout "rapide" &#40;sans passer par la modal&#41; -->)
+
+[//]: # (          <ion-button @click="addQuickTask">)
+
+[//]: # (            <ion-icon :icon="addOutline" slot="start" />)
+
+[//]: # (            Rapide)
+
+[//]: # (          </ion-button>)
+
+[//]: # (        </ion-buttons>)
+
+[//]: # (      </ion-toolbar>)
+
+[//]: # (    </ion-header>)
+
+[//]: # ()
+[//]: # (    <ion-content class="ion-padding">)
+
+[//]: # (      <!-- ✅ &#40;Optionnel&#41; PULL TO REFRESH : geste mobile classique -->)
+
+[//]: # (      <ion-refresher slot="fixed" @ionRefresh="onRefresh">)
+
+[//]: # (        <ion-refresher-content />)
+
+[//]: # (      </ion-refresher>)
+
+[//]: # ()
+[//]: # (      <!-- ✅ &#40;Optionnel&#41; SEARCHBAR : filtrer la liste -->)
+
+[//]: # (      <ion-item>)
+
+[//]: # (        <ion-searchbar)
+
+[//]: # (          v-model="query")
+
+[//]: # (          placeholder="Rechercher…")
+
+[//]: # (          inputmode="search")
+
+[//]: # (        />)
+
+[//]: # (      </ion-item>)
+
+[//]: # ()
+[//]: # (      <!-- ✅ Affichage dans une carte -->)
+
+[//]: # (      <ion-card>)
+
+[//]: # (        <ion-card-header>)
+
+[//]: # (          <ion-card-title>À faire</ion-card-title>)
+
+[//]: # (        </ion-card-header>)
+
+[//]: # ()
+[//]: # (        <ion-card-content>)
+
+[//]: # (          <!-- ✅ Liste dynamique v-for -->)
+
+[//]: # (          <ion-list v-if="filteredTasks.length">)
+
+[//]: # (            <ion-item v-for="task in filteredTasks" :key="task.id">)
+
+[//]: # (              <ion-label>{{ task.title }}</ion-label>)
+
+[//]: # ()
+[//]: # (              <!-- Bouton "done" -->)
+
+[//]: # (              <ion-button)
+
+[//]: # (                slot="end")
+
+[//]: # (                fill="clear")
+
+[//]: # (                @click="completeTask&#40;task.id&#41;")
+
+[//]: # (                aria-label="Terminer")
+
+[//]: # (              >)
+
+[//]: # (                <ion-icon :icon="checkmarkCircleOutline" />)
+
+[//]: # (              </ion-button>)
+
+[//]: # (            </ion-item>)
+
+[//]: # (          </ion-list>)
+
+[//]: # ()
+[//]: # (          <!-- ✅ Message si aucune tâche &#40;ou aucun résultat de recherche&#41; -->)
+
+[//]: # (          <ion-text v-else color="medium">)
+
+[//]: # (            Aucune tâche &#40;ou aucun résultat&#41;.)
+
+[//]: # (          </ion-text>)
+
+[//]: # (        </ion-card-content>)
+
+[//]: # (      </ion-card>)
+
+[//]: # ()
+[//]: # (      <!-- ✅ Bouton : ouvre la modal -->)
+
+[//]: # (      <ion-button expand="block" @click="isModalOpen = true">)
+
+[//]: # (        <ion-icon :icon="addOutline" slot="start" />)
+
+[//]: # (        Ajouter une tâche)
+
+[//]: # (      </ion-button>)
+
+[//]: # ()
+[//]: # (      <!-- ✅ MODAL : formulaire d'ajout -->)
+
+[//]: # (      <ion-modal :is-open="isModalOpen" @didDismiss="closeModal">)
+
+[//]: # (        <ion-header>)
+
+[//]: # (          <ion-toolbar>)
+
+[//]: # (            <ion-title>Nouvelle tâche</ion-title>)
+
+[//]: # (            <ion-buttons slot="end">)
+
+[//]: # (              <ion-button @click="closeModal">Fermer</ion-button>)
+
+[//]: # (            </ion-buttons>)
+
+[//]: # (          </ion-toolbar>)
+
+[//]: # (        </ion-header>)
+
+[//]: # ()
+[//]: # (        <ion-content class="ion-padding">)
+
+[//]: # (          <ion-item>)
+
+[//]: # (            <ion-input)
+
+[//]: # (              v-model="newTitle")
+
+[//]: # (              label="Titre")
+
+[//]: # (              label-placement="stacked")
+
+[//]: # (              placeholder="Ex: Réviser les IonCard")
+
+[//]: # (            />)
+
+[//]: # (          </ion-item>)
+
+[//]: # ()
+[//]: # (          <ion-button expand="block" class="ion-margin-top" @click="saveTask">)
+
+[//]: # (            Enregistrer)
+
+[//]: # (          </ion-button>)
+
+[//]: # (        </ion-content>)
+
+[//]: # (      </ion-modal>)
+
+[//]: # ()
+[//]: # (      <!-- ✅ TOAST : feedback utilisateur -->)
+
+[//]: # (      <ion-toast)
+
+[//]: # (        :is-open="toastOpen")
+
+[//]: # (        :message="toastMessage")
+
+[//]: # (        :duration="2000")
+
+[//]: # (        @didDismiss="toastOpen = false")
+
+[//]: # (      />)
+
+[//]: # (    </ion-content>)
+
+[//]: # (  </ion-page>)
+
+[//]: # (</template>)
+
+[//]: # ()
+[//]: # (<script setup lang="ts">)
+
+[//]: # (/**)
+
+[//]: # ( * ✅ Objectif pédagogique :)
+
+[//]: # ( * - montrer un écran complet Ionic : Header, Content, List, Modal, Toast)
+
+[//]: # ( * - + optionnel : Searchbar + Refresher)
+
+[//]: # ( *)
+
+[//]: # ( * ⚠️ Important :)
+
+[//]: # ( * Chaque tâche doit avoir un ID UNIQUE.)
+
+[//]: # ( * Sinon, quand on supprime une tâche par id, on risque de supprimer plusieurs tâches à la fois.)
+
+[//]: # ( */)
+
+[//]: # ()
+[//]: # (import { computed, ref } from 'vue')
+
+[//]: # (import {)
+
+[//]: # (  IonPage,)
+
+[//]: # (  IonHeader,)
+
+[//]: # (  IonToolbar,)
+
+[//]: # (  IonTitle,)
+
+[//]: # (  IonContent,)
+
+[//]: # (  IonButtons,)
+
+[//]: # (  IonButton,)
+
+[//]: # (  IonIcon,)
+
+[//]: # (  IonList,)
+
+[//]: # (  IonItem,)
+
+[//]: # (  IonLabel,)
+
+[//]: # (  IonModal,)
+
+[//]: # (  IonInput,)
+
+[//]: # (  IonToast,)
+
+[//]: # (  IonCard,)
+
+[//]: # (  IonCardHeader,)
+
+[//]: # (  IonCardTitle,)
+
+[//]: # (  IonCardContent,)
+
+[//]: # (  IonText,)
+
+[//]: # (  IonSearchbar,)
+
+[//]: # (  IonRefresher,)
+
+[//]: # (  IonRefresherContent,)
+
+[//]: # (} from '@ionic/vue')
+
+[//]: # (import { addOutline, checkmarkCircleOutline } from 'ionicons/icons')
+
+[//]: # ()
+[//]: # (/** Type TypeScript simple : une tâche a un id + un titre */)
+
+[//]: # (type Task = { id: number; title: string })
+
+[//]: # ()
+[//]: # (/** Liste de base */)
+
+[//]: # (const tasks = ref<Task[]>&#40;[)
+
+[//]: # (  { id: 1, title: 'Découvrir IonCard' },)
+
+[//]: # (  { id: 2, title: 'Ajouter une modal' },)
+
+[//]: # (  { id: 3, title: 'Afficher un toast' },)
+
+[//]: # (]&#41;)
+
+[//]: # ()
+[//]: # (/**)
+
+[//]: # ( * ✅ Solution la plus simple contre les doublons d'ID :)
+
+[//]: # ( * on utilise un compteur qui s'incrémente à chaque ajout.)
+
+[//]: # ( * Comme ça, on ne génère JAMAIS deux fois le même id.)
+
+[//]: # ( */)
+
+[//]: # (const nextId = ref&#40;4&#41;)
+
+[//]: # ()
+[//]: # (/** Search */)
+
+[//]: # (const query = ref&#40;''&#41;)
+
+[//]: # ()
+[//]: # (/** Liste filtrée selon le texte de recherche */)
+
+[//]: # (const filteredTasks = computed&#40;&#40;&#41; => {)
+
+[//]: # (  const q = query.value.trim&#40;&#41;.toLowerCase&#40;&#41;)
+
+[//]: # (  if &#40;!q&#41; return tasks.value)
+
+[//]: # (  return tasks.value.filter&#40;t => t.title.toLowerCase&#40;&#41;.includes&#40;q&#41;&#41;)
+
+[//]: # (}&#41;)
+
+[//]: # ()
+[//]: # (/** Modal */)
+
+[//]: # (const isModalOpen = ref&#40;false&#41;)
+
+[//]: # (const newTitle = ref&#40;''&#41;)
+
+[//]: # ()
+[//]: # (/** Toast */)
+
+[//]: # (const toastOpen = ref&#40;false&#41;)
+
+[//]: # (const toastMessage = ref&#40;''&#41;)
+
+[//]: # ()
+[//]: # (function showToast&#40;message: string&#41; {)
+
+[//]: # (  toastMessage.value = message)
+
+[//]: # (  toastOpen.value = true)
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (/** Fermer la modal + reset du champ */)
+
+[//]: # (function closeModal&#40;&#41; {)
+
+[//]: # (  isModalOpen.value = false)
+
+[//]: # (  newTitle.value = '')
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (/** Ajouter une tâche depuis la modal */)
+
+[//]: # (function saveTask&#40;&#41; {)
+
+[//]: # (  const title = newTitle.value.trim&#40;&#41;)
+
+[//]: # ()
+[//]: # (  // Validation : si vide -> toast)
+
+[//]: # (  if &#40;!title&#41; {)
+
+[//]: # (    showToast&#40;'⚠️ Merci de saisir un titre'&#41;)
+
+[//]: # (    return)
+
+[//]: # (  })
+
+[//]: # ()
+[//]: # (  // ✅ ID unique grâce au compteur)
+
+[//]: # (  tasks.value.unshift&#40;{ id: nextId.value++, title }&#41;)
+
+[//]: # ()
+[//]: # (  closeModal&#40;&#41;)
+
+[//]: # (  showToast&#40;'✅ Tâche ajoutée'&#41;)
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (/** Ajout rapide depuis le header */)
+
+[//]: # (function addQuickTask&#40;&#41; {)
+
+[//]: # (  tasks.value.unshift&#40;{ id: nextId.value++, title: 'Nouvelle tâche &#40;rapide&#41;' }&#41;)
+
+[//]: # (  showToast&#40;'➕ Ajout rapide effectué'&#41;)
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (/** "Terminer" une tâche : on la retire de la liste */)
+
+[//]: # (function completeTask&#40;id: number&#41; {)
+
+[//]: # (  // ⚠️ Si plusieurs tâches avaient le même id, elles seraient toutes supprimées)
+
+[//]: # (  // D'où l'intérêt d'un id unique !)
+
+[//]: # (  tasks.value = tasks.value.filter&#40;t => t.id !== id&#41;)
+
+[//]: # (  showToast&#40;'🎉 Tâche terminée'&#41;)
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (/** Pull-to-refresh : simulation d'un refresh */)
+
+[//]: # (function onRefresh&#40;ev: CustomEvent&#41; {)
+
+[//]: # (  setTimeout&#40;&#40;&#41; => {)
+
+[//]: # (    showToast&#40;'🔄 Liste rafraîchie'&#41;)
+
+[//]: # (    ;&#40;ev.target as HTMLIonRefresherElement&#41;.complete&#40;&#41;)
+
+[//]: # (  }, 600&#41;)
+
+[//]: # (})
+
+[//]: # (</script>)
+
+[//]: # (```)
+
+[//]: # (:::)
