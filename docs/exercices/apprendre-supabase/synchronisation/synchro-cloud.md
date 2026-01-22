@@ -20,7 +20,7 @@ Ce service va :
 - mettre à jour SQLite,
 - retirer l'action de la queue si elle a réussie.
 
-::: details Création du service de synchronisation
+::: details Création du service de synchronisation `syncService.ts`
 ```ts [src/services/syncService.ts]
 import { getQueue, removeFromQueue } from '@/services/offlineQueueService'
 import { useAuthStore } from '@/stores/authStore'
@@ -70,7 +70,6 @@ export async function syncOfflineQueue(): Promise<void> {
 
     try {
         const queue = await getQueue()
-        if (queue.length === 0) return
 
         // 1️⃣ Rejouer chaque action offline
         for (const action of queue) {
@@ -227,8 +226,15 @@ Après une synchronisation, on souhaite que l'UI reflète l'état actuel des don
 2. Puis elle "rafraîchit" SQLite depuis le cloud.
 3. Ensuite, on demande au store **de relire SQLite** &rarr; l'UI se met à jour.
 
-::: details 1. Ajoutez une méthode `loadFromLocal()` dans le store des cartes `cardStore.ts`
-Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()` &rarr; elle remplace en fait l'ancienne méthode `load()` qui servaient à récupérer les datas depuis Supabase quand on avait pas encore implémenté la synchro offline-online. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
+::: details 1. Adapter le store de cartes `cardStore.ts`
+1. Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()` &rarr; elle remplace en fait l'ancienne méthode `load()` qui servaient à récupérer les datas depuis Supabase quand on avait pas encore implémenté la synchro offline-online. 
+
+2. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
+
+3. Ensuite, nous créons une méthode `syncIfPossible()` qui va appeler `syncOfflineQueue()` si on est online et si un utilisateur est connecté. Ça permet de ce communiquer directement avec le backend après chaque action (ajout, modification, suppression) si on est en ligne. Nous ajoutons cete méthode dans chaque action du store (add, edit, remove).
+
+4. Enfin, nous créons une petite fonction `refresh()` qui va permettre de forcer le rechargement des cartes depuis le backend puis SQLite (utile pour le pull-to-refresh dans l'UI).
+
 Comme ça fait un peu beaucoup jusqu'à maintenant, je vous remets le code complet du store avec les modifications, parce qu'on est tous un peu des flemmards au fond. 😉
 
 ::: warning **⚠️ Important**
@@ -237,6 +243,8 @@ Les appels à `enqueue()` sont faits **dans `cardsLocalService`** (chapitre 9.4)
 
 ```ts [src/stores/cardStore.ts]
 import { defineStore } from 'pinia'
+import { useNetworkStore } from '@/stores/networkStore'
+import { useAuthStore } from '@/stores/authStore'
 import type { CardInsert, CardLocal, CardUpdate } from '@/types/Card'
 
 import {
@@ -273,47 +281,99 @@ export const useCardsStore = defineStore('cards', {
         },
 
         /**
+         * Sync automatique si online
+         */
+        async syncIfPossible() {
+            const network = useNetworkStore()
+            const auth = useAuthStore()
+
+            if (!network.connected) return
+            if (!auth.user) return
+
+            await syncOfflineQueue()
+        },
+
+        /**
          * Ajout offline-first
          * -> SQLite + queue (géré dans le service)
          */
         async add(payload: CardInsert) {
-            const now = new Date().toISOString()
+            this.error = null
+            this.loading = true
+            try {
+                const now = new Date().toISOString()
 
-            const localCard: CardLocal = {
-                id: crypto.randomUUID(),
-                ...payload,
-                created_at: now,
-                updated_at: now,
-                synced: 0
+                const localCard: CardLocal = {
+                    id: crypto.randomUUID(),
+                    ...payload,
+                    created_at: now,
+                    updated_at: now,
+                    synced: 0
+                }
+
+                await createLocalCard(localCard)
+
+                await this.syncIfPossible()
+                await this.loadFromLocal()
+            } catch (e: any) {
+                this.error = e?.message ?? 'Erreur ajout'
+            } finally {
+                this.loading = false
             }
-
-            await createLocalCard(localCard)
-            await this.loadFromLocal()
         },
 
         /**
          * Update offline-first
          */
         async edit(id: string, patch: CardUpdate) {
-            const current = this.cards.find(c => c.id === id)
-            if (!current) return
+            this.error = null
+            this.loading = true
+            try {
+                const current = this.cards.find(c => c.id === id)
+                if (!current) return
 
-            const updated: CardLocal = {
-                ...current,
-                ...patch,
-                synced: 0
+                const updated: CardLocal = {
+                    ...current,
+                    ...patch,
+                    synced: 0
+                }
+
+                await updateLocalCard(updated)
+                await this.syncIfPossible()
+                await this.loadFromLocal()
+            } catch (e: any) {
+                this.error = e?.message ?? 'Erreur mise à jour'
+            } finally {
+                this.loading = false
             }
-
-            await updateLocalCard(updated)
-            await this.loadFromLocal()
         },
 
         /**
          * Delete offline-first
          */
         async remove(id: string) {
-            await deleteLocalCard(id)
-            await this.loadFromLocal()
+            this.error = null
+            this.loading = true
+            try {
+                await deleteLocalCard(id)
+
+                await this.syncIfPossible()
+                await this.loadFromLocal()
+            } catch (e: any) {
+                this.error = e?.message ?? 'Erreur suppression'
+            } finally {
+                this.loading = false
+            }
+        },
+
+        async refresh(): Promise<void> {
+            this.error = null
+            try {
+                await this.syncIfPossible()
+                await this.loadFromLocal()
+            } catch (e: any) {
+                this.error = e?.message ?? 'Erreur de rafraîchissement'
+            }
         },
 
         async toggleFavorite(id: string) {
@@ -336,7 +396,7 @@ export const useCardsStore = defineStore('cards', {
 
 
 ::: details 2. Modifier l'appel au store dans `Tab1Page.vue`
-Ici, on adapte les types des interfaces des Cards et on remplace l'appel à `store.load()` par `store.loadFromLocal()`.
+Ici, on adapte les types des interfaces des Cards et on remplace l'appel à `store.load()` par `store.loadFromLocal()`. Aussi, on modifie notre pull-to-refresh pour utiliser la nouvelle méthode `refresh()` du store.
 ```ts [src/views/Tab1Page.vue]
 /**
  * Composition API
@@ -464,9 +524,9 @@ async function submit() {
 
 async function onRefresh(ev: CustomEvent) {
   // await store.load() // [!code --]
-  await store.loadFromLocal() // [!code ++]
-  const refresher = ev.target as HTMLIonRefresherElement
-  refresher.complete()
+    await store.refresh() // [!code ++]
+    const refresher = ev.target as HTMLIonRefresherElement
+    refresher.complete()
 }
 
 ```
@@ -586,19 +646,16 @@ npx cap open android
 6. Lancer l'application depuis Android Studio (Run 'app').
 7. Ouvrez votre base Supabase dans le navigateur et vérifiez les changements.
 8. Tester la synchronisation offline/online.
-   - Désactivez le Wi-Fi du téléphone ou de l'émulateur.
-   - Changer le nom d'une carte
-   - Actualisez la liste (tirer vers le bas)
-   - Vérifiez que le changement est bien local (SQLite)
-   - Vérifiez sur Supabase, le nom est inchangé.
-   - Réactivez le Wi-Fi.
-   - Observez le toast de reconnexion.
-   - Refresh Supabase, le nom a changé.
+> - **Activez le Wi-Fi &rarr; observez le toast &rarr; faites une modification &rarr; vérifiez Supabase. (la modif apparaît)**
+> - **Désactivez le Wi-Fi &rarr; observez le toast &rarr; faites une modification &rarr; vérifiez Supabase. (la modif n'apparaît pas) &rarr; réactivez le Wi-Fi &rarr; observez le toast &rarr; vérifiez Supabase. (la modif apparaît)**
+> - **Activez le Wi-Fi &rarr; observez le toast &rarr; faites une modif DANS Supabase (via le navigateur) &rarr; actualisez la liste dans l'app (tirer vers le bas) &rarr; vérifiez que la modif apparaît.**
 
 ::: danger Problèmes connus :
-- Rien ne s'affiche, c'est normal il faut se logger
-- Ensuite, quitter l'application, puis relancez-là. Le onMounted() va faire son travail (j'ai pas eu le temps de gérer ce cas, désolé. Je voulais au moins que ça fonctionne)
-- Il faut encore que j'adapte les comportements de l'application pour qu'il récupère sur le backend quand on est online au démarrage de façon propre (on le fait de manière un peu sale avec le App.vue arrangé).
+- Rien ne s'affiche &rarr; c'est normal il faut se logger. Ensuite, quittez l'application, puis relancez-là. Le `onMounted()` va faire son travail.
+- Si des boutons de navigation ou d'actions (submit) ne fonctionnent plus, quittez l'app et revenez. Je n'ai pas encore pris le temps de résoudre ces bugs-ci...
+### ...DÉSOLÉ
+
+![img.png](https://img.wattpad.com/e93f381761e4281ee115e64ed8d7525bff639d13/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f69535a336f6730765850356132513d3d2d313033363039393334372e313636396335633236366262313361353631303834373436343535352e676966)
 :::
 
 
