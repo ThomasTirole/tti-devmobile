@@ -431,7 +431,7 @@ watch(
 1. Installer Android Studio (même si vous n'allez pas coder en natif, c'est nécessaire pour l'émulateur Android)
 2. Effectuer les commandes suivantes :
 ```bash
-npm install
+npm i @capacitor/android @capacitor/ios
 npx ionic build
 npx cap add android
 ```
@@ -452,6 +452,16 @@ npx cap open android
 
 5. Lancer un émulateur Android (ou connecter un appareil réel en USB avec le mode développeur activé).
 6. Lancer l'application depuis Android Studio (Run 'app').
+7. Ouvrez votre base Supabase dans le navigateur et vérifiez les changements.
+8. Tester la synchronisation offline/online.
+   - Désactivez le Wi-Fi du téléphone ou de l'émulateur.
+   - Changer le nom d'une carte
+   - Actualisez la liste (tirer vers le bas)
+   - Vérifiez que le changement est bien local (SQLite)
+   - Vérifiez sur Supabase, le nom est inchangé.
+   - Réactivez le Wi-Fi.
+   - Observez le toast de reconnexion.
+   - Refresh Supabase, le nom a changé.
 
 ::: danger Problèmes connus :
 - Rien ne s'affiche, c'est normal il faut se logger

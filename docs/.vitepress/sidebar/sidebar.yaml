@@ -30,6 +30,7 @@
     - text: ☁️ Persistance cloud et BaaS
       link: /module/concevoir-concept-solution/persistance-cloud-baas
 - text: 3. Programmer une application hybride
+  collapsed: true
   items:
     - text: 🌀 TypeScript
       link: /module/programmer-application/typescript
@@ -43,6 +44,13 @@
       link: /module/programmer-application/api-capacitor
     - text: 🧭 Navigation
       link: /module/programmer-application/navigation
+    - text: 🧪 Simulation et test
+      link: /module/programmer-application/simulation-test-execution
+- text: 4. Préparer la publication de l'application
+  collapsed: true
+  items:
+    - text: 📦 Possibilités et conditions de publication
+      link: /module/preparer-publication/possibilites-conditions-publication
 - text: 🛠️ Exercices
   items:
     - text: ⚡ Apprendre Supabase
