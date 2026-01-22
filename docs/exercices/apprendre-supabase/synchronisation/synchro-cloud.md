@@ -227,8 +227,8 @@ Après une synchronisation, on souhaite que l'UI reflète l'état actuel des don
 2. Puis elle "rafraîchit" SQLite depuis le cloud.
 3. Ensuite, on demande au store **de relire SQLite** &rarr; l'UI se met à jour.
 
-::: details 1. Ajoutez une méthode "reload local" dans le store des cartes
-Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()`. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
+::: details 1. Ajoutez une méthode `loadFromLocal()` dans le store des cartes `cardStore.ts`
+Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()` &rarr; elle remplace en fait l'ancienne méthode `load()` qui servaient à récupérer les datas depuis Supabase quand on avait pas encore implémenté la synchro offline-online. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
 Comme ça fait un peu beaucoup jusqu'à maintenant, je vous remets le code complet du store avec les modifications, parce qu'on est tous un peu des flemmards au fond. 😉
 
 ::: warning **⚠️ Important**
@@ -334,13 +334,145 @@ export const useCardsStore = defineStore('cards', {
 ```
 :::
 
+
+::: details 2. Modifier l'appel au store dans `Tab1Page.vue`
+Ici, on adapte les types des interfaces des Cards et on remplace l'appel à `store.load()` par `store.loadFromLocal()`.
+```ts [src/views/Tab1Page.vue]
+/**
+ * Composition API
+ * - ref : pour des valeurs primitives (modalOpen, editing)
+ * - reactive : pour l’objet form (plus pratique qu’un ref d’objet ici)
+ */
+import { reactive, ref, onMounted } from 'vue'
+import { useCardsStore } from '@/stores/cardsStore'
+// import type { Card, CardInsert, Rarity, Role } from '@/types/Card' // [!code --]
+import type { CardLocal, CardInsert, Rarity, Role } from '@/types/Card' // [!code ++]
+import { useAuthStore } from '@/stores/authStore'
+
+const auth = useAuthStore()
+
+/**
+ * Imports Ionic : uniquement ce qu’on utilise
+ * (évite de tout importer “au hasard”)
+ */
+import {
+  IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+  IonList, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
+  IonBadge, IonButton, IonButtons, IonText, IonSpinner,
+  IonModal, IonItem, IonInput, IonSelect, IonSelectOption, IonToggle,
+  IonGrid, IonRow, IonCol,
+  IonRefresher, IonRefresherContent
+} from '@ionic/vue'
+
+/**
+ * Store Pinia :
+ * - store.cards = données
+ * - store.loadFromLocal() = charge depuis SQLite
+ */
+const store = useCardsStore()
+
+/** Ouverture/fermeture du modal */
+const modalOpen = ref(false)
+
+/**
+ * editing = null => mode “create”
+ * editing = Card => mode “edit”
+ */
+// const editing = ref<null | Card>(null) // [!code --]
+const editing = ref<null | CardLocal>(null) // [!code ++]
+
+/**
+ * Formulaire (valeurs par défaut).
+ * Type CardInsert = tous les champs nécessaires à l’insertion.
+ */
+const form = reactive<CardInsert>({
+  name: '',
+  rarity: 'common' as Rarity,
+  elixir_cost: 3,
+  role: 'troop' as Role,
+  hitpoints: 500,
+  damage: 100,
+  arena: 1,
+  is_favorite: false
+})
+
+/** Au chargement de la page, on récupère les cartes */
+onMounted(() => {
+  store.loadFromLocal()
+})
+
+/** Remet le form dans son état “neuf” */
+function resetForm() {
+  form.name = ''
+  form.rarity = 'common'
+  form.elixir_cost = 3
+  form.role = 'troop'
+  form.hitpoints = 500
+  form.damage = 100
+  form.arena = 1
+  form.is_favorite = false
+}
+
+/** Ouvre le modal en mode création */
+function openCreate() {
+  editing.value = null
+  resetForm()
+  modalOpen.value = true
+}
+
+/** Ouvre le modal en mode édition et copie la carte dans le form */
+// function openEdit(card: Card) { // [!code --]
+function openEdit(card: CardLocal) { // [!code ++]
+  editing.value = card
+
+  // On copie les champs dans le formulaire
+  form.name = card.name
+  form.rarity = card.rarity
+  form.elixir_cost = card.elixir_cost
+  form.role = card.role
+  form.hitpoints = card.hitpoints
+  form.damage = card.damage
+  form.arena = card.arena
+  form.is_favorite = card.is_favorite
+
+  modalOpen.value = true
+}
+
+/** Ferme le modal */
+function closeModal() {
+  modalOpen.value = false
+}
+
+/**
+ * submit :
+ * - si editing != null => update
+ * - sinon => insert
+ */
+async function submit() {
+  // Validation minimale : name obligatoire
+  if (!form.name.trim()) return
+
+  if (editing.value) {
+    await store.edit(editing.value.id, { ...form })
+  } else {
+    await store.add({ ...form })
+  }
+
+  closeModal()
+}
+
+
+async function onRefresh(ev: CustomEvent) {
+  // await store.load() // [!code --]
+  await store.loadFromLocal() // [!code ++]
+  const refresher = ev.target as HTMLIonRefresherElement
+  refresher.complete()
+}
+
+```
+:::
+
 ## 9️⃣.5️⃣.5️⃣ C'est l'heure  de tester
-Chers élèves, il est passé minuit, ça fait + de 6h que je rédige et fait cet exercice, je ne vous cache pas qu'il n'est pas parfait et que certains bugs sont encore présents. Cependant, la synchronisation fonctionne malgré les quelques manipulations scabreuses à réaliser.
-![gif](https://media.tenor.com/X8sdwnDDxhQAAAAj/skyrim-skeleton.gif)
-Je ferai en sorte de  corriger cet exercice ultérieurement pour que vous ayez quelque chose de fonctionnel et propre à la longue.
-
-Pour l'instant, je vous invite donc à 
-
 ::: details Copier-coller ce code dans `App.vue`, c'est une solution de secours car j'ai pas eu le temps de gérer tous les cas :
 
 ```ts [src/App.vue]

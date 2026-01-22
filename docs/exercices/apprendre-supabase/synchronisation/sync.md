@@ -99,4 +99,3 @@ Ce chapitre étant conséquent, nous allons le diviser en plusieurs sous-parties
 - 3️⃣ Service SQWLite (CRUD local)
 - 4️⃣ Queue offline avec `Capacitor Preferences`
 - 5️⃣ Synchronisation automatique avec Supabase
-- 6️⃣ Gestion des conflits et nettoyage de la queue.
