@@ -658,5 +658,21 @@ npx cap open android
 ![img.png](https://img.wattpad.com/e93f381761e4281ee115e64ed8d7525bff639d13/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f69535a336f6730765850356132513d3d2d313033363039393334372e313636396335633236366262313361353631303834373436343535352e676966)
 :::
 
+## 9️⃣.5️⃣.6️⃣ Checkpoint
+> Si vous êtes arrivés jusqu'ici, félicitations ! 🎉 Prenez une pause bien méritée, asseyez-vous autour du feu pendant que je vous explique les derniers éléments de ce chapitre.
+
+![img.png](https://media1.tenor.com/m/lcrQBLljnNcAAAAd/dark-souls-knight.gif)
+
+
+On a mis en place une belle synchronisation online-offline avec Supabase, SQLite et une queue d'actions.
+Votre application est maintenant robuste face aux coupures réseau.
+
+Le but était surtout que vous puissiez visualiser cette évolution step-by-step, ainsi que d'avoir un exemple de projet avec une belle séparation des responsabilités (services, stores, composants).
+
+Si vous êtes intéressé à avoir un projet à jour pour tester rapidement sur d'autres appareils sans devoir tout refaire le tuto, je vous ai préparé une branche sur mon projet GitHub avec tout le code final :
+[Checkpoint 9.5](https://github.com/ThomasTirole/clash-cards/tree/checkpoint-9.5)
+
+- N'oubliez pas de configurer vos variables d'environnement `.env` avec votre propre instance Supabase ! Le fichier `.env.example` est là pour vous aider.
+- Exécutez les commandes nécessaires comme au début du tuto (installation des dépendances, capacitor, android, build, sync, etc.)
 
 
