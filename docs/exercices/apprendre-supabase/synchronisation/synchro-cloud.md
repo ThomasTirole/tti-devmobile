@@ -161,25 +161,23 @@ import { syncOfflineQueue } from '@/services/syncService'
 ```ts [src/App.vue]
 watch(
     () => network.connected,
-    async (connected) => {
-        // Au premier run, on ne veut pas spammer un toast
-        if (!hasInitialized) {
-            hasInitialized = true
-            return
-        }
+    async (connected, oldConnected) => {
+        /**
+         * oldConnected est undefined uniquement
+         * lors du premier appel du watcher.
+         * On l’ignore pour éviter un toast inutile au démarrage.
+         */
+        if (oldConnected === undefined) return
 
         if (!connected) {
-            // 🔴 Offline
             await showToast('🔴 Réseau déconnecté (mode hors-ligne)')
-            return
+        } else {
+            await showToast('🟢 Connecté au réseau')
+            // ✅ Réseau revenu : on lance la synchronisation
+            await syncOfflineQueue() // [!code ++]
         }
-
-        // 🟢 Online
-        await showToast('🟢 Connecté au réseau')
-
-        // ✅ Réseau revenu : on lance la synchronisation
-        await syncOfflineQueue()
-    }
+    },
+    { immediate: true }
 )
 ```
 :::
@@ -191,15 +189,14 @@ Même sans changement de réseau, il peut exister une queue offline (actions fai
 ::: details Ajouter un appel après l'initialisation
 Dans `src/App.vue`, dans le `<script setup>`, ajoutez :
 ```ts [src/App.vue]
-import { onMounted } from 'vue'
-import { syncOfflineQueue } from '@/services/syncService'
-import { useNetworkStore } from '@/stores/networkStore'
-import { useAuthStore } from '@/stores/authStore'
-```
-Puis :
-```ts [src/App.vue]
-const network = useNetworkStore()
-const auth = useAuthStore()
+import { useAuthStore } from '@/stores/authStore' // [!code ++]
+import {upsertManyLocalCards} from "@/services/cardsLocalService"; // [!code ++]
+import {fetchCards} from "@/services/cardsService"; // [!code ++]
+import {useCardsStore} from "@/stores/cardsStore"; // [!code ++]
+
+const auth = useAuthStore() // [!code ++]
+
+// ...
 
 /**
 * Au démarrage :
@@ -209,11 +206,24 @@ const auth = useAuthStore()
   */
 
 onMounted(async () => {
-    // Si l’app démarre avec du réseau,
-    // on tente une synchronisation immédiate.
-    // (si pas d’utilisateur ou queue vide → le service ne fait rien)
+    // Toast temporaire : vérification réseau en cours
+    const checkingToast = await showToast('⏳ Vérification du réseau…', 0)
+
+    // Petite pause pour s'assurer que le store est prêt
+    await new Promise(r => setTimeout(r, 50))
+
+    // Fermeture du toast de vérification
+    await checkingToast.dismiss()
+
+    // Toast résultat
     if (network.connected) {
-        await syncOfflineQueue()
+        await showToast('🟢 Connecté au réseau')
+        const cloudCards = await fetchCards() // [!code ++]
+        await upsertManyLocalCards(cloudCards) // [!code ++]
+        await cardsStore.loadFromLocal() // [!code ++]
+        // await syncOfflineQueue() // [!code --]
+    } else {
+        await showToast('🔴 Réseau déconnecté (mode hors-ligne)')
     }
 })
 ```
@@ -533,7 +543,7 @@ async function onRefresh(ev: CustomEvent) {
 :::
 
 ## 9️⃣.5️⃣.5️⃣ C'est l'heure  de tester
-::: details Copier-coller ce code dans `App.vue`, c'est une solution de secours car j'ai pas eu le temps de gérer tous les cas :
+::: details Voici la version finale de `App.vue` avec les changements précédents.
 
 ```ts [src/App.vue]
 <template>
