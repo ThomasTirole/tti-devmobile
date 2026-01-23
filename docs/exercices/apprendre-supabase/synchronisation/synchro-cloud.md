@@ -226,8 +226,8 @@ Après une synchronisation, on souhaite que l'UI reflète l'état actuel des don
 2. Puis elle "rafraîchit" SQLite depuis le cloud.
 3. Ensuite, on demande au store **de relire SQLite** &rarr; l'UI se met à jour.
 
-::: details 1. Adapter le store de cartes `cardStore.ts`
-1. Dans votre store de cartes `src/stores/cardStore.ts`, ajoutez la méthode `loadFromLocal()` &rarr; elle remplace en fait l'ancienne méthode `load()` qui servaient à récupérer les datas depuis Supabase quand on avait pas encore implémenté la synchro offline-online. 
+::: details 1. Adapter le store de cartes `cardsStore.ts`
+1. Dans votre store de cartes `src/stores/cardsStore.ts`, ajoutez la méthode `loadFromLocal()` &rarr; elle remplace en fait l'ancienne méthode `load()` qui servaient à récupérer les datas depuis Supabase quand on avait pas encore implémenté la synchro offline-online. 
 
 2. De plus, nous allons profitez pour mettre à jour le store avec les nouveaux types importés (`CardLocal`, etc.).
 
@@ -241,7 +241,7 @@ Comme ça fait un peu beaucoup jusqu'à maintenant, je vous remets le code compl
 Le store **ne gère pas directement la queue offline**.
 Les appels à `enqueue()` sont faits **dans `cardsLocalService`** (chapitre 9.4), afin de centraliser la logique offline-first et éviter les duplications.
 
-```ts [src/stores/cardStore.ts]
+```ts [src/stores/cardsStore.ts]
 import { defineStore } from 'pinia'
 import { useNetworkStore } from '@/stores/networkStore'
 import { useAuthStore } from '@/stores/authStore'

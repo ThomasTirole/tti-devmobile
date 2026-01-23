@@ -108,8 +108,8 @@ export async function deleteCard(id: string): Promise<void> {
 ```
 
 ## 4️⃣.3️⃣ Créer le store Pinia
-Dans le dossier `src/stores`, créez un fichier `cardStore.ts` pour gérer l'état des cartes dans l'application
-```ts [src/stores/cardStore.ts]
+Dans le dossier `src/stores`, créez un fichier `cardsStore.ts` pour gérer l'état des cartes dans l'application
+```ts [src/stores/cardsStore.ts]
 import { defineStore } from 'pinia'
 import type { Card, CardInsert, CardUpdate } from '@/types/Card'
 import * as api from '@/services/cardsService'
