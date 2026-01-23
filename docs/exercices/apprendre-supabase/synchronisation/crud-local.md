@@ -535,8 +535,8 @@ C'est pas l'idéal je le conçois, mais c'est le but recherché avec cet exercic
 
 Mais comme je ne suis pas sadique, je vous ai préparé la liste des endroits à modifier :
 
-::: details `cardService.ts`
-```ts [src/services/cardService.ts]
+::: details `cardsService.ts`
+```ts [src/services/cardsService.ts]
 import { supabase } from '@/lib/supabase'
 // import type { Card, CardInsert, CardUpdate } from '@/types/Card' // [!code --]
 import type { CardCloud, CardInsert, CardUpdate } from '@/types/Card' // [!code ++]
