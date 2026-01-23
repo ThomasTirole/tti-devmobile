@@ -122,140 +122,75 @@ On lance un projet avec la commande `ionic serve`
 :::
 ![demo-3.2.5.gif](/3.2/demo-3.2.5.gif)
 
-[//]: # ()
-[//]: # (::: details ✅ Solution possible )
+::: details ✅ Solution possible
+::: code-group
+```vue [Tab1Page.vue]
+<template>
+  <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Tab 1</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Bienvenue dans l'app !</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Ceci est votre première interface construite avec Ionic-Vue.
+        </ion-card-content>
+      </ion-card>
 
-[//]: # (::: code-group)
+      <ion-button expand="block" @click="handleClick">
+        Cliquez-moi
+      </ion-button>
 
-[//]: # (``` vue [Tab1Page.vue])
+      <ion-list>
+        <ion-item>
+          <ion-label>Élément 1</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Élément 2</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Élément 3</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-page>
+</template>
 
-[//]: # (<template>)
+    
+<script setup lang="ts">
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/vue';
 
-[//]: # (  <ion-page>)
+function handleClick() {
+  console.log('Bouton cliqué !')
+}
 
-[//]: # (    <ion-header>)
+</script>
+```
 
-[//]: # (      <ion-toolbar>)
+```vue [🏆 Bonus - Tab1Page.vue]
+<ion-button expand="block" @click="showToast">
+  Cliquez-moi
+</ion-button>
+<ion-toast
+    :is-open="toastOpen"
+    message="Bouton cliqué !"
+    duration="2000"
+    @did-dismiss="toastOpen = false"
+></ion-toast>
 
-[//]: # (        <ion-title>Tab 1</ion-title>)
-
-[//]: # (      </ion-toolbar>)
-
-[//]: # (    </ion-header>)
-
-[//]: # (    <ion-content>)
-
-[//]: # (      <ion-card>)
-
-[//]: # (        <ion-card-header>)
-
-[//]: # (          <ion-card-title>Bienvenue dans l'app !</ion-card-title>)
-
-[//]: # (        </ion-card-header>)
-
-[//]: # (        <ion-card-content>)
-
-[//]: # (          Ceci est votre première interface construite avec Ionic-Vue.)
-
-[//]: # (        </ion-card-content>)
-
-[//]: # (      </ion-card>)
-
-[//]: # ()
-[//]: # (      <ion-button expand="block" @click="handleClick">)
-
-[//]: # (        Cliquez-moi)
-
-[//]: # (      </ion-button>)
-
-[//]: # ()
-[//]: # (      <ion-list>)
-
-[//]: # (        <ion-item>)
-
-[//]: # (          <ion-label>Élément 1</ion-label>)
-
-[//]: # (        </ion-item>)
-
-[//]: # (        <ion-item>)
-
-[//]: # (          <ion-label>Élément 2</ion-label>)
-
-[//]: # (        </ion-item>)
-
-[//]: # (        <ion-item>)
-
-[//]: # (          <ion-label>Élément 3</ion-label>)
-
-[//]: # (        </ion-item>)
-
-[//]: # (      </ion-list>)
-
-[//]: # (    </ion-content>)
-
-[//]: # ()
-[//]: # (  </ion-page>)
-
-[//]: # (</template>)
-
-[//]: # (    )
-[//]: # (<script setup lang="ts">)
-
-[//]: # (import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/vue';)
-
-[//]: # ()
-[//]: # (function handleClick&#40;&#41; {)
-
-[//]: # (  console.log&#40;'Bouton cliqué !'&#41;)
-
-[//]: # (})
-
-[//]: # ()
-[//]: # (</script>)
-
-[//]: # ()
-[//]: # (```)
-
-[//]: # ()
-[//]: # (```vue [🏆 Bonus - Tab1Page.vue])
-
-[//]: # (<ion-button expand="block" @click="showToast">)
-
-[//]: # (  Cliquez-moi)
-
-[//]: # (</ion-button>)
-
-[//]: # ()
-[//]: # (<ion-toast)
-
-[//]: # (  :is-open="toastOpen")
-
-[//]: # (  message="Bouton cliqué !")
-
-[//]: # (  duration="2000")
-
-[//]: # (  @did-dismiss="toastOpen = false")
-
-[//]: # (></ion-toast>)
-
-[//]: # ()
-[//]: # (<script setup lang="ts">)
-
-[//]: # (import { ref } from 'vue';)
-
-[//]: # (import {IonToast} from '@ionic/vue';)
-
-[//]: # ()
-[//]: # (const toastOpen = ref&#40;false&#41;;)
-
-[//]: # (function showToast&#40;&#41; {)
-
-[//]: # (  toastOpen.value = true;)
-
-[//]: # (})
-
-[//]: # (</script>)
-
-[//]: # (```)
-
-[//]: # (:::)
+<script setup lang="ts">
+  import {ref} from 'vue';
+  import {IonToast} from '@ionic/vue';
+  
+  const toastOpen = ref(false);
+  function showToast() {
+    toastOpen.value = true;
+  }
+</script>
+```
+:::
