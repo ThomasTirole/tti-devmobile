@@ -35,9 +35,9 @@ export type CardUpdate = Partial<CardInsert>
 ```
 
 ## 4️⃣.2️⃣ Créer les services API
-Dans le dossier `src/services`, créez un fichier `cardService.ts` pour gérer les interactions avec l'API Supabase :
+Dans le dossier `src/services`, créez un fichier `cardsService.ts` pour gérer les interactions avec l'API Supabase :
 
-```ts [src/services/cardService.ts]
+```ts [src/services/cardsService.ts]
 import { supabase } from '@/lib/supabase'
 import type { Card, CardInsert, CardUpdate } from '@/types/Card'
 
