@@ -86,6 +86,29 @@
               link: /exercices/apprendre-supabase/synchronisation/queue-offline
             - text: 9️⃣.5️⃣ Synchronisation cloud
               link: /exercices/apprendre-supabase/synchronisation/synchro-cloud
+    - text: 💠 En route pour Ilum
+      collapsed: true
+      items:
+        - text: 0️⃣ Introduction
+          link: /exercices/en-route-pour-ilum/intro
+        - text: 1️⃣ Setup du projet
+          link: /exercices/en-route-pour-ilum/setup-projet
+        - text: 2️⃣ Structure HTML du sabre
+          link: /exercices/en-route-pour-ilum/structure-html
+        - text: 3️⃣ Styles CSS du sabre
+          link: /exercices/en-route-pour-ilum/css-sabre
+        - text: 4️⃣ Logique de base
+          link: /exercices/en-route-pour-ilum/logique-base
+        - text: 5️⃣ Synthèse sonore
+          link: /exercices/en-route-pour-ilum/composable-sonore
+        - text: 6️⃣ Retour haptique
+          link: /exercices/en-route-pour-ilum/retour-haptique
+        - text: 7️⃣ Détection de mouvement
+          link: /exercices/en-route-pour-ilum/detection-mouvement
+        - text: 8️⃣ Intégration finale
+          link: /exercices/en-route-pour-ilum/integration-finale
+        - text: 9️⃣ Test de l'application
+          link: /exercices/en-route-pour-ilum/test-final
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
