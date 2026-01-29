@@ -1,9 +1,5 @@
 # 🧪 3.6 Simulation, tests et exécution de l'application mobile
 
-::: danger
-à essayer : https://ionicframework.com/docs/angular/your-first-app/distribute
-:::
-
 Jusqu'ici, vous avez principalement exécuté votre application Ionic dans un **navigateur web**.
 C'est rapide et confortable, mais **ce n'est pas suffisant** pour une vraie application mobile.
 
@@ -28,6 +24,8 @@ Une application Ionic peut être exécutée de plusieurs manières :
 1. **Dans le navigateur** (mode web)
 2. **Dans un émulateur** (mobile simulé)
 3. **Sur un appareil réel** (smartphone)
+
+> Note : il existe beaucoup de plateformes d'émulation (Android, iOS, différents modèles de téléphones). Cependant, pour des raisons de coût et de complexité, nous nous concentrerons ici sur méthodes d'émulations "natives" aux plateformes Android et iOS.
 
 Chaque mode a un **rôle précis** dans le cycle de développement et de test.
 ::: danger **💡 Attention !**
@@ -57,6 +55,16 @@ Elle permet de lancer l'application dans le navgateur avec :
 
 > 👉 À utiliser principalement pour l'UI, la navigation et la logique applicative.
 
+### ⚒️ Fonctionnalités avancées du DevTools
+Les DevTools du navigateur offrent des fonctionnalités avancées pour simuler un environnement mobile :
+- **Mode appareil** : simule la taille d'écran et le comportement tactile ;
+- **Simulation de la géolocalisation** : définir une position GPS fictive ;
+- **Simulation du réseau** : tester différents types de connexion (4G, offline) ;
+- **Console JavaScript** : inspecter les erreurs et logs.
+- **Utilisation des capteurs** (accéléromètre, gyroscope) via des extensions.
+
+> Pour ce faire, ouvrez les DevTools (F12 ou clic droit > Inspecter), puis dans les paramètres supplémentaires (trois points > More tools > Sensors ), vous trouverez des options pour simuler la géolocalisation, le réseau, l'orientation, la pression du toucher, etc.
+
 ## 🤖 3.6.3 Mise en place de l'émulation Android
 Un **émulateur** est un téléphone virtuel exécuté sur votre ordinateur.
 
@@ -64,6 +72,11 @@ Un **émulateur** est un téléphone virtuel exécuté sur votre ordinateur.
 - Android Studio installé
 - Android SDK configuré
 - Création d'un **AVD** (Android Virtual Device).
+- Package Android installé dans Capacitor :
+```bash
+npm install @capacitor/android
+npx cap add android
+```
 
 ### Lien entre Ionic et Android (Capacitor) 
 Avant de lancer l'app sur Android, vous devez : 
@@ -80,58 +93,64 @@ Depuis Android Studio, vous pouvez ensuite :
 - sélectionner un émulateur,
 - lancer l'application.
 
-::: danger
-ajouter les étapes, vidéos, gif ou screenshots
-:::
-
 ::: tip **Pourquoi utiliser un émulateur ?**
 - tester différents modèles de téléphones sans les posséder ;
 - simuler des conditions réseau, localisation, capteurs ;
 - déboguer avec les outils Android Studio.
 :::
 
-::: danger
-todo : ajouter appflow
-todo : ajouter émulateur iOS
-todo: exercice à la fin pour chaque type d'appareils
-:::
+## 🍎 3.6.4 Mise en place de l'émulation iOS
+> 💡 L'émulation iOS nécessite un Mac avec Xcode installé.
 
-## 📱 3.6.4 Exécution sur un appareil réel
-Tester sur un **vrai smartphone** est indispensable avant la publication. Ceci vous permets de vérifier les **performances réelles**, de tester les **vrais capteurs** (caméra, vibrations, GPS) et le **comportement réseau** (4G, Wi-Fi, coupures).
+### Pré-requis
+- Mac avec Xcode installé
+- Package iOS installé dans Capacitor :
+```bash
+npm install @capacitor/ios
+npx cap add ios
+```
+
+### Lien entre Ionic et iOS (Capacitor)
+Avant de lancer l'app sur iOS, vous devez :
+```bash
+ionic build
+ionic cap sync ios
+ionic cap open ios
+```
+- `ionic build` : génère la version web de l'app dans `www/`
+- `ionic cap sync ios` : copie le build dans le projet iOS
+- `ionic cap open ios` : ouvre Xcode
+
+Depuis Xcode, vous pouvez ensuite :
+- sélectionner un simulateur iPhone,
+- lancer l'application.
+
+## 📱 3.6.5 Exécution sur un appareil réel
+Tester sur un **vrai smartphone** est indispensable avant la publication. Ceci vous permet de vérifier les **performances réelles**, de tester les **vrais capteurs** (caméra, vibrations, GPS) et le **comportement réseau** (4G, Wi-Fi, coupures).
 
 ### Pré-requis Android
 - activer les **options développeur** sur le téléphone
 - activer le **débogage USB**
 - connecter le téléphone via USB sur l'ordinateur
 
-::: danger
-ajout screenshot ou gif pour la marche à suivre
-:::
-
 Une fois connecté, Android Studio détecte l'appareil et permet de lancer l'application directement dessus.
 
 ### Pré-requis iOS
-```markdown
+
+- avoir un Mac avec Xcode installé
+- avoir un compte développeur Apple
 - activer les **options développeur** sur l'iPhone
 - connecter l'iPhone via USB sur l'ordinateur
 - ouvrir le projet dans Xcode
 - sélectionner l'iPhone comme cible de build
-- lancer l'application
-- autoriser l'application sur l'iPhone (paramètres > général > gestion des appareils)
-- lancer à nouveau l'application depuis Xcode
-```
-::: danger 
-A VERIFIER
+
+Une fois connecté, Xcode détecte l'appareil et permet de lancer l'application directement dessus.
+
+::: warning **💡 L'importance de tester sur des appareils réels**
+Certaines erreurs n'apparaissent que sur un vrai appareil (performances, capteurs, UI).
 :::
 
-> 💡 Certaines erreurs n'apparaissent que sur un vrai appareil (performances, capteurs, UI).
-
-::: danger
-https://capacitorjs.com/docs/ios#adding-the-ios-platform
-ajouter : npm install @capacitor/ios
-:::
-
-## 🐞 3.6.5 Debug et inspection de l'application
+## 🐞 3.6.6 Debug et inspection de l'application
 Chaque environnement d'exécution (navigateur, émulateur, appareil réel) possède ses propres outils de debug.
 
 ### Debug dans le navigateur
@@ -147,14 +166,12 @@ Utilisez **Android Studio** pour :
 - utiliser le profiler pour analyser les performances.
 - utiliser Chrome Remote Debugging pour inspecter l'application Ionic dans l'émulateur ou sur un appareil réel.
 
-### Erreurs Capacitor courantes
-Les erreurs Capacitor sont souvent liées à des persmissions manquantes, une API appelée dans le mauvais environnement, ou des plugins non synchronisés.
+Pour utiliser Chrome Remote Debugging sur un appareil ou un émulateur actif Android:
+1. Ouvrez Chrome et allez sur votre navigateur sur `chrome://inspect/#devices`
+2. Vous devriez voir votre appareil ou émulateur listé.
+3. Cliquez sur "Inspect" pour ouvrir les DevTools et déboguer l'application Ionic. Vous bénéficierez de la console, des outils de réseau, et plus encore.
 
-::: danger
-revoir ce chapitre
-:::
-
-## 🔍 3.6.6 Tester les APIs natives dans de vraies conditions
+## 🔍 3.6.7 Tester les APIs natives dans de vraies conditions
 Toutes les APIs natives ne se testent pas de la même manière.
 
 ### 📸 Caméra
@@ -177,7 +194,7 @@ Toutes les APIs natives ne se testent pas de la même manière.
 
 > **👉 Conclusion** : les APIs natives doivent toujours être validées **sur un vrai appareil**.
 
-## ⚠️ 3.6.7 Erreurs courantes et pièges classiques
+## ⚠️ 3.6.8 Erreurs courantes et pièges classiques
 Voici quelques erreurs très fréquentes chez les débutants :
 - oublier de lancer `ionic cap sync` après une modification ;
 - tester une API native uniquement dans le navigateur ;
@@ -189,13 +206,13 @@ Voici quelques erreurs très fréquentes chez les débutants :
 ...tester sur appareil réel !
 :::
 
-## 🏁 3.6.8 Bonnes pratique de test mobile
+## 🏁 3.6.9 Bonnes pratique de test mobile
 - tester sur mobile **le plus tôt possible** dans le cycle de développement ;
-- ne pas atteindre la fin du projet
+- ne pas attendre la fin du projet
 - valider régulièrement les fonctionnalités critiques ;
 - considérer le navigateur comme un **outil de développement**, pas comme un environnement de test final ;
 
-## 🧪 3.6.9 Activité pratique - Comparer les environnements
+## 🧪 3.6.10 Activité pratique - Comparer les environnements
 **🎯 Objectif : observer les différences concrètes.**
 
 À réaliser :
@@ -203,9 +220,9 @@ Voici quelques erreurs très fréquentes chez les débutants :
 2. Lancer la même application dans un émulateur Android
 3. Si possible, la lancer sur un appareil réel.
 4. Tester :
-   5. navigation,
-   6. performances,
-   7. APIs natives.
+   - navigation, 
+   - performances, 
+   - APIs natives.
 
 > 💡 Notez les différences observées et les éventuels problèmes rencontrés dans chaque environnement.
 
