@@ -1,5 +1,7 @@
 # 🧪 3.6 Simulation, tests et exécution de l'application mobile
 
+<iframe src="https://slides.com/tirtho/3-6-simulation-tests-et-execution-de-l-application-mobile/embed" width="576" height="420" title="🧪 3.6 Simulation, tests et exécution de l'application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Jusqu'ici, vous avez principalement exécuté votre application Ionic dans un **navigateur web**.
 C'est rapide et confortable, mais **ce n'est pas suffisant** pour une vraie application mobile.
 
