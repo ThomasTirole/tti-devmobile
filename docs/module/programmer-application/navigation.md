@@ -1,5 +1,7 @@
 # 🧭 3.5 Navigation dans une application Ionic-Vue
 
+<iframe src="https://slides.com/tirtho/3-5-navigation-dans-une-application-ionic-vue/embed" width="576" height="420" title="🧭 3.5 Navigation dans une application Ionic-Vue" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 La navigation est un pilier fondamental dans une application mobile.
 Contrairement à une application web classique, une application mobile repose sur une **logique d'écrans**, de **piles de navigation** et de **transitions animées**, fortement liées aux conventions du système d'exploitation.
 
@@ -334,11 +336,3 @@ Objectif :
 - navigation avec paramètre ;
 - bouton retour fonctionnel ;
 - test navigateur + émulateur
-
-::: danger
-A VERIFIER ET TESTER
-:::
-
-::: danger
-ajouter des screen d'une app ionic avec ces types de navigation
-:::
