@@ -142,46 +142,87 @@ function stopHum() {
 
 ```ts
 /**
- * Joue le son d'allumage : un sweep montant 80->400Hz + burst de bruit blanc.
- * Duree : ~0.6 secondes.
+ * Joue le son d'allumage : "VWOOM" grave et lourd.
+ * Duree : ~0.9 secondes.
+ *
+ * Architecture audio :
+ *   sub   (sine 30Hz)      ──> subGain    ──┐
+ *   osc1  (sawtooth 40Hz)  ──┐              │
+ *                             ├──> lowpass ──├──> sortie
+ *   osc2  (sawtooth 80Hz)  ──┘              │
+ *   noise (bandpass 300Hz)  ──> noiseGain ──┘
+ *
+ * Le sweep reste dans les basses (40->180Hz) et un oscillateur sinusoidal
+ * a 30Hz ajoute une sous-basse qui donne l'impact physique du "VWOOM".
  */
 function playIgnite() {
-  const ac = getCtx();
-  const now = ac.currentTime;
+    const ac = getCtx();
+    const now = ac.currentTime;
+    const dur = 0.9;
 
-  // Sweep montant : la frequence monte de 80Hz a 400Hz en 0.5s
-  const osc = ac.createOscillator();
-  osc.type = 'sawtooth';
-  osc.frequency.setValueAtTime(80, now);
-  osc.frequency.exponentialRampToValueAtTime(400, now + 0.5);
+    // --- Sous-basse sinusoidale : impact grave a l'allumage ---
+    const sub = ac.createOscillator();
+    sub.type = 'sine';
+    sub.frequency.setValueAtTime(30, now);
+    sub.frequency.exponentialRampToValueAtTime(55, now + dur);
+    const subGain = ac.createGain();
+    subGain.gain.setValueAtTime(0.5, now);
+    subGain.gain.linearRampToValueAtTime(0, now + dur);
+    sub.connect(subGain);
+    subGain.connect(ac.destination);
 
-  // Le volume diminue progressivement (fade-out)
-  const oscGain = ac.createGain();
-  oscGain.gain.setValueAtTime(0.4, now);
-  oscGain.gain.linearRampToValueAtTime(0, now + 0.6);
-  osc.connect(oscGain);
-  oscGain.connect(ac.destination);
+    // --- Sweep montant grave : 40Hz -> 180Hz ---
+    const osc1 = ac.createOscillator();
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(40, now);
+    osc1.frequency.exponentialRampToValueAtTime(180, now + 0.6);
 
-  // Burst de bruit blanc filtre pour le "crissement" de l'allumage
-  const noiseBuf = createNoiseBuffer(ac, 0.6);
-  const noise = ac.createBufferSource();
-  noise.buffer = noiseBuf;
-  const noiseGain = ac.createGain();
-  noiseGain.gain.setValueAtTime(0.3, now);
-  noiseGain.gain.linearRampToValueAtTime(0, now + 0.6);
-  const noiseFilt = ac.createBiquadFilter();
-  noiseFilt.type = 'bandpass';
-  noiseFilt.frequency.value = 800;
-  noiseFilt.Q.value = 1;
-  noise.connect(noiseFilt);
-  noiseFilt.connect(noiseGain);
-  noiseGain.connect(ac.destination);
+    // --- Oscillateur octave pour epaissir : 80Hz -> 360Hz ---
+    const osc2 = ac.createOscillator();
+    osc2.type = 'sawtooth';
+    osc2.frequency.setValueAtTime(80, now);
+    osc2.frequency.exponentialRampToValueAtTime(360, now + 0.6);
 
-  // Demarrage et arret automatique apres 0.6s
-  osc.start(now);
-  osc.stop(now + 0.6);
-  noise.start(now);
-  noise.stop(now + 0.6);
+    // --- Filtre passe-bas : garde le son sombre ---
+    const filter = ac.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(200, now);
+    filter.frequency.exponentialRampToValueAtTime(500, now + 0.5);
+    filter.Q.value = 1;
+
+    const oscGain = ac.createGain();
+    oscGain.gain.setValueAtTime(0.45, now);
+    oscGain.gain.linearRampToValueAtTime(0, now + dur);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(oscGain);
+    oscGain.connect(ac.destination);
+
+    // --- Bruit grave filtre pour le grondement de l'allumage ---
+    const noiseBuf = createNoiseBuffer(ac, dur);
+    const noise = ac.createBufferSource();
+    noise.buffer = noiseBuf;
+    const noiseFilt = ac.createBiquadFilter();
+    noiseFilt.type = 'bandpass';
+    noiseFilt.frequency.value = 300;
+    noiseFilt.Q.value = 0.8;
+    const noiseGain = ac.createGain();
+    noiseGain.gain.setValueAtTime(0.25, now);
+    noiseGain.gain.linearRampToValueAtTime(0, now + dur);
+    noise.connect(noiseFilt);
+    noiseFilt.connect(noiseGain);
+    noiseGain.connect(ac.destination);
+
+    // Demarrage et arret automatique
+    sub.start(now);
+    sub.stop(now + dur);
+    osc1.start(now);
+    osc1.stop(now + dur);
+    osc2.start(now);
+    osc2.stop(now + dur);
+    noise.start(now);
+    noise.stop(now + dur);
 }
 ```
 
@@ -189,44 +230,87 @@ function playIgnite() {
 
 ```ts
 /**
- * Joue le son d'extinction : un sweep descendant 400->30Hz + bruit blanc.
- * C'est l'inverse de l'allumage. Duree : ~0.8 secondes.
+ * Joue le son d'extinction : "VWOOM" descendant, lourd et resonant.
+ * Duree : ~1.0 secondes.
+ *
+ * Architecture audio :
+ *   sub   (sine 50Hz)       ──> subGain    ──┐
+ *   osc1  (sawtooth 180Hz)  ──┐              │
+ *                              ├──> lowpass ──├──> sortie
+ *   osc2  (sawtooth 360Hz)  ──┘              │
+ *   noise (bandpass 250Hz)   ──> noiseGain ──┘
+ *
+ * Miroir de l'allumage : le sweep descend de 180Hz vers les sous-basses (20Hz),
+ * et le son s'eteint comme une machine qui se coupe.
  */
 function playRetract() {
-  const ac = getCtx();
-  const now = ac.currentTime;
+    const ac = getCtx();
+    const now = ac.currentTime;
+    const dur = 1.0;
 
-  // Sweep descendant : la frequence descend de 400Hz a 30Hz
-  const osc = ac.createOscillator();
-  osc.type = 'sawtooth';
-  osc.frequency.setValueAtTime(400, now);
-  osc.frequency.exponentialRampToValueAtTime(30, now + 0.8);
+    // --- Sous-basse : descend et s'eteint ---
+    const sub = ac.createOscillator();
+    sub.type = 'sine';
+    sub.frequency.setValueAtTime(50, now);
+    sub.frequency.exponentialRampToValueAtTime(20, now + dur);
+    const subGain = ac.createGain();
+    subGain.gain.setValueAtTime(0.45, now);
+    subGain.gain.exponentialRampToValueAtTime(0.01, now + dur);
+    sub.connect(subGain);
+    subGain.connect(ac.destination);
 
-  const oscGain = ac.createGain();
-  oscGain.gain.setValueAtTime(0.35, now);
-  oscGain.gain.linearRampToValueAtTime(0, now + 0.8);
-  osc.connect(oscGain);
-  oscGain.connect(ac.destination);
+    // --- Sweep descendant grave : 180Hz -> 20Hz ---
+    const osc1 = ac.createOscillator();
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(180, now);
+    osc1.frequency.exponentialRampToValueAtTime(20, now + 0.8);
 
-  // Bruit blanc filtre a 600Hz
-  const noiseBuf = createNoiseBuffer(ac, 0.8);
-  const noise = ac.createBufferSource();
-  noise.buffer = noiseBuf;
-  const noiseGain = ac.createGain();
-  noiseGain.gain.setValueAtTime(0.2, now);
-  noiseGain.gain.linearRampToValueAtTime(0, now + 0.8);
-  const noiseFilt = ac.createBiquadFilter();
-  noiseFilt.type = 'bandpass';
-  noiseFilt.frequency.value = 600;
-  noiseFilt.Q.value = 1;
-  noise.connect(noiseFilt);
-  noiseFilt.connect(noiseGain);
-  noiseGain.connect(ac.destination);
+    // --- Oscillateur octave : 360Hz -> 40Hz ---
+    const osc2 = ac.createOscillator();
+    osc2.type = 'sawtooth';
+    osc2.frequency.setValueAtTime(360, now);
+    osc2.frequency.exponentialRampToValueAtTime(40, now + 0.8);
 
-  osc.start(now);
-  osc.stop(now + 0.8);
-  noise.start(now);
-  noise.stop(now + 0.8);
+    // --- Filtre passe-bas descendant : le son s'assombrit en s'eteignant ---
+    const filter = ac.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(500, now);
+    filter.frequency.exponentialRampToValueAtTime(80, now + dur);
+    filter.Q.value = 1.5;
+
+    const oscGain = ac.createGain();
+    oscGain.gain.setValueAtTime(0.4, now);
+    oscGain.gain.exponentialRampToValueAtTime(0.01, now + dur);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(oscGain);
+    oscGain.connect(ac.destination);
+
+    // --- Bruit grave pour le grondement de l'extinction ---
+    const noiseBuf = createNoiseBuffer(ac, dur);
+    const noise = ac.createBufferSource();
+    noise.buffer = noiseBuf;
+    const noiseFilt = ac.createBiquadFilter();
+    noiseFilt.type = 'bandpass';
+    noiseFilt.frequency.value = 250;
+    noiseFilt.Q.value = 0.8;
+    const noiseGain = ac.createGain();
+    noiseGain.gain.setValueAtTime(0.2, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + dur);
+    noise.connect(noiseFilt);
+    noiseFilt.connect(noiseGain);
+    noiseGain.connect(ac.destination);
+
+    // Demarrage et arret automatique
+    sub.start(now);
+    sub.stop(now + dur);
+    osc1.start(now);
+    osc1.stop(now + dur);
+    osc2.start(now);
+    osc2.stop(now + dur);
+    noise.start(now);
+    noise.stop(now + dur);
 }
 ```
 
@@ -234,52 +318,130 @@ function playRetract() {
 
 ```ts
 /**
- * Joue le son de swing : un sweep en V 200->600->150Hz + bruit bandpass.
- * La frequence monte puis redescend, ce qui cree l'effet Doppler
- * caracteristique d'un objet qui passe rapidement. Duree : ~0.35 secondes.
+ * Joue le son de swing : effet Doppler realiste avec deux oscillateurs
+ * harmoniques, un filtre dynamique et deux couches de bruit.
+ *
+ * @param intensity - Force du mouvement (0 = leger, 1 = fort).
+ *                    Influence le volume, la hauteur du sweep et la duree.
+ *
+ * Architecture audio :
+ *   sub  (sine ~32Hz)       ──> subGain   ──> sortie
+ *   osc1 (sawtooth ~75Hz)   ──┐
+ *                              ├──> filtre passe-bas dynamique ──> gain ──> sortie
+ *   osc2 (sawtooth ~150Hz)  ──┘
+ *   noiseLow  (bandpass 200Hz)  ──> noiseGain ──> sortie
+ *   noiseHigh (bandpass 500Hz)  ──> noiseGain ──> sortie
+ *
+ * Trois couches : sous-basse sinusoidale pour le poids, deux oscillateurs
+ * en dents de scie pour les harmoniques, et deux couches de bruit.
+ * Le sweep Doppler en V reste dans les graves (~65-250Hz) pour un son
+ * lourd et profond, typique du sabre laser Star Wars.
  */
-function playSwing() {
-  const ac = getCtx();
-  const now = ac.currentTime;
+function playSwing(intensity = 0.5) {
+    const ac = getCtx();
+    const now = ac.currentTime;
 
-  // Sweep en "V" : monte a 600Hz puis redescend a 150Hz
-  const osc = ac.createOscillator();
-  osc.type = 'sawtooth';
-  osc.frequency.setValueAtTime(200, now);
-  osc.frequency.exponentialRampToValueAtTime(600, now + 0.15);
-  osc.frequency.exponentialRampToValueAtTime(150, now + 0.35);
+    // --- Parametres adaptatifs selon l'intensite ---
+    // Un geste leger donne un swing doux et court, un geste fort un swing puissant
+    const volume = 0.25 + intensity * 0.25;       // 0.25 .. 0.50
+    const duration = 0.7 + intensity * 0.4;       // 0.70s .. 1.10s
+    const peakTime = duration * 0.35;             // Le pic Doppler arrive au 1er tiers
+    const baseFreq = 65 + intensity * 25;         // 65  .. 90  Hz (grave)
+    const peakFreq = 150 + intensity * 100;       // 150 .. 250 Hz (reste dans les basses-mediums)
+    const endFreq = 50 + intensity * 15;          // 50  .. 65  Hz (retour sub-basse)
 
-  const filter = ac.createBiquadFilter();
-  filter.type = 'lowpass';
-  filter.frequency.value = 500;
+    // --- Sous-basse sinusoidale : donne du poids au swing ---
+    const sub = ac.createOscillator();
+    sub.type = 'sine';
+    sub.frequency.setValueAtTime(baseFreq * 0.5, now);
+    sub.frequency.exponentialRampToValueAtTime(peakFreq * 0.5, now + peakTime);
+    sub.frequency.exponentialRampToValueAtTime(endFreq * 0.5, now + duration);
+    const subGain = ac.createGain();
+    subGain.gain.setValueAtTime(0, now);
+    subGain.gain.linearRampToValueAtTime(volume * 0.7, now + 0.06);
+    subGain.gain.setValueAtTime(volume * 0.7, now + peakTime);
+    subGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+    sub.connect(subGain);
+    subGain.connect(ac.destination);
 
-  const oscGain = ac.createGain();
-  oscGain.gain.setValueAtTime(0.35, now);
-  oscGain.gain.linearRampToValueAtTime(0, now + 0.35);
+    // --- Oscillateur fondamental (sweep Doppler en V) ---
+    const osc1 = ac.createOscillator();
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(baseFreq, now);
+    osc1.frequency.exponentialRampToValueAtTime(peakFreq, now + peakTime);
+    osc1.frequency.exponentialRampToValueAtTime(endFreq, now + duration);
 
-  osc.connect(filter);
-  filter.connect(oscGain);
-  oscGain.connect(ac.destination);
+    // --- Oscillateur octave (meme sweep, une octave plus haut) ---
+    const osc2 = ac.createOscillator();
+    osc2.type = 'sawtooth';
+    osc2.frequency.setValueAtTime(baseFreq * 2, now);
+    osc2.frequency.exponentialRampToValueAtTime(peakFreq * 2, now + peakTime);
+    osc2.frequency.exponentialRampToValueAtTime(endFreq * 2, now + duration);
 
-  // Bruit bandpass aigu a 1000Hz pour le "sifflement"
-  const noiseBuf = createNoiseBuffer(ac, 0.35);
-  const noise = ac.createBufferSource();
-  noise.buffer = noiseBuf;
-  const noiseFilt = ac.createBiquadFilter();
-  noiseFilt.type = 'bandpass';
-  noiseFilt.frequency.value = 1000;
-  noiseFilt.Q.value = 5;
-  const noiseGain = ac.createGain();
-  noiseGain.gain.setValueAtTime(0.15, now);
-  noiseGain.gain.linearRampToValueAtTime(0, now + 0.35);
-  noise.connect(noiseFilt);
-  noiseFilt.connect(noiseGain);
-  noiseGain.connect(ac.destination);
+    // --- Filtre passe-bas dynamique : suit le sweep, garde le son sombre ---
+    const filter = ac.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.Q.value = 2;
+    filter.frequency.setValueAtTime(250, now);
+    filter.frequency.exponentialRampToValueAtTime(600, now + peakTime);
+    filter.frequency.exponentialRampToValueAtTime(180, now + duration);
 
-  osc.start(now);
-  osc.stop(now + 0.35);
-  noise.start(now);
-  noise.stop(now + 0.35);
+    // --- Enveloppe de gain : attaque rapide, sustain, puis fade-out graduel ---
+    const oscGain = ac.createGain();
+    oscGain.gain.setValueAtTime(0, now);
+    oscGain.gain.linearRampToValueAtTime(volume, now + 0.06);          // Attaque 60ms
+    oscGain.gain.setValueAtTime(volume, now + peakTime);               // Sustain au pic
+    oscGain.gain.exponentialRampToValueAtTime(0.01, now + duration);   // Fade-out
+
+    // Connexion : oscillateurs -> filtre -> gain -> sortie
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(oscGain);
+    oscGain.connect(ac.destination);
+
+    // --- Couche de bruit grave (corps du "whoosh") ---
+    const noiseBuf = createNoiseBuffer(ac, duration);
+
+    const noiseLow = ac.createBufferSource();
+    noiseLow.buffer = noiseBuf;
+    const noiseLowFilt = ac.createBiquadFilter();
+    noiseLowFilt.type = 'bandpass';
+    noiseLowFilt.frequency.value = 200;  // Bruit centre sur les basses
+    noiseLowFilt.Q.value = 0.7;
+
+    // --- Couche de bruit medium (texture de la lame) ---
+    const noiseHigh = ac.createBufferSource();
+    noiseHigh.buffer = noiseBuf;
+    const noiseHighFilt = ac.createBiquadFilter();
+    noiseHighFilt.type = 'bandpass';
+    noiseHighFilt.frequency.value = 500;  // Medium au lieu d'aigu
+    noiseHighFilt.Q.value = 2;
+
+    // --- Gain du bruit : meme enveloppe que les oscillateurs ---
+    const noiseGain = ac.createGain();
+    const noiseVol = volume * 0.5;
+    noiseGain.gain.setValueAtTime(0, now);
+    noiseGain.gain.linearRampToValueAtTime(noiseVol, now + 0.06);
+    noiseGain.gain.setValueAtTime(noiseVol, now + peakTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+
+    noiseLow.connect(noiseLowFilt);
+    noiseLowFilt.connect(noiseGain);
+    noiseHigh.connect(noiseHighFilt);
+    noiseHighFilt.connect(noiseGain);
+    noiseGain.connect(ac.destination);
+
+    // --- Demarrage et arret automatique ---
+    sub.start(now);
+    sub.stop(now + duration);
+    osc1.start(now);
+    osc1.stop(now + duration);
+    osc2.start(now);
+    osc2.stop(now + duration);
+    noiseLow.start(now);
+    noiseLow.stop(now + duration);
+    noiseHigh.start(now);
+    noiseHigh.stop(now + duration);
 }
 ```
 

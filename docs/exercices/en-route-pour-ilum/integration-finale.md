@@ -38,9 +38,9 @@ const { vibrateIgnite, vibrateSwing, vibrateRetract } =
   useHapticFeedback();
 
 // Callback appele quand un swing est detecte par l'accelerometre
-function onSwingDetected() {
+function onSwingDetected(intensity: number) {
   if (!isOn.value) return; // Securite : pas de swing si le sabre est eteint
-  playSwing();
+  playSwing(intensity);
   vibrateSwing();
 }
 

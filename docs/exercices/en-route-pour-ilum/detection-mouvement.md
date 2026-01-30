@@ -10,16 +10,17 @@ import { Motion } from '@capacitor/motion';
 
 // Seuil de detection : delta de magnitude en m/s² entre deux lectures
 // Une valeur plus basse = plus sensible, plus haute = moins sensible
-const SWING_THRESHOLD = 15;
+const SWING_THRESHOLD = 8;
 
 // Cooldown entre deux detections pour eviter les rafales
-const COOLDOWN_MS = 400;
+const COOLDOWN_MS = 300;
 
 /**
  * Composable de detection de swing.
  * @param onSwing - Callback appele quand un swing est detecte.
+ *                  Recoit l'intensite du mouvement (delta normalise entre 0 et 1).
  */
-export function useMotionDetector(onSwing: () => void) {
+export function useMotionDetector(onSwing: (intensity: number) => void) {
   // Etat reactif : est-ce qu'on ecoute l'accelerometre ?
   const listening = ref(false);
 
@@ -88,7 +89,9 @@ export function useMotionDetector(onSwing: () => void) {
       // Detection : delta > seuil ET cooldown respecte
       if (delta > SWING_THRESHOLD && now - lastSwingTime > COOLDOWN_MS) {
         lastSwingTime = now;
-        onSwing(); // Appel du callback
+        // Intensite normalisee entre 0 et 1 (8 = leger, 30+ = tres fort)
+        const intensity = Math.min((delta - SWING_THRESHOLD) / 22, 1);
+        onSwing(intensity); // Appel du callback avec l'intensite
       }
     });
 
