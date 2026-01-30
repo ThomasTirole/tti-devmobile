@@ -109,6 +109,27 @@
           link: /exercices/en-route-pour-ilum/integration-finale
         - text: 9️⃣ Test de l'application
           link: /exercices/en-route-pour-ilum/test-final
+    - text: 🐈‍⬛ OIIA OIIA
+      collapsed: true
+      items:
+        - text: 0️⃣ Introduction
+          link: /exercices/oiia-oiia/intro
+        - text: 1️⃣ Création du projet
+          link: /exercices/oiia-oiia/setup-projet
+        - text: 2️⃣ Installation des dépendances
+          link: /exercices/oiia-oiia/install-packages
+        - text: 3️⃣ Configuration écran
+          link: /exercices/oiia-oiia/config-fullscreen
+        - text: 4️⃣ Préparation des assets
+          link: /exercices/oiia-oiia/setup-assets
+        - text: 5️⃣ SDétection du spin
+          link: /exercices/oiia-oiia/spin-detection
+        - text: 6️⃣ HomePage.vue
+          link: /exercices/oiia-oiia/setup-homepage
+        - text: 7️⃣ Build et déploiement
+          link: /exercices/oiia-oiia/build-deploy
+        - text: 8️⃣ Test et debug
+          link: /exercices/oiia-oiia/test-debug
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
