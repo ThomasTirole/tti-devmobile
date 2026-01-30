@@ -64,4 +64,4 @@ src/
 | `@capacitor/motion` | Accelerometre | `Motion.addListener('accel', ...)` |
 | `@capacitor/status-bar` | Barre de statut sombre | `StatusBar.setStyle()`, `StatusBar.setBackgroundColor()` |
 
-Si besoin, vous trouverez le projet final sur le repo suivant : [lightsaber-ionic](https://github.com/divtec-cejef/lightsaber-ionic/tree/solution). N'oubliez pas d'installer toutes les dépendances avec `npm install` avant de lancer le projet.
+Si besoin, vous trouverez le projet final sur le repo suivant : [lightsaber-ionic](https://github.com/divtec-cejef/lightsaber-ionic/tree/solution-improved). N'oubliez pas d'installer toutes les dépendances avec `npm install` avant de lancer le projet.
