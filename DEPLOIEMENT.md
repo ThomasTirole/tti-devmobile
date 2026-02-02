@@ -60,10 +60,14 @@ npm run docs:build
 
 ## Ancienne configuration (GitHub Pages)
 
-L'ancien workflow de déploiement vers GitHub Pages est toujours présent dans `.github/workflows/deploy.yml`. Vous pouvez :
-- Le désactiver en renommant le fichier
-- Le supprimer si vous n'en avez plus besoin
-- Le conserver si vous souhaitez maintenir les deux déploiements
+L'ancien workflow de déploiement vers GitHub Pages a été désactivé et renommé en `.github/workflows/deploy-github-pages.yml.disabled`. 
+
+**Pour le réactiver si nécessaire :**
+1. Renommez le fichier en `.github/workflows/deploy-github-pages.yml` (sans `.disabled`)
+2. Dans `docs/.vitepress/config.mts`, changez `base: '/'` en `base: '/tti-devmobile/'`
+3. Changez aussi le chemin du favicon en `/tti-devmobile/favicon.ico`
+
+**Note :** Vous ne pouvez pas maintenir les deux déploiements simultanément car ils nécessitent des configurations différentes (base URL différente).
 
 ## Dépannage
 
