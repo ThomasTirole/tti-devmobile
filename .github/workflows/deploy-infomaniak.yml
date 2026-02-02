@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+# Limit permissions to minimum required
+permissions:
+  contents: read
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
