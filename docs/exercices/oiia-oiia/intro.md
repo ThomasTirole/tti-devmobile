@@ -1,6 +1,6 @@
 # 🐈‍⬛ OIIA OIIA - L'app qui donne le tournis
 
-Ce guide vous accompagne dans la construction complete de l'application **oiia-oiia** : une app mobile qui détecte quand vous tournez sur vous-meme et réagit en affichant un chat qui tourne avec un son en boucle.
+Ce guide vous accompagne dans la construction complete de l'application **oiia-oiia** : une app mobile inspirée du fameux [_meme_ du _"Spinning Cat"_](https://knowyourmeme.com/memes/oo-ee-a-e-a-cat-remixes) qui détecte quand vous tournez sur vous-meme et réagit en affichant un chat qui tourne avec un son en boucle.
 
 Vous allez découvrir comment :
 

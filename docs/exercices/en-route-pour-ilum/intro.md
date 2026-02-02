@@ -17,7 +17,7 @@ Dans cet exercice, vous allez transformer un projet starter Ionic-Vue en une app
 >une app ou vous allumez/éteignez un sabre laser avec des sons synthétisés, un hum continu, une detection de swing par accéléromètre et un retour vibratoire.
 
 ::: warning ⚠️ **Attention** ⚠️
-Je décline toute responsabilité en cas de massacre d'une classe de jeunes Padawans suite à l'utilisation de cette application, ne soyez pas comme Anakin.
+Je décline toute responsabilité en cas de décimation d'une classe de jeunes Padawans suite à l'utilisation de cette application, ne soyez pas comme Anakin.
 :::
 
 ![darth-vader.gif](/exercices/ilum/darth-vader.gif)
