@@ -27,7 +27,7 @@ jobs:
       - name: Build with VitePress
         run: npm run docs:build
 
-      - name: Deploy to Infomaniak via SFTP
+      - name: Deploy to Infomaniak via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.INFOMANIAK_FTP_SERVER }}
