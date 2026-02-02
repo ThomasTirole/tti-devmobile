@@ -73,7 +73,7 @@
         - text: 8️⃣ Détection réseau
           link: /exercices/apprendre-supabase/detection-reseau
         - text: 9️⃣ Synchronisation
-          collapsed: false
+          collapsed: true
           link: /exercices/apprendre-supabase/synchronisation/sync
           items:
             - text: 9️⃣.1️⃣ Installation et configuration de SQLite
