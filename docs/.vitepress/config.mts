@@ -4,7 +4,7 @@ import sidebar from './sidebar/sidebar.generated.mjs'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/tti-devmobile/',
+  base: '/',
   title: "DEV <MOBILE/>",
   description: "Apprendre TypeScript et Ionic",
   lang: 'fr-FR',
@@ -20,7 +20,7 @@ export default defineConfig({
       ],
   },
   ignoreDeadLinks: true, // ignore dead links to allow build to succeed
-  head: [['link', { rel: 'icon', href: '/tti-devmobile/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
       // https://vitepress.dev/reference/default-theme-config
       logo: '/logo.png',
