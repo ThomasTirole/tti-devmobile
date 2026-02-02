@@ -1,3 +1,9 @@
+# WORKFLOW DÉSACTIVÉ
+# Ce workflow a été désactivé car le déploiement se fait maintenant sur Infomaniak (devmobile.ch)
+# Voir: .github/workflows/deploy-infomaniak.yml
+# Pour réactiver ce workflow, renommez ce fichier en .yml (sans .disabled)
+# Note: Il faudra aussi ajuster la config.mts pour utiliser base: '/tti-devmobile/' au lieu de '/'
+
 name: Deploy VitePress to GitHub Pages
 
 on:
