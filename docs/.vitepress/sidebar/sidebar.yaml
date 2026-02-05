@@ -55,7 +55,9 @@
       link: /module/preparer-publication/etapes-publication
     - text: 🪙 Commercialisation
       link: /module/preparer-publication/commercialisation
-- text: 🛠️ Exercices
+    - text: 🧪 Exercice d'analyse - Publication
+      link: /module/preparer-publication/exercice-publication
+- text: 🛠️ Projets
   items:
     - text: ⚡ Apprendre Supabase
       collapsed: true
