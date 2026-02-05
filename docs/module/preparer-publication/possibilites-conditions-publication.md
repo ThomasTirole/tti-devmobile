@@ -35,7 +35,7 @@ Ces stores ne servent pas uniquement à télécharger des applications. Ils assu
 Toutes les applications mobiles ne sont pas forcément publiées sur un store public.
 
 Il existe d'autres possibilités :
-- **applications internes** (entreprise, école) ;
+- **applications internes** (entreprise, école) &rarr; par exemple, via un MDM ;
 - **applications de test** (alpha, beta) ;
 - **Progressive Web Apps (PWA)** accessibles via un navigateur.
 
@@ -98,7 +98,34 @@ Ces étapes permettent de :
 | Privée              | Organisation     | App interne RH     |
 | Test                | Groupe restreint | Version beta       |
 
-## 📋 4.1.4 Contraintes générales imposées par les stores
+## 🏢 4.1.4 Publication et déploiement en entreprise (MDM)
+
+Toutes les applications mobiles n'ont pas vocation à être publiées sur un store  public. 
+Dans de nombreux contextes professionnels, les applications sont destinées uniquement à un **usage interne**.
+
+Dans ce cas, les entreprises utilisent souvent des solutions de **MDM (Mobile Device Management)** pour gérer la distribution et la sécurité des applications internes.
+
+Un MDM est un système permettant de :
+- gérer un parc de smartphones et tablettes ;
+- contrôler les applications installées sur les appareils ;
+- déployer des applications internes sans passer par un store public.
+
+Concrètement, une application développée (par exemple avec Ionic et Capacitor), est :
+- compilée comme une application Android ou iOS classique ;
+- distribuée directement sur les appareils de l'entreprise ;
+- installée et mise à jour via le système MDM.
+
+::: info 
+Ce mode de déploiement est très courant dans les administrations publiques, hôpitaux, grandes entreprises ou établissements scolaires.
+:::
+
+Le MDM a pour avantage de ne pas montrer les applications internes visibles publiquement, de garder un contrôle total sur la distribution et de pouvoir garder les données sensibles dans un cadre maîtrisé.
+
+> Il est important de comprendre que dans le monde professionnel, **publier une application ne signifie pas toujours "_la mettre sur un store public_."**
+
+[Vidéo : Qu'est-ce qu'un MDM ?](https://www.youtube.com/watch?v=0BYM4Oa-4UA)
+
+## 📋 4.1.5 Contraintes générales imposées par les stores
 Les stores imposent un cadre strict pour protéger les utilisateurs.
 
 ### Règles de contenu :
@@ -128,7 +155,7 @@ Les applications manipulant des données utilisateur doivent :
 Par exemple, une application demandant l’accès à la caméra ou à la localisation sans justification claire peut être refusée lors de la validation.
 :::
 
-## ⚖️ 4.1.5 Contraintes spécifiques Android vs iOS
+## ⚖️ 4.1.6 Contraintes spécifiques Android vs iOS
 Même si les principes généraux sont similaires, certaines différences existent :
 ### Android
 - plus grande liberté de publication ;
@@ -142,7 +169,7 @@ Même si les principes généraux sont similaires, certaines différences existe
 
 > 👉 Ces différences influencent le **planning** et parfois les choix techniques.
 
-## 🧠 4.1.6 Anticiper la publication dès la conception de l'application
+## 🧠 4.1.7 Anticiper la publication dès la conception de l'application
 Une erreur courante consiste à penser à la publication **uniquement à la fin du projet**
 
 Or, certaines décisions prises trop tard peuvent bloquer la publication :
@@ -163,7 +190,7 @@ Penser à la publication dès le départ permet :
 - la plateforme de publication envisagée.
 :::
 
-## 🧪 4.1.7 Activité pratique - Analyse de cas
+## 🧪 4.1.8 Activité pratique - Analyse de cas
 On vous donne un contexte (par exemple) :
 - une application scolaire ;
 - une application interne d'entreprise ;
@@ -193,5 +220,11 @@ Votre réponse doit être **argumentée**.
 - [Google Play – Testing tracks (alpha / beta / internal testing)](https://support.google.com/googleplay/android-developer/answer/9845334)
 
 - [Apple TestFlight](https://developer.apple.com/testflight/)
+
+- [Apple Business Manager – App distribution](https://www.apple.com/business/it/)
+
+- [Android Enterprise – Managed app distribution](https://developer.android.com/work/managed-apps)
+
+- [Microsoft Intune – App management](https://learn.microsoft.com/en-us/mem/intune/apps/app-management)
 
 
