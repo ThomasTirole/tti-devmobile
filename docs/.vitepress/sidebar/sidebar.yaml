@@ -51,6 +51,8 @@
   items:
     - text: 📦 Possibilités et conditions de publication
       link: /module/preparer-publication/possibilites-conditions-publication
+    - text: 🧾 Étapes de publication
+      link: /module/preparer-publication/etapes-publication
 - text: 🛠️ Exercices
   items:
     - text: ⚡ Apprendre Supabase
