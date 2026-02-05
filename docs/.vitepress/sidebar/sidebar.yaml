@@ -53,6 +53,8 @@
       link: /module/preparer-publication/possibilites-conditions-publication
     - text: 🧾 Étapes de publication
       link: /module/preparer-publication/etapes-publication
+    - text: 🪙 Commercialisation
+      link: /module/preparer-publication/commercialisation
 - text: 🛠️ Exercices
   items:
     - text: ⚡ Apprendre Supabase
