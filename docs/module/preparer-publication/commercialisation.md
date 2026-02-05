@@ -249,7 +249,7 @@ Les avis utilisateurs jouent également un rôle important :
 la promesse faite doit correspondre à l’expérience réelle. Lorsqu’un utilisateur a le sentiment d’avoir été trompé, il ne se contente généralement pas de désinstaller l’application ; il laisse aussi un avis négatif, ce qui impacte durablement la réputation du produit.
 :::
 
-## 4.3.7 🔄️ Technique et commercialisation : un lien indissociable
+## 🔄️ 4.3.7 Technique et commercialisation : un lien indissociable
 Les choix techniques influencent directement :
 - la rétention des utilisateurs ;
 - la note sur le store ;
