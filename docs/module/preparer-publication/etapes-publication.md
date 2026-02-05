@@ -39,8 +39,6 @@ Il est important de noter que la publication ne marque pas la fin du projet : el
 > - **regression tests** : tests visant à vérifier que les fonctionnalités existantes ne sont pas cassées par les nouvelles modifications ;
 > - **create release candidate (rc) build** : générer une version de l'application qui sera soumise à la validation, après avoir corrigé les bugs bloquants et finalisé les fonctionnalités principales ;
 > - **ASO** : App Store Optimization, ensemble de techniques visant à améliorer la visibilité d'une application sur les stores (choix du nom, description, mots-clés, etc.) ;
-
-
 :::
 
 ## 🛠️ 4.2.2 Préparer l'application techniquement

@@ -1,8 +1,8 @@
 # 💼 4.3 Commercialisation d'une application mobile
 
-Une application mobile ne devient pas utile, durable ou rentable uniquement parce qu'elle est bien développée et publie sur un store. Dans un écosystème où des millions d'applications sont disponibles, la réussite d'un projet mobile dépend largement de sa **commercialisation**, cela consiste à définir :
+Une application mobile ne devient pas utile, durable ou rentable uniquement parce qu'elle est bien développée et publiée sur un store. Dans un écosystème où des millions d'applications sont disponibles, la réussite d'un projet mobile dépend largement de sa **commercialisation**, cela consiste à définir :
 - ce que l'application propose (le produit),
-- où et comment elle est distribution (le placement),
+- où et comment elle est distribuée (le placement),
 - son modèle économique (le prix), 
 - et comment elle est rendue visible (la promotion).
 
@@ -13,7 +13,7 @@ Une application mobile ne devient pas utile, durable ou rentable uniquement parc
 Tous ces choix influencent directement l'adoption, la rétention des utilisateurs et la viabilité du projet à long terme.
 
 ## 🎯 Objectifs d'apprentissage
-À la fin de ce chapitre, vous serez capable de :
+À la fin de ce chapitre, vous serez capables de :
 - comprendre ce que signifie **commercialiser** une application mobile ;
 - identifier les éléments clés d'un **produit mobile** ;
 - expliquer le rôle du **placement sur les stores** ;
@@ -30,13 +30,13 @@ Il est important de distinguer trois notions, souvent confondues dans un projet 
 Une application peut être techniquement réussie et correctement publiée, mais **échouer commercialement** si :
 - elle ne répond pas à un besoin clair ;
 - elle est mal positionnée ;
-- son modèle économie est inadapté.
+- son modèle économique est inadapté.
 
 ::: tip La commercialisation vise donc à répondre à une question centrale...
 _pourquoi un utilisateur devrait-il installer, utiliser et conserver cette application plutôt qu’une autre ?_
 :::
 
-Commercialiser une application mobile ne signifie pas uniquement la vendre. Dans la majorité des cas, il s'agit de **trouver un modèle viable** permettant de **financer le développement**, **couvrir les coûts d'infrastructure** et **maintenir l'application dans le temps** ! Aujourd'hui, beaucoup d'application disponibles sur les stores sont gratuites à l'installation, mais sont financées indirectement (publicité, données, abonnements).
+Commercialiser une application mobile ne signifie pas uniquement la vendre. Dans la majorité des cas, il s'agit de **trouver un modèle viable** permettant de **financer le développement**, **couvrir les coûts d'infrastructure** et **maintenir l'application dans le temps** ! Aujourd'hui, beaucoup d'applications disponibles sur les stores sont gratuites à l'installation, mais sont financées indirectement (publicité, données, abonnements).
 
 ## 📱 4.3.2 Le produit : définir ce que l'application apporte.
 
@@ -75,7 +75,7 @@ Le placement repose donc sur plusieurs éléments :
 
 Ces éléments influencent la **visibilité** dans les recherches, la **compréhension** immédiate de l'app et sa **crédibilité**. 
 
-Les développeurs cherchent donc à optimiser la présentation de leur app pour améliorer le référencement. Similaire au SEO pour les sites web, cette pratique est appelée **ASO** (App Store Optimization). Sans entrer dans les détails, on obserbe que :
+Les développeurs cherchent donc à optimiser la présentation de leur app pour améliorer le référencement. Similaire au SEO pour les sites web, cette pratique est appelée **ASO** (App Store Optimization). Sans entrer dans les détails, on observe que :
 - les **titres** explicites fonctionnent mieux ;
 - les captures montrant l'usage réel sont plus efficaces ;
 - une promesse claire réduit les désinstallations.
@@ -125,7 +125,7 @@ Ce modèle permet de générer des revenus continus, mais peut aussi être perç
 :::
 
 ### 🎬 Publicité : modèle dominant mais controversé
-La publicité est l'un des modèles les plus répandus, notamment dans les applications mobiles gratuites, en partiuclier dans :
+La publicité est l'un des modèles les plus répandus, notamment dans les applications mobiles gratuites, en particulier dans :
 - les jeux _hyper-casual_ ;
 - les applications de divertissement.
 - certains outils gratuits grand public.
@@ -135,6 +135,8 @@ Les formats courants incluent :
 - les bannières ;
 - les écrans interstitiels (plein écran) ;
 - les vidéos récompensées (une vidéo &rarr; 30 pièces ou 1 vie gratuite)
+
+Il est important de noter que ces choix ne sont pas faits au hasard : ils sont généralement pilotés par des données analytiques précises (taux de rétention, durée de session, taux de clic), souvent testées via des expérimentations A/B.
 
 ::: tip ☝️🤓
 Ce modèle pousse parfois à **maximiser le temps dans l'application**, en **fragmentant l'expérience utilisateur**, en **multipliant les pubs**, et en **ralentissant volontairement la progression**.
@@ -166,9 +168,9 @@ Ces publicités montrent un gameplay ou des fonctionnalités qui n’existent pa
 
 Les utilisateurs deviennent donc plus méfiants, les avis négatifs se multiplient et les plateformes de publication renforcent leurs règles pour limiter les contenus trompeurs.
 
+D’un point de vue juridique, ces pratiques se situent dans une zone grise : les lois sur la publicité mensongère s’appliquent difficilement aux applications gratuites, tant qu’aucun achat obligatoire n’est imposé.
+
 > Apple et Google sanctionnent désormais plus sévèrement les écarts importants entre le contenu publicitaire et l’expérience réelle de l’application.
-
-
 
 ::: details 🤷‍♂️ Mais alors... pourquoi tant d'applications utilisent des promesses exagérées ?
 Vous l'avez sûrement constaté en étant consommateurs de réseaux sociaux : les "fausses pubs" pour des jeux mobiles sont présentes en masse.
@@ -235,7 +237,7 @@ Ce phénomène reste **majoritaire**, mais **pas universel**.
 :::
 
 ## 📣 4.3.6 La promotion : faire connaître l'application
-Les réseaux sociaux jouent un rôle central dans la promotion moderne. En effet, les formats cours et visuels comme :
+Les réseaux sociaux jouent un rôle central dans la promotion moderne. En effet, des formats courts et visuels comme :
 - TikTok ;
 - Instagram Reels ;
 - YouTube Shorts ;
@@ -243,7 +245,7 @@ Les réseaux sociaux jouent un rôle central dans la promotion moderne. En effet
 
 Les avis utilisateurs jouent également un rôle important :
 - ils influencent la crédibilité ;
-- ils impacent la décision de téléchargement ;
+- ils impactent la décision de téléchargement ;
 
 ::: warning Une promotion efficace repose sur une règle simple :
 la promesse faite doit correspondre à l’expérience réelle. Lorsqu’un utilisateur a le sentiment d’avoir été trompé, il ne se contente généralement pas de désinstaller l’application ; il laisse aussi un avis négatif, ce qui impacte durablement la réputation du produit.

@@ -54,10 +54,9 @@ Pour publier une application sur un store officiel, il est nécessaire de dispos
 - abonnement **annuel** ;
 - processus de validation plus strict.
 
-::: danger
-faire les processus en entier et montrer
-:::
-
+::: info Démo
+Google Play Console : [https://play.google.com/console](https://play.google.com/console)
+::::
 
 ### Différences importantes à connaître
 - Apple impose des règles plus **strictes** sur la qualité et l'expérience utilisateur ;
@@ -202,10 +201,6 @@ On vous donne un contexte (par exemple) :
 - les principales contraintes à anticiper.
 
 Votre réponse doit être **argumentée**.
-
-::: danger
-à modifier ou enrichir
-:::
 
 ## 🔗 Sources et références
 
