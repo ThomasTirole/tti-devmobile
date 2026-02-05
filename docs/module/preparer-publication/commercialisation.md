@@ -265,7 +265,7 @@ Aussi, une maintenance de l'application est essentielle pour :
 
 La commercialisation ne peut donc pas être dissociée de la qualité technique. Le code, les performances et la maintenance participent pleinement à l’image du produit et à sa viabilité à long terme.
 
-## 🧠 4.3.9 Conclusion
+## 🧠 4.3.8 Conclusion
 La commercialisation d’une application mobile repose sur un équilibre délicat entre accessibilité, rentabilité et respect de l’utilisateur. Les modèles économiques, les stratégies de promotion et les choix techniques sont étroitement liés et doivent être pensés ensemble.
 
 Comprendre ces mécanismes permet aux développeurs de concevoir des applications non seulement fonctionnelles, mais aussi cohérentes, crédibles et durables dans un marché mobile fortement concurrentiel
