@@ -1,4 +1,7 @@
 # 🧾 4.2 Étapes nécessaires à la publication d'une application mobile
+
+<iframe src="https://slides.com/tirtho/4-2-etapes-necessaires-a-la-publication-d-une-application-mobile/embed" width="576" height="420" title="🧾 4.2 Étapes nécessaires à la publication d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Une fois les conditions de publication connues (plateforme, type de diffusion, contraintes légales), il est nécessaire de comprendre **comment se déroule concrètement la publication** d'une application mobile.
 
 Contrairement à une idée répandue, publier une application ne consiste pas simplement à "envoyer un fichier sur un store".

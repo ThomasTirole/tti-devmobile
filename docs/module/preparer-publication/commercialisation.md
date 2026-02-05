@@ -1,5 +1,7 @@
 # 💼 4.3 Commercialisation d'une application mobile
 
+<iframe src="https://slides.com/tirtho/4-3-commercialisation-d-une-application-mobile/embed" width="576" height="420" title="💼 4.3 Commercialisation d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Une application mobile ne devient pas utile, durable ou rentable uniquement parce qu'elle est bien développée et publiée sur un store. Dans un écosystème où des millions d'applications sont disponibles, la réussite d'un projet mobile dépend largement de sa **commercialisation**, cela consiste à définir :
 - ce que l'application propose (le produit),
 - où et comment elle est distribuée (le placement),
@@ -234,6 +236,12 @@ Tous les jeux mobiles ne suivent pas cette logique :
 * et misent sur la confiance et la qualité.
 
 Ce phénomène reste **majoritaire**, mais **pas universel**.
+:::
+
+::: tip 🙋 Faisons le test !
+Prenez votre téléphone, rendez-vous sur le store. Vous avez 30 seconds - 1 minute pour trouver un jeu qui sent le "fake ad".
+
+Une fois fais, regardons ensemble ce que vous avez trouvé, et analysons les commentaires
 :::
 
 ## 📣 4.3.6 La promotion : faire connaître l'application

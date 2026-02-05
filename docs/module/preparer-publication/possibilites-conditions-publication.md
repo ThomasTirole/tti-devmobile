@@ -1,4 +1,7 @@
 # 📦 4.1 Possibilités et conditions de publication d'une application mobile
+
+<iframe src="https://slides.com/tirtho/4-1-possibilites-et-conditions-de-publication-d-une-application-mobile/embed" width="576" height="420" title="📦 4.1 Possibilités et conditions de publication d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Développer une application mobile ne se limite pas à écrire du code et à la faire fonctionner sur un téléphone.
 
 Pour qu'une application soit **distribuée à des utilisateurs**, elle doit respecter un ensemble de **conditions techniques**, **administratives** et **légales** imposées par les plateformes de publication.
