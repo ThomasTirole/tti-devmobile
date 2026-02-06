@@ -35,9 +35,13 @@ features:
     link : /module/programmer-application/setup-environnement
     linkText : En savoir plus
   - title: 4. Préparer la publication de l'application
-    details: Builds Android/iOS/PWA, stores, contraintes légales
+    details: Builds Android/iOS/PWA, stores, contraintes légales, commercialisation (4P)
     link : /module/preparer-publication/possibilites-conditions-publication
     linkText : En savoir plus
+  - title: 5. Vérifier et tester l'application mobile
+    details: Tests fonctionnels et non-fonctionnels, rapport de tests
+    link: /module/verifier-tester-application/tests-fonctionnels
+    linkText: En savoir plus
   - title: Exercices pratiques
     details: Atelier de mise en pratique des concepts vus en cours
     link : /exercices/apprendre-supabase/setup-supabase
