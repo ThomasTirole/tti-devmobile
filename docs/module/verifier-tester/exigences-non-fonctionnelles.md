@@ -1,4 +1,4 @@
-# 🔍 5.2 Vérifier les exigences non fonctionnelles
+# 🔍 5.2 Vérifier les exigences non fonctionnelles d'une application mobile
 
 Une application mobile peut parfaitement fonctionner d'un point de vue fonctionnel, tout en offrant une **mauvaise expérience globale**.
 
