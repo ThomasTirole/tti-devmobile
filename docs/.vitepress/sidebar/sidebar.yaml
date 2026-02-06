@@ -57,6 +57,13 @@
       link: /module/preparer-publication/commercialisation
     - text: 🧪 Exercice d'analyse - Publication
       link: /module/preparer-publication/exercice-publication
+- text: 5. Vérifier et tester l'application
+  collapsed: true
+  items:
+    - text: 🧪 Vérifier les exigences fonctionnelles
+      link: /module/verifier-tester/exigences-fonctionnelles
+    - text: 🔍 Vérifier les exigences non fonctionnelles
+      link: /module/verifier-tester/exigences-non-fonctionnelles
 - text: 🛠️ Projets
   items:
     - text: ⚡ Apprendre Supabase
