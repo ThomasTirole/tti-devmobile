@@ -143,3 +143,9 @@ Pour voir le rendu iOS/Android dans le navigateur, vous pouvez utiliser les outi
 Choisissez ensuite un modèle d'appareil (iPhone, Samsung) et rafraîchissez pour simuler l'OS.
 :::
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre liste les outils nécessaires, l’installation de Node.js et Ionic CLI, et la création d’un projet Ionic‑Vue. Il montre comment lancer `ionic serve` et décrit la structure d’un projet. Il propose une activité de validation de l’environnement.
+:::
+

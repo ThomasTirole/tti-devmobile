@@ -374,3 +374,9 @@ On vous donne un code mal structuré (ex. tout dans un seul fichier JS).
 - [**Vue.js – State Management (Pinia)**](https://pinia.vuejs.org)
 
 - [**Clean Architecture – Robert C. Martin (“Uncle Bob”)**](https://blog.cleancoder.com/)
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre explique l’architecture en 3 couches (UI, logique/état, données) et les patterns MVC/MVVM/Clean. Il montre comment ces concepts s’appliquent à Ionic‑Vue avec stores et services. Il couvre la gestion d’état, la communication entre couches et la modularité.
+:::
+

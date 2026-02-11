@@ -623,3 +623,9 @@ Adaptez alors les 4 actions comme suit :
 </style>
 ```
 :::
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre explique Capacitor comme pont vers les API natives et le cycle de build/sync. Il présente des plugins clés (Camera, Filesystem, Preferences, Network, Haptics, Share) et le fallback web. L’activité finale propose un mini kit de tests natifs.
+:::
+

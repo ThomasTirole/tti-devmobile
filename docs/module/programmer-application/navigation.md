@@ -336,3 +336,9 @@ Objectif :
 - navigation avec paramètre ;
 - bouton retour fonctionnel ;
 - test navigateur + émulateur
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre explique la navigation mobile dans Ionic‑Vue, et la différence entre routage linéaire et non‑linéaire. Il détaille la structure du router, les patterns Tabs/Menu/Stack, les paramètres et le bouton retour. Il donne des bonnes pratiques pour éviter les pièges.
+:::
+

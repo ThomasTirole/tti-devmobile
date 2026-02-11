@@ -227,3 +227,9 @@ https://uxdesign.cc/three-simple-rules-of-good-touch-design-4590e0dd1979
 - [W3C - Device and Sensors APIs](https://www.w3.org/TR/generic-sensor/)
 - [UX Design.cc - Designing for Touch Interfaces](https://uxdesign.cc/three-simple-rules-of-good-touch-design-4590e0dd1979)
 - [Android Docs - Input and Gestures](https://developer.android.com/develop/ui/views/touch-and-input/input?hl=fr)
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre présente la diversité des appareils et l’impact des formats d’écran, résolutions et densités sur le design. Il détaille l’adaptation à l’orientation, les modes de saisie et les gestes. Il aborde les capteurs, les contextes d’usage réels et les contraintes qui imposent un design responsive et robuste.
+:::
+

@@ -271,3 +271,9 @@ Réalisez un schéma complet du flux d'authentification mobile :
 - **[JWT (JSON Web Tokens)](https://jwt.io)**
 - **[OWASP Mobile Application Security](https://owasp.org/www-project-mobile-security/)**
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre clarifie authentification vs autorisation et les méthodes courantes (email, magic link, OAuth, biométrie). Il explique les sessions JWT, le stockage sécurisé et les bonnes pratiques. Il compare Supabase/Firebase/Auth0 et décrit une stratégie mobile offline‑first robuste.
+:::
+

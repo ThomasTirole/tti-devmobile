@@ -571,3 +571,9 @@ function onRefresh(ev: CustomEvent) {
 </script>
 ```
 :::
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre présente les composants Ionic de structure, contenu, formulaires, feedback et navigation. Il explique pourquoi Ionic accélère le développement mobile tout en respectant les conventions iOS/Android. Il se termine par une activité de création d’écran complet.
+:::
+

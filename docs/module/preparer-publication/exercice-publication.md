@@ -160,3 +160,9 @@ Votre présentation doit contenir :
 * **Placement** : comment être visible ?
 * **Prix** : quel modèle économique ?
 * **Promotion** : comment attirer les utilisateurs ?
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Cet exercice demande une analyse complète de publication et commercialisation à partir d’un cas. Les livrables couvrent choix de plateforme, étapes de publication et analyse des 4P. Le travail se fait en groupe avec une présentation structurée.
+:::
+

@@ -134,3 +134,9 @@ Ce travail vise à développer un **regard critique** sur la qualité d’une ap
 * [OWASP – Mobile Top 10](https://owasp.org/www-project-mobile-top-10/)
 * [ISO/IEC 25010 – Software quality model](https://iso25000.com/index.php/en/iso-25000-standards/iso-25010)
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre {open}
+Ce chapitre couvre les exigences non fonctionnelles : portabilité, ergonomie, performance et sécurité. Il insiste sur les tests en conditions réelles et l’analyse de la qualité globale. Il propose des axes d’amélioration concrets.
+:::
+
