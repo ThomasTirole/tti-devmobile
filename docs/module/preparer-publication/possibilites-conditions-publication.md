@@ -226,3 +226,9 @@ Votre réponse doit être **argumentée**.
 - [Microsoft Intune – App management](https://learn.microsoft.com/en-us/mem/intune/apps/app-management)
 
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre présente les plateformes de publication, les comptes développeur et les types de diffusion (publique, privée, test, PWA). Il explique le rôle du MDM en entreprise. Il détaille les contraintes légales/techniques et les différences Android vs iOS, à anticiper dès la conception.
+:::
+

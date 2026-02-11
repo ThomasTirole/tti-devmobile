@@ -200,3 +200,9 @@ Ce travail peut être réalisé :
 * [Apple Developer – Testing your app](https://developer.apple.com/testflight/)
 * [ISTQB – Glossaire des tests logiciels](https://glossary.istqb.org/)
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre définit les exigences fonctionnelles et les types de tests associés. Il guide la rédaction de cas de test, l’exécution et le reporting de bugs. Il rappelle l’importance des tests de régression.
+:::
+

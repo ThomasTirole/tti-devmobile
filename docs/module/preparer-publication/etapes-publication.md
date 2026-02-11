@@ -200,3 +200,9 @@ La restitution peut prendre la forme :
 
 
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre déroule le workflow de publication de bout en bout, du build au store. Il insiste sur la préparation technique, le versioning et les assets. Il explique la validation, les causes de refus et l’importance des mises à jour.
+:::
+

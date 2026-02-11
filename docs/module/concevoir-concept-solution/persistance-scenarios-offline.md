@@ -278,3 +278,9 @@ _**👉 Format de réponse suggéré**_
 
 
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre distingue stockage clé‑valeur, base locale et fichiers, avec leurs usages. Il explique le cache local, les stratégies offline‑first et la synchronisation. Il aborde aussi la gestion des erreurs réseau et les conflits.
+:::
+

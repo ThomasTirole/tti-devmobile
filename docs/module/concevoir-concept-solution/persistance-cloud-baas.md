@@ -851,3 +851,9 @@ Par groupes, comparez **Supabase**, **Firebase** et **Appwrite** selon :
 * **[Offline-first Architecture Principles](https://offlinefirst.org)**
 
 * **[MDN – REST API Concepts](https://developer.mozilla.org/docs/Glossary/REST)**
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre présente le BaaS et le rôle du cloud dans une app mobile moderne. Il détaille le flux auth‑API‑données, compare Supabase et Firebase et cite d’autres services. Il couvre la synchro local‑cloud, la file d’attente offline et la résolution de conflits.
+:::
+

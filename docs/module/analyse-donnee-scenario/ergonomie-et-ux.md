@@ -222,3 +222,9 @@ Comparez la **même application** sur un téléphone Android et un iPhone.
 
 
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre explique l’ergonomie mobile et la norme ISO 9241-110, puis relie UX et UI à des principes concrets. Il compare les guidelines Apple HIG et Google Material Design. Il propose des bonnes pratiques pour concevoir des interfaces claires, cohérentes, accessibles et testables.
+:::
+

@@ -358,3 +358,9 @@ Vous serez amenés à débattre en petits groupes, puis présenter votre justifi
 - [.NET MAUI (Microsoft)](https://learn.microsoft.com/en-us/dotnet/maui/)
 
 - [Mozilla MDN – Progressive Web Apps](https://developer.mozilla.org/docs/Web/Progressive_web_apps)
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre compare les applications natives, web, hybrides et cross‑platform, avec leurs avantages, limites et cas d’usage. Il introduit les PWA et les principaux frameworks modernes. Il propose une grille de choix selon le public, la performance, le budget et la maintenance.
+:::
+

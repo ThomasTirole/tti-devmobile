@@ -234,3 +234,9 @@ Voici quelques erreurs très fréquentes chez les débutants :
 * [Capacitor – Android Guide](https://capacitorjs.com/docs/android)
 * [Android Studio](https://developer.android.com/studio)
 * [Chrome DevTools – Remote Debugging](https://developer.chrome.com/docs/devtools/remote-debugging)
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre compare l’exécution web, émulateur et appareil réel, avec leurs limites. Il décrit la mise en place Android/iOS, le debug et le test des APIs natives. Il liste les erreurs courantes et les bonnes pratiques de test mobile.
+:::
+

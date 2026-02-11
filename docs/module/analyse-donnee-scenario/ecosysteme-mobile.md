@@ -238,3 +238,9 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 
 
 
+
+## 📔 TL;DR
+::: details Récapitulatif du chapitre
+Ce chapitre définit l’application mobile, ses différences avec le web, et pourquoi le mobile domine l’accès Internet. Il retrace l’évolution de l’écosystème, compare Android et iOS, et rappelle le cycle de vie d’une app. Il couvre aussi la distribution, les contraintes techniques/UX et les tendances actuelles (cross‑platform, IA, 5G, PWA, AR).
+:::
+
