@@ -1,5 +1,7 @@
 # 🧪 5.1 Vérifier les exigences fonctionnelle d'une application mobile
 
+<iframe src="https://slides.com/tirtho/5-1-verifier-les-exigences-fonctionnelles-d-une-application-mobile/embed" width="576" height="420" title="🧪 5.1 Vérifier les exigences fonctionnelles d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Une application mobile ne peut pas être considérée comme "terminée" uniquement parce qu'elle se lance ou qu'elle fonctionne sur le téléphone du développeur.
 
 Avant toute publication (et même tout au long du développement), il est indispensable de **vérifier que les fonctionnalités répondent réellement aux besoin attendus**.
@@ -159,7 +161,7 @@ Sur une application mobile, il est particulièrement important de retester :
 
 Même une petite modification peut avoir un impact inattendu sur une autre partie de l'application.
 
-::: details 💡 Petite anecdote...
+::: details 🥥 Petite anecdote...
 
 Sur Twitter et Reddit, un utilisateur a décompilé les fichiers du jeu _Team Fortress 2_ pour y découvrir, dans les assets du jeu, une image de noix de coco.
 
