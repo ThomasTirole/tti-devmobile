@@ -304,7 +304,7 @@ La restitution peut se faire sous forme :
 * [Reddit - Why Fake Ads Dominate Mobile Games-and Why They're Not Going Away](https://www.reddit.com/r/AndroidGaming/comments/1iqy32g/why_fake_ads_dominate_mobile_gamesand_why_theyre/)
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre explique la commercialisation via les 4P (produit, placement, prix, promotion). Il compare les modèles économiques et aborde l’ASO. Il met en garde contre les pratiques trompeuses (fake ads) et relie qualité technique et succès commercial.
 :::
 

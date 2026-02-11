@@ -136,7 +136,7 @@ Ce travail vise à développer un **regard critique** sur la qualité d’une ap
 
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre couvre les exigences non fonctionnelles : portabilité, ergonomie, performance et sécurité. Il insiste sur les tests en conditions réelles et l’analyse de la qualité globale. Il propose des axes d’amélioration concrets.
 :::
 

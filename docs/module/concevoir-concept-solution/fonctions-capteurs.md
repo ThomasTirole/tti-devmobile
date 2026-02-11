@@ -265,7 +265,7 @@ _💬 Exemple : une app qui fait "vibrer" le téléphone quand un objet est dét
 - **[W3C - Device and Sensors APIs](https://www.w3.org/TR/)**
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre présente les capteurs mobiles (géolocalisation, mouvement, audio/vidéo, biométrie, etc.) et leurs usages. Il donne les APIs principales et les bonnes pratiques d’optimisation énergie. Il insiste sur les permissions, la sécurité et le respect de la vie privée.
 :::
 

@@ -319,7 +319,7 @@ TypeScript est un **filet de sécurité, pas une contrainte**.
 
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre introduit TypeScript, ses avantages par rapport à JavaScript et le typage de base. Il montre les fonctions, interfaces, null/undefined et l’usage dans Vue. Il conclut par des bonnes pratiques pour un typage progressif.
 :::
 

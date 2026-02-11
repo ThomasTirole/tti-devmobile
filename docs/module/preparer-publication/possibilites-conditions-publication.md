@@ -228,7 +228,7 @@ Votre réponse doit être **argumentée**.
 
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre présente les plateformes de publication, les comptes développeur et les types de diffusion (publique, privée, test, PWA). Il explique le rôle du MDM en entreprise. Il détaille les contraintes légales/techniques et les différences Android vs iOS, à anticiper dès la conception.
 :::
 

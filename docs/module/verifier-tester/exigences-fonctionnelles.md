@@ -202,7 +202,7 @@ Ce travail peut être réalisé :
 
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre définit les exigences fonctionnelles et les types de tests associés. Il guide la rédaction de cas de test, l’exécution et le reporting de bugs. Il rappelle l’importance des tests de régression.
 :::
 

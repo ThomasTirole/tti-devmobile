@@ -97,7 +97,7 @@ Bonus :
 | Cohérence globale    | ⭐⭐⭐         |
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce corrigé liste les attentes par chapitre (4.1, 4.2, 4.3), les points de vigilance et des bonus par cas. Il propose aussi une grille d’évaluation indicative. L’objectif est d’évaluer la cohérence et la justification des choix.
 :::
 

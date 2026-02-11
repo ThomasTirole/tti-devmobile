@@ -196,7 +196,7 @@ function handleClick() {
 :::
 
 ## 📔 TL;DR
-::: details Récapitulatif du chapitre
+::: details Récapitulatif du chapitre {open}
 Ce chapitre rappelle les principes UX mobile essentiels et explique la philosophie adaptative d’Ionic. Il liste les composants fondamentaux et la structure type d’une page. Une activité pratique met en œuvre ces composants.
 :::
 
