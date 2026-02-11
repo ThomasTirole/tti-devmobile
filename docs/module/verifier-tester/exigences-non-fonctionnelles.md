@@ -1,5 +1,7 @@
 # 🔍 5.2 Vérifier les exigences non fonctionnelles d'une application mobile
 
+<iframe src="https://slides.com/tirtho/5-2-verifier-les-exigences-non-fonctionnelles-d-une-application-mobile/embed" width="576" height="420" title="🔍 5.2 Vérifier les exigences non fonctionnelles d'une application mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 Une application mobile peut parfaitement fonctionner d'un point de vue fonctionnel, tout en offrant une **mauvaise expérience globale**.
 
 L'utilisateur arrive à effectuer les actions prévues, mais l'application est lente, peu lisible, instable ou peu agréable à utiliser.
