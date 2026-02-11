@@ -40,7 +40,7 @@ features:
     linkText : En savoir plus
   - title: 5. Vérifier et tester l'application mobile
     details: Tests fonctionnels et non-fonctionnels, rapport de tests
-    link: /module/verifier-tester-application/exigences-fonctionnelles
+    link: /module/verifier-tester/exigences-fonctionnelles
     linkText: En savoir plus
   - title: Exercices pratiques
     details: Atelier de mise en pratique des concepts vus en cours
