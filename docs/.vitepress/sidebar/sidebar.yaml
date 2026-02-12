@@ -64,6 +64,8 @@
       link: /module/verifier-tester/exigences-fonctionnelles
     - text: 🔍 Vérifier les exigences non fonctionnelles
       link: /module/verifier-tester/exigences-non-fonctionnelles
+    - text: 👨‍💻 Exercice - Tester une application
+      link: /module/verifier-tester/exercice-tester-app
 - text: 🛠️ Projets
   items:
     - text: ⚡ Apprendre Supabase
@@ -143,6 +145,11 @@
           link: /exercices/oiia-oiia/build-deploy
         - text: 8️⃣ Test et debug
           link: /exercices/oiia-oiia/test-debug
+- text: 💡 Tips & Tricks !
+  collapsed: true
+  items:
+    - text: 📥 Générer et installer une APK
+      link: /tips-and-tricks/generate-install-apk
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
