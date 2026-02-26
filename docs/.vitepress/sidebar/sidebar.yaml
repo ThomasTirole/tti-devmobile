@@ -150,6 +150,8 @@
   items:
     - text: 📥 Générer et installer une APK
       link: /tips-and-tricks/generate-install-apk
+    - text: 🤑 Monétiser une application mobile
+      link: /tips-and-tricks/monetiser-app
 #- text: Apprendre le développement mobile
 #  collapsed: true
 #  items:
