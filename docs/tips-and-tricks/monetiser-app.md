@@ -18,7 +18,7 @@ La monétisation est une réalité du marché : même les applications gratuites
 - comprendre le fonctionnement des **achats intégrés (IAP)** et leur intégration avec **RevenueCat** ;
 - comprendre ce que la monétisation implique pour la **publication** sur les stores.
 
-## B.1 — Les modèles de monétisation mobiles
+##  💰 B.1 — Les modèles de monétisation mobiles
 
 ### 💡 B.1.1 Vue d'ensemble
 
@@ -51,7 +51,7 @@ Un mauvais modèle de monétisation peut détruire une bonne application. Les pu
 
 Dans ce chapitre, nous nous concentrons sur deux approches pratiques : la **publicité avec Google AdMob** et les **achats intégrés (IAP)** avec RevenueCat.
 
-## B.2 — La publicité mobile avec Google AdMob
+##  📢 B.2 — La publicité mobile avec Google AdMob
 
 ### 📱 B.2.1 Qu'est-ce qu'AdMob ?
 
@@ -67,6 +67,8 @@ En tant que développeur, vous :
 ### 🎨 B.2.2 Les formats publicitaires
 
 Il existe plusieurs formats, chacun adapté à un contexte précis.
+
+![ads.png](/bonus/ads.png)
 
 #### 🔲 Bannière (`Banner`)
 Une petite bande publicitaire, affichée de manière **permanente** en haut ou en bas de l'écran.
@@ -139,7 +141,7 @@ Certaines interstitielles peuvent avoir un **délai jusqu'à 5 secondes** avant 
 - Déclencher une pub **en plein milieu** d'une action (formulaire, lecture, gameplay actif).
 - Afficher **plusieurs interstitielles à la suite** sans pause.
 - Placer le bouton "Fermer" de façon à le rendre **difficile à trouver ou à toucher**.
-- Déclencher une pub susceptible de provoenir d'un **clic accidentel** sur l'interface.
+- Déclencher une pub susceptible de provenir d'un **clic accidentel** sur l'interface.
 
 📎 [Interstitial ad guidance — Google AdMob](https://support.google.com/admob/answer/6066980)
 :::
@@ -158,7 +160,7 @@ Implémentez toujours un **cooldown** entre deux interstitielles. Une bonne prat
 - Pour les récompenses à fort enjeu (argent réel, contenu premium), utiliser la **vérification côté serveur (SSV)**.
   :::
 
-> 💬 Les pubs rewarded ont les **meilleurs eCPM** de tous les formats — souvent 5 à 15× plus élevés qu'une bannière — car l'engagement utilisateur est maximal : l'utilisateur a choisi de regarder.
+> 💬 Les pubs rewarded ont les **meilleurs eCPM** (effective Costs Per Mille, soit le revenu généré pour 1000 impressions publicitaires affichées) de tous les formats — souvent 5 à 15× plus élevés qu'une bannière — car l'engagement utilisateur est maximal : l'utilisateur a choisi de regarder.
 
 #### 📊 Estimations de revenus publicitaires (2024–2025)
 
@@ -170,7 +172,9 @@ Implémentez toujours un **cooldown** entre deux interstitielles. Une bonne prat
 
 > 💬 Ces valeurs sont indicatives et varient selon la région, la thématique de l'app et la qualité de l'audience. Un utilisateur européen ou nord-américain génère en moyenne 5 à 10× plus de revenus qu'un utilisateur d'Asie du Sud-Est.
 
-## B.3 — Les achats intégrés (In-App Purchases)
+<video src="/bonus/mobile-game-ads.mp4" controls style="width: 50%; border-radius: 8px;" />
+
+##  🛒 B.3 — Les achats intégrés (In-App Purchases)
 
 ### 🛒 B.3.1 Principe général
 
@@ -208,11 +212,9 @@ Voici ce qui se passe lorsqu'un utilisateur achète quelque chose dans une app :
 Pour les achats à fort enjeu (monnaie premium, abonnements), il est fortement recommandé de **valider le receipt côté serveur** pour éviter la fraude. C'est l'une des choses que RevenueCat gère automatiquement.
 :::
 
-### ⚙️ B.3.4 Implémenter les IAP avec RevenueCat
+### ⚙️ B.3.4 RevenueCat — pourquoi et comment ça marche
 
 Pour Ionic + Capacitor, la solution la plus fiable et la plus utilisée en production est **RevenueCat**. C'est un service qui abstrait les APIs de facturation d'Apple et Google en une API unifiée.
-
-#### Pourquoi RevenueCat ?
 
 | Sans RevenueCat | Avec RevenueCat |
 |-----------------|-----------------|
@@ -222,279 +224,27 @@ Pour Ionic + Capacitor, la solution la plus fiable et la plus utilisée en produ
 | Gestion complexe des abonnements (renouvellement, annulation, grace period) | Gestion entièrement automatique |
 | Gratuit | Gratuit jusqu'à 2 500$/mois de revenus gérés |
 
-#### Installation
+RevenueCat introduit trois concepts clés que vous retrouverez dans le code :
 
-```bash
-npm install @revenuecat/purchases-capacitor
-npx cap sync
-```
-
-#### Configuration Android
-
-Dans `android/app/src/main/AndroidManifest.xml`, vérifiez que le `launchMode` de votre Activity est `standard` ou `singleTop`. Certaines méthodes de paiement Google redirigent l'utilisateur vers une autre app pour valider — si le `launchMode` est mal configuré, l'achat peut être annulé automatiquement.
-
-```xml
-<activity
-  android:name="com.yourapp.MainActivity"
-  android:launchMode="singleTop" />
-```
-
-#### Configuration iOS
-
-Dans Xcode, activez la capability **In-App Purchase** : `Project Target → Capabilities → In-App Purchase`. Sans ça, les appels à RevenueCat échoueront silencieusement sur iOS.
-
-#### Initialisation dans `main.ts`
-
-```typescript
-// src/main.ts
-import { LOG_LEVEL, Purchases } from '@revenuecat/purchases-capacitor'
-
-const configure = async () => {
-  // En développement, activer les logs pour le debug
-  await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG })
-
-  await Purchases.configure({
-    apiKey:    'votre_cle_revenuecat', // Clé API depuis le dashboard RevenueCat
-    appUserID: 'id_utilisateur'        // Optionnel : pour lier à votre système d'auth
-  })
-}
-
-router.isReady().then(() => {
-  app.mount('#app')
-  configure()
-})
-```
-
-::: tip 💡 Note Vue.js importante
-Si vous utilisez les wrappers réactifs de Vue (`reactive`, `readonly`), passez les objets bruts — pas les Proxy — aux méthodes Capacitor avec `toRaw()`. C'est un comportement spécifique à Vue 3 qui peut causer des bugs subtils et difficiles à diagnostiquer.
-:::
-
-#### Composable `useIAP.ts`
-
-Dans la même logique que le composable AdMob, on encapsule toute la logique IAP :
-
-```typescript
-// src/composables/useIAP.ts
-import { Purchases, PurchasesOfferings } from '@revenuecat/purchases-capacitor'
-import { ref } from 'vue'
-
-export function useIAP() {
-  const offerings = ref<PurchasesOfferings | null>(null)
-  const isPremium = ref(false)
-  const isLoading = ref(false)
-  const error = ref<string | null>(null)
-
-  // ── Charger les offres disponibles ───────────────────────────
-  /**
-   * Récupère les "Offerings" configurées dans le dashboard RevenueCat.
-   * Une Offering est un ensemble de produits à proposer à l'utilisateur
-   * (ex: "Mensuel à 2.99€", "Annuel à 19.99€").
-   */
-  async function loadOfferings(): Promise<void> {
-    isLoading.value = true
-    error.value = null
-    try {
-      const result = await Purchases.getOfferings()
-      offerings.value = result.offerings
-    } catch (e: any) {
-      error.value = e?.message ?? 'Impossible de charger les offres'
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  // ── Vérifier le statut premium ───────────────────────────────
-  /**
-   * Vérifie si l'utilisateur a un accès premium actif.
-   * À appeler au démarrage de l'app et après chaque achat.
-   * "premium" est l'identifiant de l'entitlement dans RevenueCat.
-   */
-  async function checkPremiumStatus(): Promise<void> {
-    try {
-      const customerInfo = await Purchases.getCustomerInfo()
-      isPremium.value = customerInfo.customerInfo.entitlements.active['premium'] !== undefined
-    } catch (e: any) {
-      console.warn('[IAP] Impossible de vérifier le statut premium :', e)
-    }
-  }
-
-  // ── Acheter un package ───────────────────────────────────────
-  /**
-   * Déclenche l'achat d'un package (abonnement ou achat unique).
-   * Ouvre la fenêtre de paiement native du store.
-   * @returns true si l'achat est réussi et que l'utilisateur est maintenant premium
-   */
-  async function purchasePackage(packageToPurchase: any): Promise<boolean> {
-    isLoading.value = true
-    error.value = null
-    try {
-      const { customerInfo } = await Purchases.purchasePackage({ aPackage: packageToPurchase })
-      isPremium.value = customerInfo.entitlements.active['premium'] !== undefined
-      return isPremium.value
-    } catch (e: any) {
-      // L'utilisateur a annulé → pas une erreur à afficher à l'écran
-      if (e?.code !== 'PURCHASE_CANCELLED') {
-        error.value = e?.message ?? 'Erreur lors de l\'achat'
-      }
-      return false
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  // ── Restaurer les achats ─────────────────────────────────────
-  /**
-   * Restaure les achats précédents de l'utilisateur (ex : réinstallation de l'app).
-   * OBLIGATOIRE sur iOS : Apple exige un bouton "Restaurer les achats" dans toute
-   * app contenant des achats intégrés.
-   */
-  async function restorePurchases(): Promise<void> {
-    isLoading.value = true
-    error.value = null
-    try {
-      const { customerInfo } = await Purchases.restorePurchases()
-      isPremium.value = customerInfo.entitlements.active['premium'] !== undefined
-    } catch (e: any) {
-      error.value = e?.message ?? 'Impossible de restaurer les achats'
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  return {
-    offerings,
-    isPremium,
-    isLoading,
-    error,
-    loadOfferings,
-    checkPremiumStatus,
-    purchasePackage,
-    restorePurchases,
-  }
-}
-```
-
-#### Exemple de page Paywall
-
-```vue
-<!-- src/views/PaywallPage.vue -->
-<template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Passer Premium ⭐</ion-title>
-        <ion-buttons slot="end">
-          <ion-button router-link="/tabs/home">Fermer</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content class="ion-padding">
-
-      <div v-if="isLoading" class="ion-text-center ion-padding">
-        <ion-spinner />
-        <p>Chargement des offres...</p>
-      </div>
-
-      <ion-card v-else-if="error" color="danger">
-        <ion-card-content>{{ error }}</ion-card-content>
-      </ion-card>
-
-      <ion-card v-else-if="isPremium" color="success">
-        <ion-card-header>
-          <ion-card-title>⭐ Vous êtes Premium !</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          Vous avez accès à toutes les fonctionnalités.
-        </ion-card-content>
-      </ion-card>
-
-      <template v-else-if="offerings?.current">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Fonctionnalités Premium</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>✅ Sans publicité</p>
-            <p>✅ Accès illimité au contenu</p>
-            <p>✅ Fonctionnalités exclusives</p>
-          </ion-card-content>
-        </ion-card>
-
-        <!-- Packages disponibles (mensuel, annuel, ...) -->
-        <ion-list>
-          <ion-item
-            v-for="pkg in offerings.current.availablePackages"
-            :key="pkg.identifier"
-            button
-            @click="purchase(pkg)"
-          >
-            <ion-label>
-              <h2>{{ pkg.product.title }}</h2>
-              <p>{{ pkg.product.description }}</p>
-            </ion-label>
-            <ion-note slot="end">
-              {{ pkg.product.priceString }}
-            </ion-note>
-          </ion-item>
-        </ion-list>
-
-        <!-- Obligatoire sur iOS -->
-        <ion-button expand="block" fill="clear" @click="restorePurchases">
-          Restaurer mes achats
-        </ion-button>
-      </template>
-
-    </ion-content>
-  </ion-page>
-</template>
-
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import {
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonList, IonItem, IonLabel, IonNote, IonSpinner
-} from '@ionic/vue'
-import { useIAP } from '@/composables/useIAP'
-
-const {
-  offerings, isPremium, isLoading, error,
-  loadOfferings, checkPremiumStatus, purchasePackage, restorePurchases
-} = useIAP()
-
-async function purchase(pkg: any) {
-  await purchasePackage(pkg)
-}
-
-onMounted(async () => {
-  await checkPremiumStatus()
-  await loadOfferings()
-})
-</script>
-```
-
-::: details 🔧 Ce qu'il faut configurer dans les stores avant de tester
-**Dans Google Play Console :**
-1. Créer un abonnement (ou produit) dans l'onglet "Monétisation"
-2. Définir un ID de produit (ex: `premium_monthly`)
-3. Définir un prix et une période de facturation
-4. Publier sur la piste de test interne
-
-**Dans App Store Connect :**
-1. Créer un abonnement auto-renouvelable dans "Fonctionnalités → Achats intégrés"
-2. Définir un nom localisé, un ID et un prix
-3. Activer la capability In-App Purchase dans Xcode
-
-**Dans le dashboard RevenueCat :**
-1. Créer un **Product** lié à l'ID de votre produit store
-2. Créer un **Entitlement** (ex: `premium`) et y associer ce produit
-3. Créer une **Offering** (ex: `default`) avec les packages à proposer à l'utilisateur
+- **Product** : un produit défini dans le store (ex : `premium_monthly` sur Google Play)
+- **Entitlement** : un accès que l'utilisateur débloque en achetant (ex : `premium`) — c'est ce que votre app vérifie
+- **Offering** : l'ensemble des packages à proposer à l'utilisateur sur l'écran paywall (ex : mensuel + annuel)
 
 > 💬 RevenueCat sert d'intermédiaire : il écoute les événements de facturation des stores, valide les reçus côté serveur, et expose une API unifiée à votre app. Sans lui, vous auriez deux intégrations complètement différentes à maintenir.
+
+::: warning ⚠️ Prérequis pour tester les IAP
+Contrairement à AdMob qui fonctionne immédiatement en local avec des IDs de test, les achats intégrés nécessitent que votre app soit **publiée sur une piste de test interne** de Google Play ou App Store avant de pouvoir tester la fenêtre de paiement native. RevenueCat ne peut pas simuler cela en local.
+
+Tester les achats intégrés nécessite plusieurs prérequis qui dépassent le cadre de cet atelier :
+- un compte RevenueCat créé et configuré avec votre app
+- des produits créés et publiés dans Google Play Console ou App Store Connect
+- votre app publiée sur une piste de test interne du store
+
+**Dans cet exercice, concentrez-vous sur AdMob** — les trois formats publicitaires (bannière, interstitielle, rewarded) fonctionnent immédiatement en local avec les IDs de test. Le code IAP est là pour que vous puissiez l'utiliser dans vos projets personnels une fois les prérequis remplis.
 :::
 
-## B.4 — Implications pour la publication
+
+##  📋 B.4 — Implications pour la publication
 
 Avant de publier une app avec monétisation, plusieurs étapes supplémentaires sont nécessaires par rapport à une app classique.
 
@@ -537,73 +287,77 @@ AdMob fournit des **IDs publicitaires de test officiels**, à utiliser pendant l
 Utiliser vos IDs de production pour tester = générer de faux clics = **suspension immédiate et définitive** du compte AdMob. Toujours utiliser les IDs de test pendant le développement.
 :::
 
-## B.5 — Mise en pratique : projet AdMob de A à Z
+##  🔨 B.5 — Mise en pratique : projet AdMob de A à Z
 
-Passons à la pratique ! Nous allons créer un petit projet Ionic-Vue qui démontre les trois formats publicitaires.
+Passons à la pratique ! Nous allons créer un petit projet Ionic-Vue qui démontre les trois formats publicitaires ainsi qu'un écran de paywall IAP.
 
 > 🎯 **Objectif du projet** : une mini-app "QuizFlash" avec :
-> - une **bannière** permanente en bas
-> - une **interstitielle** affichée après une transition naturelle (avec cooldown)
-> - une pub **rewarded** pour débloquer un indice
+> - **Tab 1** — Quiz avec bannière en bas, interstitielle entre les questions (cooldown), rewarded pour un indice
+> - **Tab 2** — Écran Paywall avec les offres IAP
 
-### B.5.1 — Créer le projet
-
+### B.5.1 — Créer et préparer le projet
 ```bash
 ionic start quizflash-admob tabs --type=vue --capacitor
 cd quizflash-admob
 ```
 
-### B.5.2 — Installer le plugin AdMob
-
+Vérifiez votre version de Capacitor si besoin :
 ```bash
-npm install @capacitor-community/admob@6
-npx cap update
+npx cap --version
 ```
 
-::: warning ⚠️ Version
-Ce chapitre utilise `@capacitor-community/admob@6`, compatible avec Capacitor 6. Pour Capacitor 7, installez `@capacitor-community/admob@7`.
+Installez les plugins :
+```bash
+npm install @capacitor-community/admob@8 # remplacez selon version de Capacitor
+npm install @revenuecat/purchases-capacitor
+```
+
+Ajoutez la plateforme Android et synchronisez :
+```bash
+npx cap add android      # génère le dossier android/ (une seule fois)
+ionic build              # compile le projet web dans www/
+npx cap sync             # copie www/ dans android/ et installe les plugins natifs
+```
+
+::: warning ⚠️ L'ordre compte
+`npx cap add android` doit être fait **avant** d'éditer les fichiers natifs — il génère la structure `android/`. `ionic build` ne touche jamais à `AndroidManifest.xml` ni à `strings.xml` : ces fichiers sont sous votre contrôle dès leur création et `cap sync` ne les écrase pas.
+
+Vérification de la version : `npx cap --version`. Ce chapitre utilise `admob@8` pour Capacitor 8, utilisez `admob@7` pour Capacitor 7, `admob@6` pour Capacitor 6...
 :::
 
-### B.5.3 — Configuration Android
+### B.5.2 — Configuration Android
+
+Une fois le dossier `android/` généré, éditez les deux fichiers suivants.
 
 Dans `android/app/src/main/AndroidManifest.xml`, ajoutez à l'intérieur de `<application>` :
-
 ```xml
 <meta-data
   android:name="com.google.android.gms.ads.APPLICATION_ID"
   android:value="@string/admob_app_id"/>
 ```
 
-Dans `android/app/src/main/res/values/strings.xml`, ajoutez :
+Si votre app contient des **achats intégrés (IAP)**, vérifiez également que le `launchMode` de votre Activity est `standard` ou `singleTop`. Avec `singleTask` ou `singleInstance`, certaines méthodes de paiement Google redirigent l'utilisateur vers une app bancaire pour valider — au retour, Android recrée une nouvelle instance de l'activité et l'achat est annulé automatiquement.
+```xml
+<activity
+  android:name="com.yourapp.MainActivity"
+  android:launchMode="singleTop" /> <!-- ← ne pas utiliser singleTask avec les IAP -->
+```
 
+Dans `android/app/src/main/res/values/strings.xml`, ajoutez :
 ```xml
 <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
 ```
 
 > 💬 Cet ID est l'**App ID de test officiel** de Google. En production, il sera remplacé par votre propre App ID AdMob.
-
-### B.5.4 — Configuration iOS (si applicable)
-
-Dans `ios/App/App/Info.plist`, ajoutez dans le `<dict>` principal :
-
-```xml
-<key>GADApplicationIdentifier</key>
-<string>ca-app-pub-3940256099942544~1458002511</string>
-<key>NSUserTrackingUsageDescription</key>
-<string>Cet identifiant sera utilisé pour vous proposer des publicités personnalisées.</string>
-```
-
-### B.5.5 — Composable `useAdMob.ts`
+### B.5.3 — Composable `useAdMob.ts`
 
 Créez `src/composables/useAdMob.ts` :
 
-```typescript
-// src/composables/useAdMob.ts
+```typescript [src/composables/useAdMob.ts]
 import {
-  AdMob,
-  BannerAdOptions, BannerAdSize, BannerAdPosition,
-  AdOptions, RewardAdOptions,
-  AdmobConsentStatus
+    AdMob,
+    BannerAdOptions, BannerAdSize, BannerAdPosition,
+    AdmobConsentStatus,
 } from '@capacitor-community/admob'
 
 // ─── IDs publicitaires ──────────────────────────────────────────
@@ -612,9 +366,9 @@ import {
 const IS_TESTING = true
 
 const AD_IDS = {
-  banner:       IS_TESTING ? 'ca-app-pub-3940256099942544/6300978111'  : 'VOTRE_ID_BANNER',
-  interstitial: IS_TESTING ? 'ca-app-pub-3940256099942544/1033173712' : 'VOTRE_ID_INTERSTITIAL',
-  rewarded:     IS_TESTING ? 'ca-app-pub-3940256099942544/5224354917' : 'VOTRE_ID_REWARDED',
+    banner:       IS_TESTING ? 'ca-app-pub-3940256099942544/6300978111'  : 'VOTRE_ID_BANNER',
+    interstitial: IS_TESTING ? 'ca-app-pub-3940256099942544/1033173712' : 'VOTRE_ID_INTERSTITIAL',
+    rewarded:     IS_TESTING ? 'ca-app-pub-3940256099942544/5224354917' : 'VOTRE_ID_REWARDED',
 }
 
 // ─── Cooldown interstitiel ──────────────────────────────────────
@@ -624,99 +378,95 @@ const INTERSTITIAL_COOLDOWN_MS = 3 * 60 * 1000 // 3 minutes minimum
 
 export function useAdMob() {
 
-  // ── Initialisation ────────────────────────────────────────────
-  /**
-   * À appeler UNE SEULE FOIS au démarrage dans main.ts.
-   * Gère le consentement RGPD (UMP) et l'ATT sur iOS 14+.
-   */
-  async function initialize(): Promise<void> {
-    await AdMob.initialize()
+    // ── Initialisation ────────────────────────────────────────────
+    /**
+     * À appeler UNE SEULE FOIS au démarrage dans main.ts.
+     * Gère le consentement RGPD (UMP) et l'ATT sur iOS 14+.
+     */
+    async function initialize(): Promise<void> {
+        await AdMob.initialize()
 
-    const consentInfo = await AdMob.requestConsentInfo()
-    if (
-      consentInfo.isConsentFormAvailable &&
-      consentInfo.status === AdmobConsentStatus.REQUIRED
-    ) {
-      await AdMob.showConsentForm()
+        const consentInfo = await AdMob.requestConsentInfo()
+        if (consentInfo.isConsentFormAvailable && consentInfo.status === AdmobConsentStatus.REQUIRED) {
+            await AdMob.showConsentForm()
+        }
+
+        const trackingInfo = await AdMob.trackingAuthorizationStatus()
+        if (trackingInfo.status === 'notDetermined') {
+            await AdMob.requestTrackingAuthorization()
+        }
     }
 
-    const trackingInfo = await AdMob.trackingAuthorizationStatus()
-    if (trackingInfo.status === 'notDetermined') {
-      await AdMob.requestTrackingAuthorization()
+    // ── Bannière ──────────────────────────────────────────────────
+    async function showBanner(): Promise<void> {
+        const options: BannerAdOptions = {
+            adId:     AD_IDS.banner,
+            adSize:   BannerAdSize.ADAPTIVE_BANNER, // format recommandé par Google
+            position: BannerAdPosition.BOTTOM_CENTER,
+        }
+        await AdMob.showBanner(options)
     }
-  }
 
-  // ── Bannière ──────────────────────────────────────────────────
-  async function showBanner(): Promise<void> {
-    const options: BannerAdOptions = {
-      adId:     AD_IDS.banner,
-      adSize:   BannerAdSize.ADAPTIVE_BANNER, // Format recommandé par Google
-      position: BannerAdPosition.BOTTOM_CENTER,
-      margin:   0,
+    async function hideBanner(): Promise<void> { await AdMob.hideBanner() }
+
+    /**
+     * Détruit la bannière. À appeler dans onUnmounted.
+     */
+    async function removeBanner(): Promise<void> { await AdMob.removeBanner() }
+
+    // ── Interstitiel ──────────────────────────────────────────────
+    /**
+     * Pré-charge en arrière-plan (à faire avant d'en avoir besoin).
+     * Bonne pratique : charger la pub avant d'en avoir besoin
+     * pour éviter un délai au moment de l'affichage.
+     */
+    async function prepareInterstitial(): Promise<void> {
+        await AdMob.prepareInterstitial({ adId: AD_IDS.interstitial })
     }
-    await AdMob.showBanner(options)
-  }
 
-  async function hideBanner(): Promise<void> {
-    await AdMob.hideBanner()
-  }
-
-  async function removeBanner(): Promise<void> {
-    await AdMob.removeBanner()
-  }
-
-  // ── Interstitiel ──────────────────────────────────────────────
-  /**
-   * Pré-charge en arrière-plan (à faire avant d'en avoir besoin).
-   */
-  async function prepareInterstitial(): Promise<void> {
-    const options: AdOptions = { adId: AD_IDS.interstitial }
-    await AdMob.prepareInterstitial(options)
-  }
-
-  /**
-   * Affiche l'interstitielle si le cooldown est respecté.
-   * @returns true si la pub a été affichée
-   */
-  async function showInterstitial(): Promise<boolean> {
-    const now = Date.now()
-    if (now - lastInterstitialTime < INTERSTITIAL_COOLDOWN_MS) {
-      console.log('[AdMob] Cooldown actif — interstitielle ignorée.')
-      return false
+    /**
+     * Affiche l'interstitielle uniquement si le cooldown est respecté.
+     * Respecte les guidelines AdMob (pas de spam).
+     * @returns true si la pub a été affichée
+     */
+    async function showInterstitial(): Promise<boolean> {
+        const now = Date.now()
+        if (now - lastInterstitialTime < INTERSTITIAL_COOLDOWN_MS) {
+            console.log('[AdMob] Cooldown actif — interstitielle ignorée.')
+            return false
+        }
+        try {
+            await AdMob.showInterstitial()
+            lastInterstitialTime = now
+            return true
+        } catch (e) {
+            console.warn('[AdMob] Interstitiale non disponible :', e)
+            return false
+        }
     }
-    try {
-      await AdMob.showInterstitial()
-      lastInterstitialTime = now
-      return true
-    } catch (e) {
-      console.warn('[AdMob] Interstitiale non disponible :', e)
-      return false
-    }
-  }
 
-  // ── Rewarded ──────────────────────────────────────────────────
-  /**
-   * Affiche une pub rewarded et retourne la récompense si l'utilisateur
-   * a regardé la vidéo jusqu'au bout. Retourne null sinon.
-   */
-  async function showRewardedAd(): Promise<{ type: string; amount: number } | null> {
-    const options: RewardAdOptions = { adId: AD_IDS.rewarded }
-    try {
-      await AdMob.prepareRewardVideoAd(options)
-      const reward = await AdMob.showRewardVideoAd()
-      return { type: reward.type, amount: reward.amount }
-    } catch (e) {
-      console.warn('[AdMob] Rewarded non disponible :', e)
-      return null
+    // ── Rewarded ──────────────────────────────────────────────────
+    /**
+     * Affiche une pub rewarded et retourne la récompense si l'utilisateur
+     * a regardé la vidéo jusqu'au bout. Retourne null sinon.
+     */
+    async function showRewardedAd(): Promise<{ type: string; amount: number } | null> {
+        try {
+            await AdMob.prepareRewardVideoAd({ adId: AD_IDS.rewarded })
+            const reward = await AdMob.showRewardVideoAd()
+            return { type: reward.type, amount: reward.amount }
+        } catch (e) {
+            console.warn('[AdMob] Rewarded non disponible :', e)
+            return null
+        }
     }
-  }
 
-  return {
-    initialize,
-    showBanner, hideBanner, removeBanner,
-    prepareInterstitial, showInterstitial,
-    showRewardedAd,
-  }
+    return {
+        initialize,
+        showBanner, hideBanner, removeBanner,
+        prepareInterstitial, showInterstitial,
+        showRewardedAd,
+    }
 }
 ```
 
@@ -724,10 +474,9 @@ export function useAdMob() {
 Même logique qu'au chapitre **2.3** : la **page** ne doit pas connaître les détails d'AdMob. Le **composable** encapsule les IDs, le cooldown, la gestion d'erreurs et le consentement RGPD. Si demain vous changez de régie pub, vous ne touchez qu'à ce fichier.
 :::
 
-### B.5.6 — Initialiser AdMob dans `main.ts`
+### B.5.4 — Initialiser AdMob dans `main.ts`
 
-```typescript
-// src/main.ts
+```typescript [src/main.ts]
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -748,10 +497,11 @@ async function bootstrap() {
 bootstrap()
 ```
 
-### B.5.7 — Page avec les trois formats
+### B.5.5 — Tab 1 : Quiz avec les trois formats publicitaires
 
-```vue
-<!-- src/views/Tab1Page.vue -->
+La bannière AdMob s'affiche par-dessus l'interface native — elle ne connaît pas la barre de tabs. Sans ajustement, elle masque le bas du contenu ou se superpose aux onglets.
+
+```vue [src/views/Tab1Page.vue]
 <template>
   <ion-page>
     <ion-header>
@@ -781,124 +531,314 @@ bootstrap()
       </ion-card>
 
       <ion-toast
-        :is-open="toastOpen"
-        :message="toastMessage"
-        :duration="3000"
-        @didDismiss="toastOpen = false"
+          :is-open="toastOpen"
+          :message="toastMessage"
+          :duration="3000"
+          @didDismiss="toastOpen = false"
       />
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
+  import {
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    IonButton, IonToast
+  } from '@ionic/vue'
+  import { useAdMob } from '@/composables/useAdMob'
+
+  const { showBanner, removeBanner, prepareInterstitial, showInterstitial, showRewardedAd } = useAdMob()
+
+  const questions = [
+    { text: 'Quelle est la capitale de la Suisse ?' },
+    { text: 'Combien font 7 × 8 ?' },
+    { text: 'En quelle année a eu lieu la Révolution française ?' },
+    { text: 'Quel est le symbole chimique de l\'or ?' },
+    { text: 'Combien de côtés a un hexagone ?' },
+  ]
+  const currentQuestion = ref(0)
+  const toastOpen = ref(false)
+  const toastMessage = ref('')
+
+  function showToast(msg: string) {
+    toastMessage.value = msg
+    toastOpen.value = true
+  }
+
+  async function nextQuestion() {
+    currentQuestion.value = (currentQuestion.value + 1) % questions.length
+
+    // Transition naturelle → on tente l'interstitielle (le cooldown gère le rythme)
+    const shown = await showInterstitial()
+    if (!shown) {
+      // Pas affichée (cooldown) → on précharge pour la prochaine transition
+      await prepareInterstitial()
+    }
+  }
+
+  async function getHint() {
+    showToast('⏳ Chargement de la vidéo...')
+    const reward = await showRewardedAd()
+
+    if (reward) {
+      showToast(`🎉 Indice débloqué ! (récompense : ${reward.amount} ${reward.type})`)
+    } else {
+      showToast('❌ Vidéo non disponible, réessayez plus tard.')
+    }
+  }
+
+  onMounted(async () => {
+    await showBanner()           // Bannière dès l'arrivée sur la page
+    await prepareInterstitial()  // Pré-chargement en arrière-plan
+  })
+
+  onUnmounted(async () => {
+    await removeBanner()         // Nettoyage propre à la sortie
+  })
+</script>
+```
+
+::: tip 💭 Récap des 3 formats dans cette page
+- **Bannière** : affichée automatiquement dans `onMounted`, retirée dans `onUnmounted`
+- **Interstitiel** : tentée lors d'une transition naturelle (`nextQuestion`), cooldown géré dans le composable
+- **Rewarded** : déclenchée uniquement sur action explicite de l'utilisateur (`getHint`)
+:::
+
+### B.5.6 — Composable `useIAP.ts`
+```typescript [src/composables/useIAP.ts]
+import { Purchases, PurchasesOffering } from '@revenuecat/purchases-capacitor'
+import { ref, toRaw } from 'vue'
+
+export function useIAP() {
+  const offering = ref<PurchasesOffering | null>(null)
+  const isPremium = ref(false)
+  const isLoading = ref(false)
+  const error = ref<string | null>(null)
+
+  // ── Charger l'offre active ────────────────────────────────────
+  /**
+   * Récupère l'Offering "default" configurée dans RevenueCat.
+   * Contient les packages à proposer (mensuel, annuel, etc.).
+   */
+  async function loadOffering(): Promise<void> {
+    isLoading.value = true
+    error.value = null
+    try {
+      const result = await Purchases.getOfferings()
+      offering.value = result.current ?? null
+    } catch (e: any) {
+      error.value = e?.message ?? 'Impossible de charger les offres'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  // ── Vérifier le statut premium ───────────────────────────────
+  /**
+   * Vérifie si l'utilisateur a un accès premium actif.
+   * À appeler au démarrage de l'app et après chaque achat.
+   * "premium" est l'identifiant de l'entitlement dans RevenueCat.
+   */
+  async function checkPremiumStatus(): Promise<void> {
+    try {
+      const { customerInfo } = await Purchases.getCustomerInfo()
+      isPremium.value = customerInfo.entitlements.active['premium'] !== undefined
+    } catch (e: any) {
+      console.warn('[IAP] Impossible de vérifier le statut premium :', e)
+    }
+  }
+
+  // ── Acheter un package ───────────────────────────────────────
+  /**
+   * Déclenche l'achat d'un package (abonnement ou achat unique).
+   * toRaw() est nécessaire pour éviter que Vue passe un Proxy à Capacitor.
+   */
+  async function purchasePackage(packageToPurchase: any): Promise<boolean> {
+    isLoading.value = true
+    error.value = null
+    try {
+      const { customerInfo } = await Purchases.purchasePackage({
+        aPackage: toRaw(packageToPurchase)
+      })
+      isPremium.value = customerInfo.entitlements.active['premium'] !== undefined
+      return isPremium.value
+    } catch (e: any) {
+      if (e?.code !== 'PURCHASE_CANCELLED') {
+        error.value = e?.message ?? 'Erreur lors de l\'achat'
+      }
+      return false
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  // ── Restaurer les achats ─────────────────────────────────────
+  /**
+   * OBLIGATOIRE sur iOS : Apple exige un bouton "Restaurer les achats"
+   * dans toute app contenant des achats intégrés.
+   */
+  async function restorePurchases(): Promise<void> {
+    isLoading.value = true
+    error.value = null
+    try {
+      const { customerInfo } = await Purchases.restorePurchases()
+      isPremium.value = customerInfo.entitlements.active['premium'] !== undefined
+    } catch (e: any) {
+      error.value = e?.message ?? 'Impossible de restaurer les achats'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  return {
+    offering,
+    isPremium,
+    isLoading,
+    error,
+    loadOffering,
+    checkPremiumStatus,
+    purchasePackage,
+    restorePurchases,
+  }
+}
+```
+
+::: details 🔧 Ce qu'il faut configurer dans les stores avant de tester
+
+> ⚠️ **Rappel** :
+Ces étapes ne permettront pas de tester les achats en local. Le Tab 2 affichera "Aucune offre disponible" tant que tout n'est pas configuré — c'est normal.
+
+
+**1. Créer un compte RevenueCat**
+
+Rendez-vous sur [app.revenuecat.com](https://app.revenuecat.com) et créez un compte gratuit (GitHub ou email). Créez un **projet**, puis ajoutez une **app** en choisissant Google Play Store ou App Store et en renseignant le package name de votre app (visible dans `android/app/build.gradle`, champ `applicationId`).
+
+RevenueCat vous génère une **clé API publique** — c'est elle qui va dans `main.ts` :
+
+```typescript
+await Purchases.configure({
+  apiKey: 'appl_XXXXXXXXXXXXXXXX', // votre clé API RevenueCat
+})
+```
+
+**2. Créer un produit dans le store**
+
+Dans **Google Play Console** (onglet "Monétisation → Abonnements") ou **App Store Connect**, créez un produit et notez son **ID** (ex: `premium_monthly`). Sur iOS, activez aussi la capability **In-App Purchase** dans Xcode.
+
+**3. Relier le produit dans RevenueCat**
+
+Dans votre projet RevenueCat :
+1. **Products** → Add product → collez l'ID du produit store
+2. **Entitlements** → Create → nommez-le `premium` → associez-y le produit
+3. **Offerings** → Create → nommez-la `default` → ajoutez un package → reliez-le au produit
+
+**4. Publier sur la piste de test interne**
+
+Votre app doit être uploadée au moins une fois sur la **piste de test interne** de Google Play pour que la fenêtre de paiement native s'ouvre. Un simple APK signé suffit — l'app n'a pas besoin d'être publique.
+
+Liens utiles : [Dashboard RevenueCat](https://app.revenuecat.com) · [Google Play Console](https://play.google.com/console) · [App Store Connect](https://appstoreconnect.apple.com) · [Doc RevenueCat Capacitor](https://www.revenuecat.com/docs/getting-started/installation/capacitor)
+:::
+
+### B.5.7 — Tab 2 : Écran Paywall (IAP)
+```vue [src/views/Tab2Page.vue]
+<template>
+  <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Premium ⭐</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+
+      <div v-if="isLoading" class="ion-text-center ion-padding">
+        <ion-spinner />
+        <p>Chargement des offres...</p>
+      </div>
+
+      <ion-card v-else-if="error" color="danger">
+        <ion-card-content>{{ error }}</ion-card-content>
+      </ion-card>
+
+      <ion-card v-else-if="isPremium" color="success">
+        <ion-card-header>
+          <ion-card-title>⭐ Vous êtes Premium !</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>Vous avez accès à toutes les fonctionnalités.</ion-card-content>
+      </ion-card>
+
+      <template v-else-if="offering">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Passer Premium</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>✅ Sans publicité</p>
+            <p>✅ Accès illimité au contenu</p>
+            <p>✅ Fonctionnalités exclusives</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-list>
+          <ion-item
+            v-for="pkg in offering.availablePackages"
+            :key="pkg.identifier"
+            button
+            @click="purchasePackage(pkg)"
+          >
+            <ion-label>
+              <h2>{{ pkg.product.title }}</h2>
+              <p>{{ pkg.product.description }}</p>
+            </ion-label>
+            <ion-note slot="end">{{ pkg.product.priceString }}</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <!-- Obligatoire sur iOS -->
+        <ion-button expand="block" fill="clear" @click="restorePurchases">
+          Restaurer mes achats
+        </ion-button>
+      </template>
+
+      <ion-card v-else>
+        <ion-card-content class="ion-text-center">
+          <p>Aucune offre disponible.</p>
+          <p><small>RevenueCat doit être configuré avec un vrai compte et des produits publiés sur le store.</small></p>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-content>
+  </ion-page>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
 import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
   IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-  IonButton, IonToast
+  IonList, IonItem, IonLabel, IonNote, IonSpinner, IonButton
 } from '@ionic/vue'
-import { useAdMob } from '@/composables/useAdMob'
+import { useIAP } from '@/composables/useIAP'
 
-const { showBanner, removeBanner, prepareInterstitial, showInterstitial, showRewardedAd } = useAdMob()
-
-const questions = [
-  { text: 'Quelle est la capitale de la Suisse ?' },
-  { text: 'Combien font 7 × 8 ?' },
-  { text: 'En quelle année a eu lieu la Révolution française ?' },
-  { text: 'Quel est le symbole chimique de l\'or ?' },
-  { text: 'Combien de côtés a un hexagone ?' },
-]
-const currentQuestion = ref(0)
-const toastOpen = ref(false)
-const toastMessage = ref('')
-
-function showToast(msg: string) {
-  toastMessage.value = msg
-  toastOpen.value = true
-}
-
-async function nextQuestion() {
-  currentQuestion.value = (currentQuestion.value + 1) % questions.length
-
-  // Transition naturelle → on tente l'interstitielle (le cooldown gère le rythme)
-  const shown = await showInterstitial()
-  if (!shown) {
-    // Pas affichée (cooldown) → on précharge pour la prochaine transition
-    await prepareInterstitial()
-  }
-}
-
-async function getHint() {
-  showToast('⏳ Chargement de la vidéo...')
-  const reward = await showRewardedAd()
-
-  if (reward) {
-    showToast(`🎉 Indice débloqué ! (récompense : ${reward.amount} ${reward.type})`)
-  } else {
-    showToast('❌ Vidéo non disponible, réessayez plus tard.')
-  }
-}
+const {
+  offering, isPremium, isLoading, error,
+  loadOffering, checkPremiumStatus, purchasePackage, restorePurchases
+} = useIAP()
 
 onMounted(async () => {
-  await showBanner()           // Bannière dès l'arrivée sur la page
-  await prepareInterstitial()  // Pré-chargement en arrière-plan
-})
-
-onUnmounted(async () => {
-  await removeBanner()         // Nettoyage propre à la sortie
+  await checkPremiumStatus()
+  await loadOffering()
 })
 </script>
 ```
 
-::: tip 💭 Récap des 3 formats dans ce fichier
-- **Bannière** : affichée automatiquement dans `onMounted`, retirée dans `onUnmounted`
-- **Interstitiel** : tentée lors d'une transition naturelle (`nextQuestion`), cooldown géré dans le composable
-- **Rewarded** : déclenchée uniquement sur action explicite de l'utilisateur (`getHint`)
-  :::
-
-### B.5.8 — Tester sur Android
-
-AdMob nécessite un vrai SDK mobile — le navigateur ne suffit pas. Buildez et déployez sur Android :
-
-```bash
-ionic build
-npx cap sync android
-npx cap open android
-```
-
-Dans Android Studio, branchez votre téléphone ou lancez un émulateur, puis cliquez sur **Run ▶️**.
-
-::: info ℹ️ Ce que vous devriez voir
-- Une **bannière** en bas de l'écran dès l'ouverture
-- Une **interstitielle** après plusieurs clics sur "Question suivante" (cooldown de 3 minutes)
-- Une **vidéo rewarded** après le clic sur "Obtenir un indice"
-
-Tous ces formats affichent la mention **"Test Ad"** en mode test — c'est tout à fait normal.
-:::
-
-### B.5.9 — Passer en production
-
-Quand votre application est prête à être publiée :
-
-**1.** Créez un compte sur [admob.google.com](https://admob.google.com), ajoutez votre application, et créez une unité publicitaire pour chaque format.
-
-**2.** Dans `useAdMob.ts`, passez `IS_TESTING = false` et renseignez vos vrais IDs :
-
-```typescript
-const IS_TESTING = false // [!code ++]
-
-const AD_IDS = {
-  banner:       'ca-app-pub-XXXXXXXX/XXXXXXXXXX', // [!code ++]
-  interstitial: 'ca-app-pub-XXXXXXXX/XXXXXXXXXX', // [!code ++]
-  rewarded:     'ca-app-pub-XXXXXXXX/XXXXXXXXXX', // [!code ++]
-}
-```
-
-**3.** Mettez à jour l'**App ID** dans `AndroidManifest.xml` et `Info.plist` avec votre vrai App ID AdMob.
+**3.** Mettez à jour l'**App ID** dans `strings.xml` (Android) et `Info.plist` (iOS).
 
 **4.** Déclarez l'usage d'AdMob dans Google Play Console et App Store Connect.
 
-## B.6 — Bonnes pratiques et éthique de la monétisation
+## 🤝 B.6 — Bonnes pratiques et éthique de la monétisation
 
 Monétiser une application, c'est aussi accepter une **responsabilité envers ses utilisateurs**.
 
@@ -922,11 +862,12 @@ Monétiser une application, c'est aussi accepter une **responsabilité envers se
 
 **🎯 Objectif :** intégrer une bannière de test dans le projet Ionic développé durant l'atelier.
 
-1. Installez `@capacitor-community/admob@6` dans votre projet existant.
-2. Configurez `AndroidManifest.xml` avec l'App ID de test.
-3. Créez le composable `useAdMob.ts` en vous basant sur celui du cours.
-4. Ajoutez une bannière sur la page principale de votre application.
-5. Vérifiez qu'elle s'affiche correctement sur l'émulateur ou votre appareil.
+1. Installez `@capacitor-community/admob@8` dans votre projet existant.
+2. Faites `npx cap add android` si ce n'est pas encore fait, puis `ionic build` et `npx cap sync`.
+3. Configurez `AndroidManifest.xml` et `strings.xml` avec l'App ID de test.
+4. Créez le composable `useAdMob.ts` en vous basant sur celui du cours.
+5. Ajoutez une bannière sur la page principale — pensez au `margin` si votre app a des tabs.
+6. Vérifiez qu'elle s'affiche correctement sur l'émulateur ou votre appareil.
 
 🏆 **Bonus :** ajoutez une interstitielle déclenchée après une action de votre choix, avec un cooldown de 2 minutes.
 
@@ -946,5 +887,5 @@ Monétiser une application, c'est aussi accepter une **responsabilité envers se
 
 ## 📔 TL;DR
 ::: details Récapitulatif du chapitre {open}
-Ce chapitre bonus couvre la monétisation mobile sous deux angles. Pour la **publicité**, il présente les trois formats AdMob (bannière, interstitielle, rewarded), leurs guidelines officielles Google par format (placement, cooldown, interdictions), et leur implémentation dans un composable `useAdMob.ts` réutilisable incluant la gestion du consentement RGPD. Pour les **achats intégrés (IAP)**, il explique les trois types de produits (consommable, non-consommable, abonnement), le flux d'un achat via le store, et l'implémentation avec RevenueCat (`@revenuecat/purchases-capacitor`) — solution recommandée pour sa gestion unifiée iOS + Android. Le projet fil rouge "QuizFlash" illustre les trois formats publicitaires de A à Z.
+Ce chapitre bonus couvre la monétisation mobile sous deux angles. Pour la **publicité**, il présente les trois formats AdMob (bannière, interstitielle, rewarded), leurs guidelines officielles Google par format (placement, cooldown, interdictions), et leur implémentation dans un composable `useAdMob.ts` réutilisable incluant la gestion du consentement RGPD. La bannière nécessite un `margin` pour se placer au-dessus de la barre de tabs Ionic. Pour les **achats intégrés (IAP)**, il explique les trois types de produits, le flux d'un achat via le store, et l'implémentation avec RevenueCat (`@revenuecat/purchases-capacitor`) — solution recommandée pour sa gestion unifiée iOS + Android. Les IAP nécessitent une publication sur piste de test store pour être testées. Le projet fil rouge "QuizFlash" intègre les deux approches en deux onglets.
 :::
