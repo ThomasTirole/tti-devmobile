@@ -2,7 +2,7 @@
 
 > ⚠️ **Chapitre hors scope du module**, proposé en bonus pour les plus curieux. Il ne fait pas partie des objectifs évalués, mais reflète la réalité du marché et vous permettra de mettre en place une monétisation dans vos projets personnels.
 
-<iframe src="https://slides.com/tirtho/bonus-monetisation-ionic/embed" width="576" height="420" title="💰 Bonus — Monétiser une application mobile avec Ionic" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="https://slides.com/tirtho/bonus-monetiser-une-application-mobile-avec-ionic/embed" width="576" height="420" title="💰 Bonus — Monétiser une application mobile avec Ionic" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 Dans ce chapitre bonus, vous allez découvrir **comment gagner de l'argent avec une application mobile**, de la théorie jusqu'à l'implémentation concrète dans un projet Ionic-Vue.
 
