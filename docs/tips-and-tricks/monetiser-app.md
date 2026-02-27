@@ -293,7 +293,7 @@ Passons à la pratique ! Nous allons créer un petit projet Ionic-Vue qui démon
 
 > 🎯 **Objectif du projet** : une mini-app "QuizFlash" avec :
 > - **Tab 1** — Quiz avec bannière en bas, interstitielle entre les questions (cooldown), rewarded pour un indice
-> - **Tab 2** — Écran Paywall avec les offres IAP
+> - **Tab 2** — Écran Paywall avec les offres IAP --> attention, ça ne marchera pas en local tant que vous n'aurez pas publié l'app sur une piste de test du store, mais le code est là pour que vous puissiez l'utiliser dans vos projets personnels
 
 ### B.5.1 — Créer et préparer le projet
 ```bash
@@ -309,7 +309,7 @@ npx cap --version
 Installez les plugins :
 ```bash
 npm install @capacitor-community/admob@8 # remplacez selon version de Capacitor
-npm install @revenuecat/purchases-capacitor
+npm install @revenuecat/purchases-capacitor # pour les achats intégrés (IAP)
 ```
 
 Ajoutez la plateforme Android et synchronisez :
@@ -336,12 +336,9 @@ Dans `android/app/src/main/AndroidManifest.xml`, ajoutez à l'intérieur de `<ap
   android:value="@string/admob_app_id"/>
 ```
 
-Si votre app contient des **achats intégrés (IAP)**, vérifiez également que le `launchMode` de votre Activity est `standard` ou `singleTop`. Avec `singleTask` ou `singleInstance`, certaines méthodes de paiement Google redirigent l'utilisateur vers une app bancaire pour valider — au retour, Android recrée une nouvelle instance de l'activité et l'achat est annulé automatiquement.
-```xml
-<activity
-  android:name="com.yourapp.MainActivity"
-  android:launchMode="singleTop" /> <!-- ← ne pas utiliser singleTask avec les IAP -->
-```
+> Attention, veillez à ne pas mettre dans le `<meta-data>` qui est dans la balise `<provider>`. Pour être sûr, allez jusqu'à la fin de la balise `</application>`.
+
+
 
 Dans `android/app/src/main/res/values/strings.xml`, ajoutez :
 ```xml
@@ -483,6 +480,8 @@ import router from './router'
 import { IonicVue } from '@ionic/vue'
 import { useAdMob } from '@/composables/useAdMob' // [!code ++]
 
+// ... reste du code
+
 async function bootstrap() {
   const app = createApp(App).use(IonicVue).use(router)
 
@@ -496,6 +495,10 @@ async function bootstrap() {
 
 bootstrap()
 ```
+
+::: warning ⚠️ **Attention** :
+On utilise aussi l'encapsulation du code dans une fonction `bootstrap()` asynchrone pour pouvoir `await initialize()` avant de monter l'app. C'est important pour que le consentement RGPD soit géré avant tout affichage de pub.
+:::
 
 ### B.5.5 — Tab 1 : Quiz avec les trois formats publicitaires
 
@@ -606,7 +609,13 @@ La bannière AdMob s'affiche par-dessus l'interface native — elle ne connaît 
 - **Rewarded** : déclenchée uniquement sur action explicite de l'utilisateur (`getHint`)
 :::
 
+À partir d'ici, vous pouvez tester l'application pour y voir les pubs. Les trois formats fonctionnent immédiatement en local grâce aux IDs de test officiels. N'oubliez pas que les achats intégrés (Tab 2), ci-dessous, nécessitent une configuration préalable dans les stores et la publication sur une piste de test pour fonctionner.
+
 ### B.5.6 — Composable `useIAP.ts`
+::: danger 🚨 **Important** :
+Depuis cette étape, ce code ne fonctionnera pas en local tant que vous n'aurez pas configuré votre projet dans RevenueCat et publié sur une piste de test du store. Cependant, il est là pour que vous puissiez l'utiliser dans vos projets personnels une fois les prérequis remplis.
+:::
+
 ```typescript [src/composables/useIAP.ts]
 import { Purchases, PurchasesOffering } from '@revenuecat/purchases-capacitor'
 import { ref, toRaw } from 'vue'
@@ -705,7 +714,7 @@ export function useIAP() {
 }
 ```
 
-::: details 🔧 Ce qu'il faut configurer dans les stores avant de tester
+::: details 🔧 Ce qu'il faut configurer avant de tester
 
 > ⚠️ **Rappel** :
 Ces étapes ne permettront pas de tester les achats en local. Le Tab 2 affichera "Aucune offre disponible" tant que tout n'est pas configuré — c'est normal.
@@ -832,6 +841,13 @@ onMounted(async () => {
   await loadOffering()
 })
 </script>
+```
+
+Si votre app contient des **achats intégrés (IAP)**, dans le `AndroidManifest.xml` vérifiez également que le `launchMode` de votre Activity est `standard` ou `singleTop`. Avec `singleTask` ou `singleInstance`, certaines méthodes de paiement Google redirigent l'utilisateur vers une app bancaire pour valider — au retour, Android recrée une nouvelle instance de l'activité et l'achat est annulé automatiquement.
+```xml
+<activity
+  android:name="com.yourapp.MainActivity"
+  android:launchMode="singleTop" /> <!-- ← ne pas utiliser singleTask avec les IAP -->
 ```
 
 **3.** Mettez à jour l'**App ID** dans `strings.xml` (Android) et `Info.plist` (iOS).
