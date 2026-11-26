@@ -75,7 +75,7 @@ Les autres systèmes (HarmonyOS, KaiOS, etc.) ne représentent qu'une minorité.
 - Environnement de développement : **Xcode** sur **macOS**.
 - Publication via l’**App Store**, soumise à **validation stricte**.
 - **Avantages** : stabilité, performance, cohérence visuelle.
-- **Inconvénients** : environnement fermé, coûts de publication plus élevés.
+- **Inconvénients** : environnement fermé, coûts de publication plus élevés (compte Apple Developer à 99 USD par an, contre 25 USD une seule fois pour Google Play).
 
 **🔍 Comparatif rapide**
 | **Critère**                  | **Android**                   | **iOS**                |
@@ -112,7 +112,6 @@ C'est un **processus complet**, du concept initial jusqu'à la maintenance aprè
    - Soumettre l'application sur un store (Play Store, App Store)
 5. **Maintenance et amélioration**
    - Corriger les bugs détectés après publication.
-   - Ajouter de nouvelles fonctionnalités.
    - Analyser les retours des utilisateurs via des outils analytiques. (ex: Firebase Analytics)
    - Ajouter de nouvelles fonctionnalités selon les besoins.
 
@@ -135,7 +134,7 @@ Les mises à jour sont essentielles pour :
 - Introduire des nouveautés et fidéliser les utilisateurs.
 
 ::: info 
-*📈 En moyenne, une application populaire reçoit entre 4 et 12 mises à jour par an.*
+*📈 Parmi les 1000 applications les plus populaires, environ 3 sur 4 reçoivent au moins une mise à jour par mois, et près de la moitié une par semaine sur l'App Store (42matters, 2026).*
 :::
 
 ## ⚙️ 1.1.7 Les contraintes du développement mobile
@@ -236,8 +235,9 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 * **StatCounter (2026)** – [https://gs.statcounter.com/](https://gs.statcounter.com/)
 * **Google Developers** – [developer.android.com](https://developer.android.com)
 * **Apple Developer** – [developer.apple.com](https://developer.apple.com)
-* **Flutter Docs** – [https://docs.flutter.dev](https://docs.flutter.dev)
-* **W3C – Mobile Web Best Practices** – [https://www.w3.org/TR/mobile-bp/](https://www.w3.org/TR/mobile-bp/)
+* **Ionic Docs** – [https://ionicframework.com/docs](https://ionicframework.com/docs)
+* **Capacitor Docs** – [https://capacitorjs.com/docs](https://capacitorjs.com/docs)
+* **42matters (2026)** – [App Update Frequency Statistics](https://42matters.com/apple-app-store-aso-with-app-update-frequency-statistics)
 * **DataReportal (2024)** – Global Digital Overview
 
 

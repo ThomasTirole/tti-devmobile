@@ -234,7 +234,7 @@ Stabilité, performances, cohérence visuelle, parc d'appareils homogène.
 <div class="px-card grey">
 
 ### Inconvénients
-Écosystème fermé, Mac obligatoire pour compiler, compte développeur payant.
+Écosystème fermé, Mac obligatoire pour compiler, compte développeur à 99 USD par an (Google : 25 USD une seule fois).
 
 </div>
 </div>
