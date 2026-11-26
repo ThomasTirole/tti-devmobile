@@ -124,6 +124,37 @@ Les entreprises misent sur les apps pour :
 
 ---
 
+<div class="chap">1.1.2 · Et vous ?</div>
+
+# Et vous, combien de temps ?
+
+<div class="grid grid-cols-3 gap-6 mt-6 items-stretch">
+<div class="px-card yellow" style="text-align:center">
+<div class="big-num">3h46</div>
+<p>par jour sur Internet depuis le téléphone, en moyenne mondiale</p>
+</div>
+<div class="px-card blue">
+
+### Android
+Paramètres > **Bien-être numérique et contrôle parental**
+
+<p style="font-size:.9rem">Le nom peut varier selon la marque.</p>
+
+</div>
+<div class="px-card">
+
+### iOS
+Réglages > **Temps d'écran** > Afficher toute l'activité
+
+</div>
+</div>
+
+<p style="font-family:'Jersey 10';font-size:1.8rem;margin-top:2.2rem">Votre temps d'écran de la semaine ? Vos 3 apps les plus utilisées ?</p>
+
+<div class="src">Source : DataReportal, Digital 2025</div>
+
+---
+
 <div class="chap">1.1.3 · Histoire</div>
 
 # 25 ans de mobile en 5 étapes

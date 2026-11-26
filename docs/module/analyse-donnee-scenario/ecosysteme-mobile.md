@@ -24,6 +24,14 @@ Elle se distingue d'un **site web mobile**, qui s'exécute dans un navigateur, p
 Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter, environ **60% du trafic web mondial** provient d'appareils mobiles (59,9% en octobre 2026).
 Les internautes passent en moyenne **près de 4 heures par jour** (3 h 46) sur Internet depuis leur téléphone, contre moins de 3 heures sur un ordinateur (DataReportal, Digital 2025).
 
+::: tip 📱 Et vous ? Combien de temps passez-vous sur votre téléphone ?
+Vérifiez votre temps d'écran de la semaine et notez vos **3 apps les plus utilisées** :
+- **Android :** Paramètres > **Bien-être numérique et contrôle parental** (le nom peut légèrement varier selon la marque).
+- **iOS :** Réglages > **Temps d'écran** > Afficher toute l'activité.
+
+➡️ Êtes-vous au-dessus ou en dessous de la moyenne mondiale ? Quels types d'apps reviennent le plus dans la classe ?
+:::
+
 Les entreprises privilégient donc les applications mobiles pour :
 
 - **Améliorer l'expérience utilisateur** grâce à une interface fluide et personnalisée
