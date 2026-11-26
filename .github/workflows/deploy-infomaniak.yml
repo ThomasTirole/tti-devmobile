@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -27,6 +27,9 @@ jobs:
 
       - name: Generate sidebar
         run: npm run gen:sidebar
+
+      - name: Build slides (Slidev)
+        run: npm run slides:build
 
       - name: Build with VitePress
         run: npm run docs:build

@@ -1,6 +1,8 @@
 # 🌳 1.1 Comprendre l'écosystème mobile
 
-<iframe src="https://slides.com/tirtho/1-1-comprendre-l-ecosysteme-mobile/embed" width="576" height="420" title="🌳 1.1 Comprendre l'écosystème mobile" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="/slides/1-1-ecosysteme-mobile/" title="1.1 Comprendre l'écosystème mobile" style="width:100%;aspect-ratio:16/9;border:0" allowfullscreen></iframe>
+
+<a href="/slides/1-1-ecosysteme-mobile/" target="_blank">Ouvrir les slides en plein écran</a>
 
 ## 🎯 Objectifs d'apprentissage
 À la fin de ce chapitre, vous serez capables de :
@@ -14,18 +16,18 @@ Une **application mobile** est un programme conçu pour être exécuté sur un *
 Elle se distingue d'un **site web mobile**, qui s'exécute dans un navigateur, par le fait qu'elle peut être **installée localement**, **utiliser des capteurs** de l'appareil (GPS, caméra, micro, etc.) et **fonctionner hors-ligne**.
 
 ::: details **💡 Exemples concrets :** {open}
-- **Application native :** WhatApp, développée pour Android et iOS séparement.
-- **Application web :** Twitter Web App, accessible via un navigateur.
+- **Application native :** WhatsApp, développée pour Android et iOS séparément.
+- **Application web :** X (ex-Twitter) Web App, accessible via un navigateur.
 - **Application cross-platform :** Spotify, développée avec des outils multi-plateformes.
 :::
 ## 🔍 1.1.2 Pourquoi développer pour mobile ?
-Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter (2024), plus de **60% du trafic web mondial** provient d'appareils mobiles.
-Les utilisateur passent en moyenne **4 à 5 heures par jour** sur leur téléphone.
+Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter, environ **60% du trafic web mondial** provient d'appareils mobiles (59,9% en octobre 2026).
+Les utilisateurs passent en moyenne **4 à 5 heures par jour** sur leur téléphone.
 
 Les entreprises privilégient donc les applications mobiles pour :
 
-- **Améliorer l'expérience utilisateur** grâce à une interface gluide et personnalisée
-- **Créer de la proximité via les notification et la géolocalisation**.
+- **Améliorer l'expérience utilisateur** grâce à une interface fluide et personnalisée
+- **Créer de la proximité via les notifications et la géolocalisation**.
 - **Offrir des fonctionnalités inédites**, comme la réalité augmentée, les paiements sans contact ou la reconnaissance faciale.
 
 ::: tip
@@ -42,6 +44,7 @@ Le développement mobile n'a pas toujours ressemblé à ce qu'il est aujourd'hui
 | **2008**      | App Store et Android Market                          | Émergence des écosystèmes d’applications        |
 | **2010–2015** | Explosion des frameworks hybrides (PhoneGap, Ionic)  | Développement multi-plateformes facilité        |
 | **2016–2024** | Apparition de Flutter, React Native, SwiftUI, Kotlin | Simplification, performance et ergonomie accrue |
+| **2020–2026** | Jetpack Compose, SwiftUI, IA embarquée sur l'appareil | UI déclarative, fonctions d'IA directement dans les apps |
 
 ::: warning 💡 À retenir :
 Les outils ont évolué pour **simplifier le travail des développeurs** et **unifier les plateformes**, mais chaque système garde ses particularités.
@@ -49,8 +52,10 @@ Les outils ont évolué pour **simplifier le travail des développeurs** et **un
 
 ## 📱 1.1.4 Les plateformes dominantes
 Le marché mobile mondial est dominé par **deux systèmes d'exploitation** :
-- **Android (Google)** : environ 70% de part de marché.
-- **iOS (Apple)** : environ 28% de part de marché.
+- **Android (Google)** : environ 68% de part de marché mondiale.
+- **iOS (Apple)** : environ 32% de part de marché mondiale.
+
+*Source : StatCounter, août 2026. Attention, ces chiffres changent beaucoup selon les pays : en Suisse, iOS est en tête (environ 56% en octobre 2026).*
 Les autres systèmes (HarmonyOS, KaiOS, etc.) ne représentent qu'une minorité.
 
 ![statcounter-os-mobile.png](/1.1/statcounter-os-mobile.png)
@@ -116,7 +121,7 @@ Le développement mobile est un **cycle itératif**, où chaque version amélior
 :::
 
 ## 📦 1.1.6 Distribution et mise à jour
-Les applications peuvent être distributées de plusieurs manières :
+Les applications peuvent être distribuées de plusieurs manières :
 - **Via un store officiel** (Play Store, App Store)
   - ➡️ C'est le mode le plus courant pour le grand public.
 - **Via une distribution interne** (entreprise, test)
@@ -130,7 +135,7 @@ Les mises à jour sont essentielles pour :
 - Introduire des nouveautés et fidéliser les utilisateurs.
 
 ::: info 
-*📈 En moyenne, une application populaire reçoit entre 4 et 12 mises à jours par an.*
+*📈 En moyenne, une application populaire reçoit entre 4 et 12 mises à jour par an.*
 :::
 
 ## ⚙️ 1.1.7 Les contraintes du développement mobile
@@ -153,10 +158,10 @@ Développer pour mobile implique de composer avec un ensemble de **contraintes t
 :::
 
 ## 🔝 1.1.8 Tendances et évolutions du mobile
-L'écosystème mobile évolue constamment. Voici quelques tendances majeures en 2025 :
+L'écosystème mobile évolue constamment. Voici quelques tendances majeures en 2026 :
 ### ⚡ 1. Applications multiplateformes 
 Les frameworks comme **Flutter**, **Ionic** ou **React Native** permettent de développer **une seule base de code** pour Android et iOS.
-> Avantage : gain de temps et de maintenanc.
+> Avantage : gain de temps et de maintenance.
 > Limite : parfois moins performant qu'une app native.
 
 ### 🧠 2. Intelligence artificielle et personnalisation 
@@ -179,11 +184,11 @@ Les PWA combinent les avantages du web et du mobile :
 - Accessibilité multiplateformes
 
 ### 🕶️ 5. Réalité augmentée et connectivité
-L'essor de l'AR (Réalité Augmentée) et des objects connectés (IoT, montres, capteurs), ouvre de nouvelles perspectives pour les applications mobiles.
+L'essor de l'AR (Réalité Augmentée) et des objets connectés (IoT, montres, capteurs), ouvre de nouvelles perspectives pour les applications mobiles.
 > 💬 Exemples : IKEA Place (visualisation d'objets 3D), Strava (suivi d'activité en temps réel).
 
 **💡 Tendances futures :**
-- Apps **contextuelles** (qui s'adaptent à la localisaiton ou au moment de la journée)
+- Apps **contextuelles** (qui s'adaptent à la localisation ou au moment de la journée)
 - Meilleure **intégration entre mobile**, **montre**, et **web**.
 - Sensibilité accrue aux **questions d'éthique et de sobriété numérique**.
 
@@ -207,7 +212,7 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 
 [//]: # (Incluez : les systèmes d'exploitation, les languages, et les frameworks majeurs.)
 
-[//]: # (> ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applicaitons.)
+[//]: # (> ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applications.)
 
 [//]: # ()
 [//]: # (### 🔁 Exercice 3 - Cycle de vie d'une application)
@@ -228,7 +233,7 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 
 ## 🔗 1.1.10 Sources et références
 
-* **StatCounter (2024)** – [https://gs.statcounter.com/](https://gs.statcounter.com/)
+* **StatCounter (2026)** – [https://gs.statcounter.com/](https://gs.statcounter.com/)
 * **Google Developers** – [developer.android.com](https://developer.android.com)
 * **Apple Developer** – [developer.apple.com](https://developer.apple.com)
 * **Flutter Docs** – [https://docs.flutter.dev](https://docs.flutter.dev)

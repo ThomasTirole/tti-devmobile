@@ -1,0 +1,101 @@
+@import '@fontsource/jersey-10/400.css';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+/* Identité DEV <MOBILE/> : pixel art, bleu écran, gris coque, contours noirs */
+:root {
+  --ink: #141414;
+  --screen: #8fc8f7;
+  --screen-dark: #3f8fd2;
+  --shell: #a9a9a9;
+  --paper: #f4f1ea;
+  --accent: #f2b33d;
+  --px: 4px;
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1.15rem;
+  padding: 2.6rem 3.4rem;
+  /* grille de pixels discrète */
+  background-image:
+    linear-gradient(rgba(20,20,20,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,20,20,.035) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: 'Jersey 10', monospace;
+  font-weight: 400;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.slidev-layout h1 { font-size: 3.2rem; line-height: 1; margin-bottom: 1.2rem; }
+.slidev-layout h1 + p { opacity: 1; }
+.slidev-layout h3 { font-size: 1.6rem; margin: .2rem 0 .5rem; }
+
+/* étiquette de chapitre en haut à gauche */
+.chap {
+  display: inline-block;
+  font-family: 'Jersey 10', monospace;
+  font-size: 1.05rem;
+  background: var(--ink);
+  color: var(--screen);
+  padding: .15rem .6rem;
+  margin-bottom: .8rem;
+}
+
+/* carte "pixel" : contour noir épais + ombre décalée en escalier */
+.px-card {
+  background: #fff;
+  border: var(--px) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: .9rem 1.1rem;
+}
+.px-card.blue { background: var(--screen); }
+.px-card.grey { background: #dcdcdc; }
+.px-card.yellow { background: var(--accent); }
+.px-card ul { margin: 0; padding-left: 1.1rem; }
+.px-card li { margin: .15rem 0; }
+
+.big-num { font-size: 5.4rem !important;
+  font-family: 'Jersey 10', monospace;
+  font-size: 4.2rem;
+  line-height: 1;
+}
+.src { font-size: .72rem; opacity: .65; position: absolute; bottom: 1.2rem; left: 3.4rem; }
+
+/* barres de parts de marché */
+.bar { height: 46px; border: var(--px) solid var(--ink); display: flex; }
+.bar > div { display: flex; align-items: center; padding-left: .7rem; font-family: 'Jersey 10', monospace; font-size: 1.3rem; }
+
+/* tableau */
+.slidev-layout table { border-collapse: collapse; width: 100%; font-size: 1rem; }
+.slidev-layout th { font-family: 'Jersey 10', monospace; background: var(--ink); color: var(--screen); text-align: left; }
+.slidev-layout th, .slidev-layout td { border: 2px solid var(--ink); padding: .4rem .7rem; }
+.slidev-layout tr:nth-child(even) td { background: #fff; }
+
+/* frise */
+.timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: .8rem; margin-top: 1.4rem; }
+.timeline .year { font-family: 'Jersey 10', monospace; font-size: 1.4rem; background: var(--ink); color: var(--screen); padding: .2rem .5rem; display: inline-block; margin-bottom: .5rem; }
+.timeline p { font-size: .95rem; margin: 0; }
+
+/* cycle de vie */
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; margin-top: 1.3rem; }
+.steps .n { font-family: 'Jersey 10', monospace; font-size: 2rem; }
+.steps p { font-size: .9rem; margin: .3rem 0 0; }
+
+/* couverture */
+.cover-wrap { display: grid; grid-template-columns: 1.6fr 1fr; align-items: center; height: 100%; }
+.cover-wrap h1 { font-size: 4.2rem; }
+.cover-wrap img { width: 260px; image-rendering: pixelated; justify-self: center; filter: drop-shadow(8px 8px 0 rgba(20,20,20,.18)); }
+.blink { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.slidev-layout code { font-family: 'JetBrains Mono', monospace; }
+.slidev-page-num, .slidev-layout .slidenum { font-family: 'Jersey 10', monospace; }

@@ -1,12 +1,19 @@
 {
   "devDependencies": {
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/jersey-10": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@slidev/cli": "^53.1.0",
+    "@slidev/theme-default": "^0.25.0",
     "vitepress": "^2.0.0-alpha.12"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "gen:sidebar": "node docs/.vitepress/sidebar/generate-sidebar.mjs"
+    "gen:sidebar": "node docs/.vitepress/sidebar/generate-sidebar.mjs",
+    "slides:build": "node slides/build-slides.mjs",
+    "slides:dev": "slidev"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
