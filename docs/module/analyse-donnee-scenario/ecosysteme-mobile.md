@@ -22,7 +22,7 @@ Elle se distingue d'un **site web mobile**, qui s'exécute dans un navigateur, p
 :::
 ## 🔍 1.1.2 Pourquoi développer pour mobile ?
 Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter, environ **60% du trafic web mondial** provient d'appareils mobiles (59,9% en octobre 2026).
-Les utilisateurs passent en moyenne **4 à 5 heures par jour** sur leur téléphone.
+Les internautes passent en moyenne **près de 4 heures par jour** (3 h 46) sur Internet depuis leur téléphone, contre moins de 3 heures sur un ordinateur (DataReportal, Digital 2025).
 
 Les entreprises privilégient donc les applications mobiles pour :
 
@@ -238,7 +238,7 @@ Choisissez une application que vous utilisez souvent (par exemple celle que vous
 * **Capacitor Docs** – [https://capacitorjs.com/docs](https://capacitorjs.com/docs)
 * **Google – Android developer verification** – [developer.android.com/developer-verification](https://developer.android.com/developer-verification)
 * **42matters (2026)** – [App Update Frequency Statistics](https://42matters.com/apple-app-store-aso-with-app-update-frequency-statistics)
-* **DataReportal (2024)** – Global Digital Overview
+* **DataReportal (2025)** – [Digital 2025 Global Overview Report](https://datareportal.com/reports/digital-2025-global-overview-report)
 
 
 
