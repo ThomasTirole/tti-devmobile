@@ -327,6 +327,31 @@ Les mises à jour servent à corriger, à suivre les nouvelles versions d'Androi
 
 ---
 
+<div class="chap">1.1.6 · Distribution · Ce qui change</div>
+
+# Ce qui change en 2026-2027
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+<div class="px-card blue">
+
+### Android
+Pour installer une app **hors Play Store** (APK), le développeur devra être **vérifié par Google**.
+
+<p style="font-size:.95rem">Depuis sept. 2026 dans 4 pays, partout en 2027. Pour vos tests, rien ne change (ADB).</p>
+
+</div>
+<div class="px-card">
+
+### iOS
+Dans l'**UE**, on peut installer des apps depuis d'autres stores depuis 2024.
+
+<p style="font-size:.95rem">En Suisse, hors UE : l'App Store reste le seul store public.</p>
+
+</div>
+</div>
+
+---
+
 <div class="chap">1.1.7 · Contraintes · Techniques</div>
 
 # Contraintes techniques
@@ -510,6 +535,24 @@ Quelles conséquences pour un développeur qui veut publier dans ces régions ?
 </div>
 
 <p class="mt-8" style="font-family:'Jersey 10';font-size:1.8rem">Par deux · 20 minutes · mise en commun ensuite</p>
+
+---
+
+<div class="chap">1.1.9 · Exercice 2 (bonus)</div>
+
+# Le cycle de vie d'une app que vous utilisez
+
+<div class="steps" style="margin-top:.6rem">
+<div class="px-card blue"><div class="n">1</div><b>Analyse</b><p>Quel besoin ? Quelle année ?</p></div>
+<div class="px-card"><div class="n">2</div><b>Dev</b><p>Native, multiplateforme ou web ?</p></div>
+<div class="px-card"><div class="n">3</div><b>Tests</b><p>Bêta, lancement limité ?</p></div>
+<div class="px-card"><div class="n">4</div><b>Publication</b><p>Quels stores ? Gratuite, payante ?</p></div>
+<div class="px-card yellow"><div class="n">5</div><b>Maintenance</b><p>Dernière mise à jour, grandes évolutions</p></div>
+</div>
+
+<p style="margin-top:2rem">Où chercher : fiche du store (« Nouveautés »), Wikipédia, blog de l'éditeur.</p>
+
+<p style="font-family:'Jersey 10';font-size:1.8rem">Par deux · si l'exercice 1 est fini · 1 minute de présentation</p>
 
 ---
 layout: default

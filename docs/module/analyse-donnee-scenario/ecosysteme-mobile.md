@@ -128,6 +128,11 @@ Les applications peuvent être distribuées de plusieurs manières :
 - **Via une Web App ou PWA**
   - ➡️ Accessible sans installation, directement dans le navigateur.
 
+::: tip 🆕 Ce qui change en 2026-2027
+- **Android :** pour installer une app en dehors du Play Store (fichier APK), le développeur devra être **vérifié par Google**. C'est obligatoire depuis septembre 2026 dans quelques pays (Brésil, Indonésie, Singapour, Thaïlande) et ce sera étendu au monde entier en 2027. Pour vos propres tests, rien ne change : on peut toujours installer ses apps sur son téléphone via Android Studio (ADB).
+- **iOS :** dans l'Union européenne, il est possible depuis 2024 d'installer des apps depuis d'autres stores que l'App Store. En Suisse, qui ne fait pas partie de l'UE, l'App Store reste le seul store public.
+:::
+
 Les mises à jour sont essentielles pour :
 - Corriger les problèmes techniques.
 - S'adapter aux nouvelles versions des systèmes d'exploitation.
@@ -204,31 +209,25 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 > 
 > ➡️ et pour la stratégie de marketing ?
 
-[//]: # ()
-[//]: # (### 📈 Exercice 2 - Ligne du temps technologique)
 
-[//]: # (En groupe, créez une **frise technologique** retraçant les grandes étapes du développement mobile entre 2000 et 2025.)
+### 🔁 Exercice 2 (bonus) - Le cycle de vie d'une app que vous utilisez
+*À faire par deux si vous avez terminé l'exercice 1.*
 
-[//]: # (Incluez : les systèmes d'exploitation, les languages, et les frameworks majeurs.)
+Choisissez une application que vous utilisez souvent (par exemple celle que vous avez citée dans le Menti) et retracez son cycle de vie avec les 5 étapes vues au point 1.1.5 :
 
-[//]: # (> ➡️ **Objectif :** comprendre comment les outils ont évolué pour simplifier la création d'applications.)
+| Étape | Ce que vous cherchez |
+|---|---|
+| 1. Analyse | Quel besoin l'app voulait-elle résoudre à sa sortie ? En quelle année est-elle sortie ? |
+| 2. Développement | Est-elle native, multiplateforme ou web ? Sur quelle plateforme est-elle sortie en premier ? |
+| 3. Tests | Y a-t-il eu une version bêta ou un lancement limité à certains pays ? |
+| 4. Publication | Sur quels stores est-elle disponible ? Est-elle gratuite, payante, avec achats intégrés ? |
+| 5. Maintenance | Date de la dernière mise à jour, et 2 ou 3 grandes évolutions depuis sa sortie. |
 
-[//]: # ()
-[//]: # (### 🔁 Exercice 3 - Cycle de vie d'une application)
+**Où chercher :** la fiche de l'app sur le Play Store ou l'App Store (section « Nouveautés » et historique des versions), sa page Wikipédia, le blog officiel de l'éditeur.
 
-[//]: # (Choisissez une application que vous utilisez souvent &#40;ex: Instagram, Spotify, Duolingo, etc.&#41;)
-
-[//]: # (Reconstituez les **grandes étapes de son cycle de vie** :)
-
-[//]: # (1. Idée / besoin initial)
-
-[//]: # (2. Fonctionnalités principales)
-
-[//]: # (3. Tests / publication)
-
-[//]: # (4. Évolutions depuis sa sortie)
-
-[//]: # (> ➡️ **Objectif :** relier la théorie du développement mobile à un cas concret)
+> ➡️ **Rendu :** le tableau rempli, et une présentation d'une minute à la classe.
+>
+> ➡️ **Objectif :** constater qu'une app n'est jamais « finie » et que le cycle recommence à chaque version.
 
 ## 🔗 1.1.10 Sources et références
 
@@ -237,6 +236,7 @@ Recherchez la part de marché actuelle d'Android et d'iOS dans :
 * **Apple Developer** – [developer.apple.com](https://developer.apple.com)
 * **Ionic Docs** – [https://ionicframework.com/docs](https://ionicframework.com/docs)
 * **Capacitor Docs** – [https://capacitorjs.com/docs](https://capacitorjs.com/docs)
+* **Google – Android developer verification** – [developer.android.com/developer-verification](https://developer.android.com/developer-verification)
 * **42matters (2026)** – [App Update Frequency Statistics](https://42matters.com/apple-app-store-aso-with-app-update-frequency-statistics)
 * **DataReportal (2024)** – Global Digital Overview
 
