@@ -43,8 +43,8 @@ Le développement mobile n'a pas toujours ressemblé à ce qu'il est aujourd'hui
 | **2007**      | Lancement de l’iPhone                                | Naissance du smartphone moderne                 |
 | **2008**      | App Store et Android Market                          | Émergence des écosystèmes d’applications        |
 | **2010–2015** | Explosion des frameworks hybrides (PhoneGap, Ionic)  | Développement multi-plateformes facilité        |
-| **2016–2024** | Apparition de Flutter, React Native, SwiftUI, Kotlin | Simplification, performance et ergonomie accrue |
-| **2020–2026** | Jetpack Compose, SwiftUI, IA embarquée sur l'appareil | UI déclarative, fonctions d'IA directement dans les apps |
+| **2015–2018** | Apparition de React Native, Flutter, Kotlin | Multiplateforme plus performant, langages modernes |
+| **2019–2026** | SwiftUI, Jetpack Compose, IA embarquée sur l'appareil | UI déclarative, fonctions d'IA directement dans les apps |
 
 ::: warning 💡 À retenir :
 Les outils ont évolué pour **simplifier le travail des développeurs** et **unifier les plateformes**, mais chaque système garde ses particularités.
