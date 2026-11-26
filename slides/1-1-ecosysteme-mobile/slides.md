@@ -73,6 +73,33 @@ Une **application mobile** est un programme conçu pour tourner sur un smartphon
 
 ---
 
+<div class="chap">1.1.1 · Exemples concrets</div>
+
+# Trois façons de faire une app
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+<div class="px-card blue">
+
+### Native : WhatsApp
+Deux codes sources séparés, un pour Android, un pour iOS. Accès complet aux capteurs : caméra, micro, localisation.
+
+</div>
+<div class="px-card">
+
+### Multiplateforme : Discord
+L'app mobile est développée en **React Native** : une seule base de code pour Android et iOS.
+
+</div>
+<div class="px-card yellow">
+
+### PWA : Starbucks
+En plus des apps natives, une version web qu'on **installe depuis le navigateur**, sans passer par un store.
+
+</div>
+</div>
+
+---
+
 <div class="chap">1.1.2 · Pourquoi le mobile ?</div>
 
 # Le mobile, premier accès à Internet

@@ -17,8 +17,8 @@ Elle se distingue d'un **site web mobile**, qui s'exécute dans un navigateur, p
 
 ::: details **💡 Exemples concrets :** {open}
 - **Application native :** WhatsApp, développée pour Android et iOS séparément.
-- **Application web :** X (ex-Twitter) Web App, accessible via un navigateur.
-- **Application cross-platform :** Spotify, développée avec des outils multi-plateformes.
+- **Application web (PWA) :** Starbucks, qui a des apps natives mais aussi une version web qu'on peut installer sur le téléphone depuis le navigateur.
+- **Application cross-platform :** Discord, dont l'app mobile est développée en React Native, avec une seule base de code pour Android et iOS.
 :::
 ## 🔍 1.1.2 Pourquoi développer pour mobile ?
 Aujourd'hui, le mobile est **le principal moyen d'accès à Internet**. Selon StatCounter, environ **60% du trafic web mondial** provient d'appareils mobiles (59,9% en octobre 2026).
