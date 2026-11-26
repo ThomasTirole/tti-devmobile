@@ -150,9 +150,74 @@ Les outils simplifient le travail et unifient les plateformes, mais <b>chaque sy
 
 ---
 
-<div class="chap">1.1.4 · Plateformes</div>
+<div class="chap">1.1.4 · Plateformes · Android</div>
 
-# Android vs iOS
+# Android
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+<div class="px-card blue">
+
+### Fiche
+- Système **open source** (AOSP) développé par Google
+- Utilisé par de **nombreux fabricants** : Samsung, Xiaomi, Google...
+- Langages : **Kotlin**, Java
+- IDE : **Android Studio**
+- Publication : **Google Play**
+
+</div>
+<div>
+<div class="px-card" style="margin-bottom:1.2rem">
+
+### Avantages
+Flexibilité, très large audience, liberté de distribution (APK, stores alternatifs).
+
+</div>
+<div class="px-card grey">
+
+### Inconvénients
+Forte **fragmentation** : beaucoup de versions d'Android et de tailles d'écran à tester.
+
+</div>
+</div>
+</div>
+
+---
+
+<div class="chap">1.1.4 · Plateformes · iOS</div>
+
+# iOS
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+<div class="px-card blue">
+
+### Fiche
+- Système **propriétaire** d'Apple, limité à ses appareils
+- Langages : **Swift** (moderne), Objective-C (historique)
+- IDE : **Xcode**, uniquement sur **macOS**
+- Publication : **App Store**, avec une validation stricte
+
+</div>
+<div>
+<div class="px-card" style="margin-bottom:1.2rem">
+
+### Avantages
+Stabilité, performances, cohérence visuelle, parc d'appareils homogène.
+
+</div>
+<div class="px-card grey">
+
+### Inconvénients
+Écosystème fermé, Mac obligatoire pour compiler, compte développeur payant.
+
+</div>
+</div>
+</div>
+
+---
+
+<div class="chap">1.1.4 · Plateformes · Comparatif</div>
+
+# Comparatif rapide
 
 | Critère | Android | iOS |
 |---|---|---|
@@ -163,6 +228,8 @@ Les outils simplifient le travail et unifient les plateformes, mais <b>chaque sy
 | Publication | Google Play | App Store, validation stricte |
 | Point fort | Flexibilité, grande audience | Cohérence, stabilité |
 | Point faible | Fragmentation (versions, écrans) | Écosystème fermé, Mac obligatoire |
+
+<p class="mt-6" style="font-family:'Jersey 10';font-size:1.6rem">Android : flexibilité et audience. iOS : uniformité et expérience contrôlée.</p>
 
 ---
 
@@ -233,60 +300,157 @@ Les mises à jour servent à corriger, à suivre les nouvelles versions d'Androi
 
 ---
 
-<div class="chap">1.1.7 · Contraintes</div>
+<div class="chap">1.1.7 · Contraintes · Techniques</div>
 
-# Développer pour un appareil dans une poche
+# Contraintes techniques
 
-<div class="grid grid-cols-2 gap-8 mt-6">
-<div class="px-card">
-
-### Techniques
-- Mémoire et batterie limitées
-- Performances variables selon les modèles
-- Tailles et ratios d'écran différents
-- Réseau instable ou absent
-
+<div class="grid grid-cols-2 gap-6 mt-8">
+<div class="px-card ">
+<b>Mémoire et batterie limitées</b>
+<p>Une app gourmande se fait fermer par le système, ou désinstaller par l'utilisateur.</p>
 </div>
 <div class="px-card blue">
-
-### Expérience utilisateur
-- Usage en mobilité, souvent interrompu
-- Saisie tactile : grandes zones cliquables
-- Lisibilité : textes courts, bons contrastes
-- Accessibilité : lecteurs d'écran, sous-titres
-
+<b>Performances variables</b>
+<p>Un téléphone d'entrée de gamme n'a rien à voir avec le dernier iPhone.</p>
+</div>
+<div class="px-card blue">
+<b>Écrans différents</b>
+<p>Tailles et ratios variés, encoches, écrans pliables.</p>
+</div>
+<div class="px-card ">
+<b>Réseau instable ou absent</b>
+<p>Train, tunnel, montagne : l'app doit le gérer proprement.</p>
 </div>
 </div>
 
 ---
 
-<div class="chap">1.1.8 · Tendances</div>
+<div class="chap">1.1.7 · Contraintes · Expérience utilisateur</div>
 
-# Ce qui bouge en 2026
+# Contraintes d'expérience utilisateur
 
-<div class="grid grid-cols-3 gap-5 mt-6">
+<div class="grid grid-cols-2 gap-5 mt-4">
+<div class="px-card ">
+<b>Usage en mobilité</b>
+<p>L'utilisateur peut être interrompu à tout moment.</p>
+</div>
 <div class="px-card blue">
-<b>Multiplateforme</b>
-<p>Flutter, React Native, Ionic + Capacitor : une seule base de code.</p>
+<b>Saisie tactile</b>
+<p>Grandes zones cliquables, gestes intuitifs.</p>
+</div>
+<div class="px-card blue">
+<b>Lisibilité</b>
+<p>Textes courts, contrastes élevés, polices adaptées.</p>
+</div>
+<div class="px-card ">
+<b>Accessibilité</b>
+<p>Lecteurs d'écran, sous-titres, contrastes suffisants.</p>
+</div>
+</div>
+
+<div class="px-card yellow mt-5">Objectif : une expérience fluide et cohérente, malgré ces contraintes.</div>
+
+---
+
+<div class="chap">1.1.8 · Tendances · 1/5</div>
+
+# 1. Applications multiplateformes
+
+<div class="px-card blue mt-6">
+
+**Flutter**, **React Native** ou **Ionic + Capacitor** permettent de développer **une seule base de code** pour Android et iOS.
+
+C'est l'approche qu'on utilise dans ce module.
+
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="px-card"><b>Avantage</b><p>Gain de temps et de maintenance.</p></div>
+<div class="px-card grey"><b>Limite</b><p>Parfois moins performant qu'une app native.</p></div>
+</div>
+
+---
+
+<div class="chap">1.1.8 · Tendances · 2/5</div>
+
+# 2. Intelligence artificielle et personnalisation
+
+<div class="px-card blue mt-6">
+
+- Personnaliser l'expérience : recommandations, assistants
+- Automatiser des fonctions : reconnaissance vocale, traitement d'image
+- Analyser les usages pour améliorer l'interface
+- De plus en plus de modèles tournent **directement sur le téléphone**
+
+</div>
+
+
+---
+
+<div class="chap">1.1.8 · Tendances · 3/5</div>
+
+# 3. 5G et au-delà
+
+<div class="px-card blue mt-6">
+
+Des connexions ultra-rapides pour des apps plus riches : streaming 4K, réalité augmentée, jeux multijoueurs, outils collaboratifs en temps réel.
+
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="px-card grey"><b>Limite</b><p>Il faut une bonne couverture réseau, encore inégale selon les régions.</p></div>
+</div>
+
+---
+
+<div class="chap">1.1.8 · Tendances · 4/5</div>
+
+# 4. Progressive Web App (PWA)
+
+<div class="px-card blue mt-6">
+
+Les PWA combinent web et mobile :
+
+- installation depuis le navigateur
+- fonctionnement hors ligne
+- mises à jour automatiques, sans store
+- une seule app pour toutes les plateformes
+
+</div>
+
+
+---
+
+<div class="chap">1.1.8 · Tendances · 5/5</div>
+
+# 5. Réalité augmentée et objets connectés
+
+<div class="px-card blue mt-6">
+
+L'essor de l'AR et des objets connectés (montres, capteurs, IoT) ouvre de nouvelles possibilités.
+
+Exemples : **IKEA Place** pour visualiser un meuble en 3D chez soi, **Strava** pour suivre une activité en temps réel.
+
+</div>
+
+
+---
+
+<div class="chap">1.1.8 · Tendances · Et ensuite ?</div>
+
+# Tendances futures
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+<div class="px-card blue">
+<b>Apps contextuelles</b>
+<p>Elles s'adaptent au lieu ou au moment de la journée.</p>
 </div>
 <div class="px-card">
-<b>IA dans les apps</b>
-<p>Recommandations, assistants, traitement d'image, de plus en plus sur l'appareil.</p>
-</div>
-<div class="px-card">
-<b>PWA</b>
-<p>Installables, hors ligne, mises à jour sans store.</p>
-</div>
-<div class="px-card">
-<b>Réalité augmentée et objets connectés</b>
-<p>Montres, capteurs, visualisation 3D.</p>
-</div>
-<div class="px-card">
-<b>5G</b>
-<p>Streaming, temps réel, multijoueur. Couverture encore inégale.</p>
+<b>Mobile, montre, web</b>
+<p>Une meilleure continuité entre les appareils.</p>
 </div>
 <div class="px-card yellow">
-<b>Sobriété et éthique</b>
+<b>Éthique et sobriété</b>
 <p>Données personnelles, consommation, temps d'écran.</p>
 </div>
 </div>

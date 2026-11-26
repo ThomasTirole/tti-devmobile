@@ -90,7 +90,7 @@ Les autres systèmes (HarmonyOS, KaiOS, etc.) ne représentent qu'une minorité.
 *Android offre plus de flexibilité et d'audience, tandis qu'iOS garantit une meilleure uniformité et une expérience plus contrôlée.*
 :::
 
-## 🧬 Le cycle de vie d'une application mobile
+## 🧬 1.1.5 Le cycle de vie d'une application mobile
 
 Développer une application mobile ne se limite pas à l'écriture de code.
 C'est un **processus complet**, du concept initial jusqu'à la maintenance après publication.

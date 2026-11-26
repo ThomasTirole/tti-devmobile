@@ -62,6 +62,7 @@
 .px-card.yellow { background: var(--accent); }
 .px-card ul { margin: 0; padding-left: 1.1rem; }
 .px-card li { margin: .15rem 0; }
+.px-card > p { margin: .35rem 0 0; }
 
 .big-num { font-size: 5.4rem !important;
   font-family: 'Jersey 10', monospace;
