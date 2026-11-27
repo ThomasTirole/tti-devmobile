@@ -1,13 +1,18 @@
 # 🎓 Présentation du module 335
 
+<iframe src="/slides/0-1-presentation/" title="Présentation du module 335" style="width:100%;aspect-ratio:16/9;border:0" allowfullscreen></iframe>
+
+<a href="/slides/0-1-presentation/" target="_blank">Ouvrir les slides en plein écran</a>
+
+
 Ce module a pour but de comprendre et maîtriser les **principes fondamentaux du développement mobile :** de la conception au test, en passant par la mise en oeuvre et la publication d'une application.
 
-L'objectif générale est le suivant : 
+L'objectif général est le suivant : 
 > **Mettre en oeuvre et tester une application mobile selon directives.**
 
 À travers ce cours théorique, nous apprendrons à identifier les enjeux liés aux technologies mobiles, à concevoir une solution adaptée à un besoin donné, et à comprendre les spécificités des plateformes et des frameworks actuels.
 
-Le module est complété par un **atelier pratique distinct**, dans lequel les concepts étudiés ici seront mis en oeuvre à travers le développement concret d'une applicaiton mobile.
+Le module est complété par un **atelier pratique distinct**, dans lequel les concepts étudiés ici seront mis en oeuvre à travers le développement concret d'une application mobile.
 
 ## 🕰️ Organisation du cours
 - **Durée totale :** 11 jours * 3 périodes de 45 minutes (33 total)

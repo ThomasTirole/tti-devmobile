@@ -1,7 +1,12 @@
 # 🎯 Objectifs du module
 
+<iframe src="/slides/0-2-objectifs/" title="Objectifs du module 335" style="width:100%;aspect-ratio:16/9;border:0" allowfullscreen></iframe>
+
+<a href="/slides/0-2-objectifs/" target="_blank">Ouvrir les slides en plein écran</a>
+
+
 ## 🔎 Objectif 1 : Analyser la donnée, développer la fonctionnalité et le scénario
-Vous identifier les besoins fonctionnels et ergonomiques d'une application mobile.
+Vous identifierez les besoins fonctionnels et ergonomiques d'une application mobile.
 
 1. Connaître les standards ergonomiques (par ex. EN-9241-110) et leur mise en œuvre sur une plateforme mobile
 2. Connaître les lignes directrices pour le design et le pilotage des utilisateurs sur une application.
@@ -17,10 +22,9 @@ Vous élaborerez des **concepts d'application mobile** cohérents et explorerez 
 3. Connaître les spécificités des architectures d’applications en regard des fonctionnalités, des possibilités et limites des caractéristiques.
 4. Connaître des possibilités de solutions de persistance sur des plateformes mobiles (scénarios online/offline).
 
-📘 *Cette partie dévleoppe la compréhension des choix techniques et des modèles de conception.*
+📘 *Cette partie développe la compréhension des choix techniques et des modèles de conception.*
 
 ## 💻 Objectif 3 : Programmer l'application à l'aide d'un environnement de développement usuel et en tenant compte des possibilités et restrictions des appareils mobiles
-Vous découvrirez les **outils et frameworks** pour développer une application mobile en tenant compte des contraintes spécifiques.
 Vous découvrirez les **outils et frameworks** pour développer une application mobile en tenant compte des contraintes spécifiques.
 
 1. Connaître l’utilisation et la mise en œuvre d’un environnement de développement, de simulation et de tests.
