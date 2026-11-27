@@ -15,7 +15,7 @@ Le module est complété par un **atelier pratique distinct**, dans lequel les c
 - **Public cible :** Apprentis informaticiens de 3e année - orientation développement
 - **Langage :** Ionic pour Vue.JS
 
-## 🧭 Structure du GitBook
+## 🧭 Structure du support
 Le support de cours est organisé autour des [**5 objectifs opérationnels**](objectifs.md) du module, chacun correspondant à une grande partie du cours : 
 
 1. **Analyser la donnée et le scénario fonctionnel**
